@@ -4,3 +4,6 @@
 /rest/
 /ws/
 >>>>>>> Registration
+/dao/
+/controller/
+/services/
