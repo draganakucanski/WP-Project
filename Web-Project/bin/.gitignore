@@ -4,6 +4,12 @@
 /rest/
 /ws/
 >>>>>>> Registration
+<<<<<<< HEAD
 /controller/
 /UserService.class
 /service/
+=======
+/dao/
+/controller/
+/services/
+>>>>>>> UserRegistration

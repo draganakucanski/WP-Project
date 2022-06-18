@@ -124,6 +124,20 @@ public class User {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	public User(String username, String password, String firstName, String lastName, Date dateOfBirth, Gender gender,
+			Role role, UserType type, boolean deleted, double pointsCollected) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.role = role;
+		this.type = type;
+		this.deleted = deleted;
+		this.pointsCollected = pointsCollected;
+	}
 	
 	
 }
