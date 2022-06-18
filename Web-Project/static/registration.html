@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../js/jquery.min.js"></script>
+        <link href="css/registration.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="padding-top: 6%;">
+        <form name="registration" id="registration" method="post">
+          <table style="padding-bottom: 5px;">
+            <tr>
+              <th style="padding: 0%;">
+                <img width=15% height=60% src="../img/weights-1.png">
+                GymPass
+                </th>
+            </tr>
+            <tr>
+                <td><div style="text-align: center;">Sign up to join our team.</div></td>
+              </tr>
+            <tr>
+              <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" autofocus></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name"></td>
+              </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name"></td>
+            </tr>
+            <tr>
+                <td>
+                        <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="gender" id="gender">
+                          <option value="opt">Gender</option>
+                          <option value="male">MALE</option>
+                          <option value="female">FEMALE</option>
+                        </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="dateOfBirth" id="dateOfBirth" placeholder="Date of Birth"></td>
+              </tr>
+            <tr>
+                <td><input type="password" class="inputF" name="password" id="password" placeholder="Password"></td>
+            </tr>
+            <tr>
+                <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" name="confirmPassword" placeholder="Confirm password"></td>
+            </tr>
+            
+            <tr>
+                  <td><input class="heroButton" type="button" id="registrationButton" value="Sign Up"/></td>
+            </tr>
+            
+          </table>
+        </form>
+    
+        <form name="login">
+            <p>Have an account? <a class="link" href="index.html"><b>Log In</b></a></p>
+        </form>
+        
+    </body>
+</html>

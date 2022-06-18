@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    min-height: 100vh;  /*Postavlja minimalnu velicinu, ako je nesto manje onda vazi, ako je vece nema efekta */
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img{
+    width: 100px;
+}
+
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.nav-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;  /*postavi se underline na hidden, kad je 100 vidi se pa se stavi na reakciju da se uveca*/
+    height: 3px;
+    background: rgb(242, 190, 141);
+    display: block;
+    margin: auto;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+
+.text-box{
+    width: 90%;
+    color: white;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);   /*Ovo da bude u centru diva*/
+    text-align: center;
+}
+
+.text-box h1{
+    font-size: 66px;
+
+}
+
+.text-box p{
+    margin: 10px 0px 40px;
+    font-size: 32px;
+    color: white;
+}
+
+
+.hero-btn:hover{
+    border: 3px solid rgb(242, 190, 141);
+    background: #f2be8d;
+    transition: 1.5s;
+}
+
+button{
+    font-size: 24px;
+    width: 200px;
+    padding: 15px 0px;
+    text-align: center;
+    margin: 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    border:3px solid rgb(242, 190, 141) ;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+  input.search {
+  	font-size: 20px;
+    font-family: serif;
+    color: white;
+    border-radius: 25px;
+    width: 200px;
+    padding: 5px;
+    background: url("../img/magnifier.png") no-repeat;
+    padding-left: 30px;
+  }
