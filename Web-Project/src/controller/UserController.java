@@ -5,6 +5,7 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.put;
 
+
 import com.google.gson.Gson;
 
 import beans.User;
@@ -17,6 +18,7 @@ public class UserController {
 	private static Gson g = new Gson();
 	private static UserService userService = new UserService();
 	
+
 	public static void getUsers() {
 		get("rest/users/", (req, res) -> {
 			res.type("application/json");
@@ -41,4 +43,5 @@ public class UserController {
 		});
 	}
 	
+
 }
