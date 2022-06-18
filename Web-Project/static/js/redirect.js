@@ -1,5 +1,5 @@
 function redirectOnLogin() {
-	window.location.href = "/login.html";
+	window.location.href = "/logIn.html";
 }
 
 function redirectOnRegistration() {
