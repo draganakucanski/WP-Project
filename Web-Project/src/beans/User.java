@@ -12,6 +12,7 @@ public class User {
 	private Gender gender;
 	private Role role;
 	private UserType type;
+	private boolean deleted;
 	
 	private TrainingHistory history;
 	private Membership membership;
@@ -116,6 +117,12 @@ public class User {
 	}
 	public User() {
 		super();
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	
