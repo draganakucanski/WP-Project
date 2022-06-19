@@ -13,7 +13,7 @@ Vue.component("mainpage", {
                     <li><a href="index.html">Home</a></li>
                     <li><a href="">About us</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><fieldset style="border: 0px;"><button class="hero-btn" type="button" v-on:click="redirectOnFacilities">Our Facilities</button></fieldset></li>
+                    <li><a @click="redirectOnFacilities">Our Facilities</a></li>
                 </ul>
             </div>
         </nav>

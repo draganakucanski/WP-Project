@@ -21,14 +21,14 @@ Vue.component("registration", {
          <form name="registration" id="registration" method="post">
 
           <table style="padding-bottom: 5px;" class="reg">
-            <tr>
-              <th style="padding: 0%;">
+            <tr class="reg" >
+              <th class="reg" style="padding: 0%;">
                 <img width=15% height=60% src="../img/weights-1.png">
                 GymPass
                 </th>
             </tr>
-            <tr>
-                <td><div style="text-align: center;">Sign up to join our team.</div></td>
+            <tr class="reg">
+                <td class="reg"><div class="reg" style="text-align: center;">Sign up to join our team.</div></td>
               </tr>
             <tr>
               <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" v-model="username" autofocus></td>
@@ -40,7 +40,7 @@ Vue.component("registration", {
                 <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name" v-model="lastname"></td>
             </tr>
             <tr>
-                <td>
+                <td class="reg">
                         <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="gender" id="gender" v-model="gender">
                           <option value="opt">Gender</option>
                           <option value="male">MALE</option>
@@ -59,25 +59,24 @@ Vue.component("registration", {
             </tr>
             
             <tr>
-                  <td><input class="heroButton" type="button" id="registrationButton" v-on:click="Registration" value="Sign Up"/></td>
+                  <td><input class="heroButtonReg" type="button" id="registrationButton" v-on:click="Registration" value="Sign Up"/></td>
             </tr>
             
           </table>
         </form>
-         <div v-if="validInfo.username!='OK'"><br>
+         <div class="err" v-if="validInfo.username!='OK'"><br>
             <label style="color: red;">{{validInfo.username}}</label>
          </div>
-        <div v-if="validInfo.emptyInput != 'OK'"> <br>
+        <div class="err" v-if="validInfo.emptyInput != 'OK'"> <br>
                <label style="color: red;">{{validInfo.emptyInput}}</label>
         </div>
         <form name="login">
-            <p>Have an account? <a class="link" href="index.html"><b>Log In</b></a></p>
+            <p class="reg">Have an account? <a class="reg" href="index.html"><b>Log In</b></a></p>
         </form>
     </div>
     `,
 	methods : {	
          InputValid: function () {
-        	alert('U reg smo.');
             axios.post('rest/registration', { "username": this.username, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth })
                 .then(response => {
                    alert('Successfully registrated!');

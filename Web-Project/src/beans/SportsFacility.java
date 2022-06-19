@@ -84,6 +84,14 @@ public class SportsFacility {
 		this.name = name;
 		this.works = works;
 	}
+	public SportsFacility(String name, FacilityType type, boolean works, Location location, double averageGrade) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.works = works;
+		this.location = location;
+		this.averageGrade = averageGrade;
+	}
 	
 	
 }

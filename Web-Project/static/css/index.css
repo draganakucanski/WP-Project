@@ -123,9 +123,123 @@ button{
     border: 2px solid rgb(221, 199, 179);
     border-spacing: 3px;
     font-size: 12px;
+    padding-top:20px;
     padding: 30px;
     padding-bottom: 50px;
     margin-left: 40%;
     margin-top: auto;
     margin-bottom: auto;
   }
+  p.or {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(221, 199, 179); 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+ span { 
+     color:rgb(221, 199, 179); 
+     background: white;
+     padding:0 10px; 
+ }
+ .heroButtonReg:hover{
+    border: 3px solid rgb(242, 190, 141);
+    background: #f2be8d;
+    transition: 1.5s;
+}
+ input[type="button"].heroButtonReg{
+ 	font-family: serif;
+    font-size: 20px;
+    width: 235px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 25px;
+    border:3px solid rgb(242, 190, 141) ;
+    background: transparent;
+    color: rgb(0, 40, 101);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+p.reg, input.reg, th.reg, div.reg, option.reg, select.reg, label.reg{
+    font-size: 17px;
+    font-family: serif;
+    color: rgb(0, 40, 101);
+  }
+  p.reg {
+      margin-left: 45%;
+      color:antiquewhite;
+  }
+
+  th.reg {
+    font-size: 35px;
+    color: rgb(0, 40, 101);
+    text-align: center;
+    background-color: white;
+    padding-bottom: 15px;
+  }
+  input.reg {
+    width: 200px;
+    padding: 5px;
+  }
+  a.reg {
+    color: rgb(242, 190, 141);
+  }
+  .err{
+  	margin-left:45%;
+  }
+  button.search{
+    background-color:#7892c2;
+	border-radius:15px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:10px;
+	padding:9px 43px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+  }
+  .facilities{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  table.customTable {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-width: 2px;
+  border-color: #BDE4FF;
+  border-style: solid;
+  color: #000000;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #BDE4FF;
+  border-style: solid;
+  padding: 5px;
+}
+
+table.customTable thead {
+  background-color: #7CA9F8;
+}
+h2.list{
+	padding-top:3%;
+	margin-bottom:1%;
+	margin-left: 45%;
+	color:#FFFFFF;
+}
+h2.search{
+	color:#FFFFFF;
+	padding-top:1%;
+	padding-left:20px;
+}
+div.search{
+	margin-top:20px;
+	margin-left:45%;
+}

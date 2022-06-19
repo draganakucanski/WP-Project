@@ -4,6 +4,7 @@ import static spark.Spark.get;
 
 import com.google.gson.Gson;
 
+import dto.FacilitySearchDTO;
 import services.FacilitiesService;
 
 public class FacilitiesController {
@@ -18,4 +19,17 @@ public class FacilitiesController {
 			
 		});
 	}
+	public static void FacilitySearch() {
+		get("rest/facilities/getFacilitiesSearch", (req, res) -> {
+			res.type("application/json");
+			String name = req.queryParams("name");
+			String location = req.queryParams("location");
+			String grade = req.queryParams("grade");
+			String type = req.queryParams("type");
+			FacilitySearchDTO search = new FacilitySearchDTO(name, location, grade, type);
+			res.status(200);		
+			System.out.println(search);
+			return g.toJson(facilitiesService.SearchFacility(search));
+		});
+}
 }
