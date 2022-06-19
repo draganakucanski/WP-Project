@@ -27,7 +27,7 @@ Vue.component("facilities", {
 ,
 mounted () {
         axios
-          .get('rest/facilities/getJustFacilities')
+          .get('/rest/facilities/getJustFacilities/')
           .then(response => (this.facilities = response.data))
-    },//ovde mozda ne treba zarez
+    },
    });

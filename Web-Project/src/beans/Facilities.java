@@ -18,7 +18,7 @@ public class Facilities {
 	private ArrayList<SportsFacility> facilitiesList = new ArrayList<SportsFacility>();
 
 	public Facilities() {
-		this(".");
+		this("static");
 	}
 
 	public Facilities(String path) {

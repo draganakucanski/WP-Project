@@ -10,6 +10,7 @@ public class FacilitiesService {
 	private Facilities facilities = new Facilities();
 	
 	public Collection<SportsFacility> getAll(){
+		System.out.println(facilities.values().size());
 		return facilities.values();
 	}
 }

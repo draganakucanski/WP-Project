@@ -22,6 +22,7 @@ import beans.Role;
 import beans.User;
 import beans.UserType;
 import beans.Facilities;
+import controller.FacilitiesController;
 import controller.UserController;
 import dao.UserDAO;
 import io.jsonwebtoken.Claims;
@@ -53,6 +54,7 @@ public class SparkAppMain {
 		UserController.Registration();
 		UserController.login();
 		UserController.usernameExists();
+		FacilitiesController.getFacilities();
 
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
