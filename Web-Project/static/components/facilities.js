@@ -58,7 +58,7 @@ Vue.component("facilities", {
 	<tr v-for="f in facilities">
 		<td>{{f.name}}</td>
 		<td>
-		<img src="{{f.logo}}" class="logo"> 
+		<img :src="photoPath(f)""> 
 		</td>
 		<td>{{f.type}}</td>
 		<td>{{f.averageGrade}}</td>
@@ -156,6 +156,13 @@ mounted () {
 				}
 	
 			},
+		photoPath: function (f) {
+			if (f.logo === 'None') {
+				return 'img/logo.png';
+			} else {
+				return f.logo;	
+			}
+		},
 			FilterWorks: function () {
 			if(this.filterWorks=='true'){
 				axios.get('rest/facilities/getOpened')
