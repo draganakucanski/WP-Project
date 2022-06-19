@@ -56,6 +56,13 @@ public class SparkAppMain {
 		UserController.usernameExists();
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
+		FacilitiesController.GetGyms();
+		FacilitiesController.GetDanceS();
+		FacilitiesController.GetPools();
+		FacilitiesController.GetSportsC();
+		FacilitiesController.GetClosed();
+		FacilitiesController.GetOpened();
+		
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
 			String payload = req.body();

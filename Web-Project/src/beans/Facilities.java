@@ -43,7 +43,7 @@ public class Facilities {
 	}
 	
 	private void readFacilities(BufferedReader in) {
-		String line, name = "", wholeLoc="", wholeAdd="", street="", number="", city="";
+		String line, name = "", wholeLoc="", wholeAdd="", street="", number="", city="", logo="";
 		double grade = 0;
 		double lat;
 		double longi;
@@ -77,8 +77,9 @@ public class Facilities {
 					city = arrAdd[2];
 					zip = Integer.valueOf(arrAdd[3]);
 					loc = new Location(lat,longi,new Address(street,number,city,zip));
+					logo = st.nextToken().trim();
 				}
-				SportsFacility facility = new SportsFacility(name,type, works,loc,grade);
+				SportsFacility facility = new SportsFacility(name,type, works,loc,grade, logo);
 				facilities.put(name, facility);
 				facilitiesList.add(facility);
 			}
