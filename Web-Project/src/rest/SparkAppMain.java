@@ -55,7 +55,7 @@ public class SparkAppMain {
 		UserController.login();
 		UserController.usernameExists();
 		FacilitiesController.getFacilities();
-
+		FacilitiesController.FacilitySearch();
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
 			String payload = req.body();

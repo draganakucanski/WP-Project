@@ -43,7 +43,14 @@ public class Facilities {
 	}
 	
 	private void readFacilities(BufferedReader in) {
-		String line, name = "", works="";
+		String line, name = "", wholeLoc="", wholeAdd="", street="", number="", city="";
+		double grade = 0;
+		double lat;
+		double longi;
+		boolean works = false;
+		int zip;
+		FacilityType type =FacilityType.GYM;
+		Location loc = new Location();
 		//Location location = new Location();
 		//boolean works = true;// ovo je drugacije, bio je string
 		StringTokenizer st;
@@ -56,9 +63,22 @@ public class Facilities {
 				while (st.hasMoreTokens()) {
 					name = st.nextToken().trim();
 //					location = st.nextToken().trim();
-					works = st.nextToken().trim();
+					works = Boolean.valueOf(st.nextToken().trim());
+					grade = Double.valueOf(st.nextToken().trim());
+					type = FacilityType.valueOf(st.nextToken().trim());
+					wholeLoc=st.nextToken().trim();
+					String[] arr = wholeLoc.split("-");
+					lat = Double.valueOf(arr[0]);
+					longi =Double.valueOf(arr[1]);
+					wholeAdd = arr[2];
+					String[] arrAdd = wholeAdd.split(",");
+					street = arrAdd[0];
+					number = arrAdd[1];
+					city = arrAdd[2];
+					zip = Integer.valueOf(arrAdd[3]);
+					loc = new Location(lat,longi,new Address(street,number,city,zip));
 				}
-				SportsFacility facility = new SportsFacility(name,  Boolean.parseBoolean(works));
+				SportsFacility facility = new SportsFacility(name,type, works,loc,grade);
 				facilities.put(name, facility);
 				facilitiesList.add(facility);
 			}

@@ -77,7 +77,6 @@ Vue.component("registration", {
     `,
 	methods : {	
          InputValid: function () {
-        	alert('U reg smo.');
             axios.post('rest/registration', { "username": this.username, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth })
                 .then(response => {
                    alert('Successfully registrated!');

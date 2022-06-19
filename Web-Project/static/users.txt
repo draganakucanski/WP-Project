@@ -1,2 +1,3 @@
 pera;pera123;Petar;Petrovic;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0
-Dragana;dragana;Dragana;Kućanski;17.08.2000.;FEMALE;BRONZE;CUSTOMER;false;0.0
+mika;mika123;Mika;Mikic;07.03.1996.;MALE;BRONZE;CUSTOMER;false;0.0
+Dragana;dragana;Dragana;KuÄ‡anski;17.08.2000.;FEMALE;BRONZE;CUSTOMER;false;0.0
