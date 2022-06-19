@@ -28,12 +28,17 @@
             </tr>
             
             <tr>
-                  <td><input class="heroButton" type="button" id="registrationButton" value="Log In"/></td>
+                  <td>
+                  		<fieldset style="border: 0px;"><button class="hero-btn" type="button" onclick="redirectOnFacilities()">Log in</button></fieldset>
             </tr>
             
           </table>
         </form>
-    
+    	<script>
+    	function redirectOnFacilities(){
+    		window.location.href = "/facilities.html";
+    	}
+    	</script>
         <form name="signUp">
             <p>Don't have an account? <a class="link" href="registration.html"><b>Sign up</b></a></p>
         </form>

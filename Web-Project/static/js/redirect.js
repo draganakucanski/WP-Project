@@ -9,3 +9,4 @@ function redirectOnRegistration() {
 function loadFirstPage() {
 	window.location.href = "/homePage.html";
 }
+

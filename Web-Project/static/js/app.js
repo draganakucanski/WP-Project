@@ -2,6 +2,7 @@ const Login = { template: '<login></login>' }
 const Registration = { template: '<registration></registration>' }
 const Product = { template: '<edit-user></edit-user>' }
 const Products = { template: '<products></products>' }
+const Facilities = {template: '<facilities></facilities>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -9,7 +10,8 @@ const router = new VueRouter({
 	  	{ path: '/', component: Users },
 		{ path: '/login', component: Login },
 		{ path: '/registration', component: Registration },
-	    { path: '/users/:id', component: User}
+	    { path: '/users/:id', component: User},
+	    {path: '/facitilies',component: Facilities}
 	  ]
 });
 
