@@ -51,6 +51,7 @@ public class SparkAppMain {
 		UserController.getUsers();
 		UserController.getUser();
 		UserController.addUser();
+		UserController.Registration();
 		
 
 		post("/rest/demo/login", (req, res) -> {
@@ -88,17 +89,7 @@ public class SparkAppMain {
 			return true;
 		});
 		
-		/*post("/rest/demo/loginJWT", (req, res) -> {
-			res.type("application/json");
-			String payload = req.body();
-			User u = g.fromJson(payload, User.class);
-			// Token je validan 10 sekundi!
-			String jws = Jwts.builder().setSubject(u.getUsername()).setExpiration(new Date(new Date().getTime() + 1000*10L)).setIssuedAt(new Date()).signWith(key).compact();
-			u.setJWTToken(jws);
-			System.out.println("Returned JWT: " + jws);
-			return g.toJson(u);
-		}); */
-
+		
 		get("/rest/demo/testloginJWT", (req, res) -> {
 			String auth = req.headers("Authorization");
 			System.out.println("Authorization: " + auth);
@@ -115,19 +106,6 @@ public class SparkAppMain {
 			return "No user logged in.";
 		});
 
-	}
-	private static List<String> getParameters(String body) {
-		List<String> params = new ArrayList<String>();
-		body = body.substring(1, body.length()-1);
-		StringTokenizer st = new StringTokenizer(body, ",");
-		while (st.hasMoreTokens()) {
-			StringTokenizer second = new StringTokenizer(st.nextToken(), ":");
-			second.nextToken().trim();
-			String param = second.nextToken().trim();
-			param = param.substring(1, param.length()-1);
-			params.add(param);
-		}
-		return params;
 	}
 
 	

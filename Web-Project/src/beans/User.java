@@ -139,5 +139,4 @@ public class User {
 		this.pointsCollected = pointsCollected;
 	}
 	
-	
 }

@@ -20,17 +20,17 @@
                 <td><div style="text-align: center;">Sign up to join our team.</div></td>
               </tr>
             <tr>
-              <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" autofocus></td>
+              <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" v-model="username" autofocus></td>
             </tr>
             <tr>
-                <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name"></td>
+                <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name" v-model="firstname"></td>
               </tr>
             <tr>
-                <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name"></td>
+                <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name" v-model="lastname"></td>
             </tr>
             <tr>
                 <td>
-                        <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="gender" id="gender">
+                        <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="gender" id="gender" v-model="gender">
                           <option value="opt">Gender</option>
                           <option value="male">MALE</option>
                           <option value="female">FEMALE</option>
@@ -38,25 +38,30 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="text" class="inputF" name="dateOfBirth" id="dateOfBirth" placeholder="Date of Birth"></td>
+                <td><input type="text" class="inputF" name="dateOfBirth" id="dateOfBirth" v-model="dateOfBirth" placeholder="Date of Birth"></td>
               </tr>
             <tr>
-                <td><input type="password" class="inputF" name="password" id="password" placeholder="Password"></td>
+                <td><input type="password" class="inputF" name="password" id="password" v-model="password" placeholder="Password"></td>
             </tr>
             <tr>
-                <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" name="confirmPassword" placeholder="Confirm password"></td>
+                <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" v-model="confirmPassword" name="confirmPassword" placeholder="Confirm password"></td>
             </tr>
             
             <tr>
-                  <td><input class="heroButton" type="button" id="registrationButton" value="Sign Up"/></td>
+                  <td><input class="heroButton" type="button" id="registrationButton" v-on:click="Registration" value="Sign Up"/></td>
             </tr>
             
           </table>
         </form>
-    
         <form name="login">
             <p>Have an account? <a class="link" href="index.html"><b>Log In</b></a></p>
         </form>
         
+	<script src="../js/vue.js"></script>
+	<script src="../js/vue-router.js"></script>
+	<script src="../js/axios.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/toast.js"></script>
+    <script src="../components/registration.js"></script> 
     </body>
 </html>
