@@ -44,6 +44,9 @@ Vue.component("login", {
                 console.log(response);
                 /*this.role = response.data.role;
                 router.push(`/${this.role}`);*/
+                if(response.data.password != ""){
+				router.push('/frontpage');
+				} 
             }).catch(error => {
                 console.log(error.response)
             });
@@ -57,5 +60,6 @@ Vue.component("login", {
               .get('rest/products/' + this.id)
               .then(response => (this.product = response.data))
         }*/
-    }
+    },
+   
 });
