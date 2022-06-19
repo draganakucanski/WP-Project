@@ -1,3 +1,3 @@
-gold;30;500
-silver;20;250
-bronze;10;100
+GOLD;30;500
+SILVER;20;250
+BRONZE;10;100

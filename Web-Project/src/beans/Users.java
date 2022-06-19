@@ -45,7 +45,8 @@ public class Users {
 					String dateOfBirth =  st.nextToken().trim();
 					Gender gender = Gender.valueOf(st.nextToken().trim());
 					UserTypeName typeName = UserTypeName.valueOf(st.nextToken().trim());
-					UserType type  = UserTypeDAO.getUserTypeByName(typeName);
+					UserTypeDAO ut = new UserTypeDAO();
+					UserType type  = ut.getUserTypeByName(typeName);
 					Role role = Role.valueOf(st.nextToken().trim());
 					boolean deleted = Boolean.valueOf(st.nextToken().trim());
 					double points = Double.valueOf(st.nextToken().trim()); 

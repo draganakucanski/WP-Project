@@ -52,6 +52,7 @@ public class SparkAppMain {
 		UserController.addUser();
 		UserController.Registration();
 		UserController.login();
+		UserController.usernameExists();
 
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");

@@ -3,10 +3,10 @@ package beans;
 import com.google.gson.annotations.SerializedName;
 
 public enum UserTypeName {
-	   @SerializedName("gold")
+	   @SerializedName("GOLD")
 	    GOLD, 
-	    @SerializedName("silver")
+	    @SerializedName("SILVER")
 	    SILVER,
-	    @SerializedName("bronze")
+	    @SerializedName("BRONZE")
 	    BRONZE
 }

@@ -1,1 +1,2 @@
-pera;pera123;Petar;Petrovic;1998-12-11;MALE;BRONZE;CUSTOMER;FALSE;30
+pera;pera123;Petar;Petrovic;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0
+Dragana;dragana;Dragana;Kućanski;17.08.2000.;FEMALE;BRONZE;CUSTOMER;false;0.0

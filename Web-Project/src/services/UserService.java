@@ -1,9 +1,7 @@
 package services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
+
 
 import beans.Role;
 import beans.User;
@@ -17,7 +15,6 @@ import dto.UserRegistrationDTO;
 public class UserService {
 
 	private Users users = new Users();
-	
 	public Collection<User> getUsers() {
 		return this.users.getValues();
 	}
@@ -39,7 +36,8 @@ public class UserService {
 	}
 
 	public void CustomerRegistration(UserRegistrationDTO customerInfo) {
-		UserType type = UserTypeDAO.getUserTypeByName(UserTypeName.BRONZE);
+		UserTypeDAO ut = new UserTypeDAO();
+		UserType type = ut.getUserTypeByName(UserTypeName.BRONZE);
 		this.users.addUser(new User(customerInfo.username,customerInfo.password,customerInfo.firstname,customerInfo.lastname,customerInfo.dateOfBirth, customerInfo.gender,Role.CUSTOMER,type,false, 0));
 	}	
 	
