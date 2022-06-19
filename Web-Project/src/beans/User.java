@@ -1,5 +1,6 @@
 package beans;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	private Gender gender;
 	private Role role;
 	private UserType type;
@@ -43,10 +44,10 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public Gender getGender() {
@@ -97,7 +98,7 @@ public class User {
 	public void setPointsCollected(double pointsCollected) {
 		this.pointsCollected = pointsCollected;
 	}
-	public User(String username, String password, String firstName, String lastName, Date dateOfBirth, Gender gender,
+	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
 			Role role, UserType type, TrainingHistory history, Membership membership, SportsFacility sportsFacility,
 			ArrayList<SportsFacility> visitedFacility, double pointsCollected) {
 		super();
@@ -124,7 +125,7 @@ public class User {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
-	public User(String username, String password, String firstName, String lastName, Date dateOfBirth, Gender gender,
+	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
 			Role role, UserType type, boolean deleted, double pointsCollected) {
 		super();
 		this.username = username;

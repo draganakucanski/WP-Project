@@ -29,6 +29,7 @@ public class UserService {
 	public void addUser(User user) {
 		this.users.addUser(user);
 	}
+
 	public boolean UsernameExists(String username) {
 		for (User u : this.users.getValues()) {
 			if(u.getUsername().equals(username)) 
@@ -37,9 +38,17 @@ public class UserService {
 		return false;
 	}
 
-	public void CustomerRegistration(UserRegistrationDTO customerInfo) throws ParseException {
-		Date dateOfBirth = new SimpleDateFormat("dd.MM.yyyy.").parse(customerInfo.dateOfBirth);
+	public void CustomerRegistration(UserRegistrationDTO customerInfo) {
 		UserType type = UserTypeDAO.getUserTypeByName(UserTypeName.BRONZE);
-		this.users.addUser(new User(customerInfo.username,customerInfo.password,customerInfo.firstname,customerInfo.lastname,dateOfBirth, customerInfo.gender,Role.CUSTOMER,type,false, 0));
+		this.users.addUser(new User(customerInfo.username,customerInfo.password,customerInfo.firstname,customerInfo.lastname,customerInfo.dateOfBirth, customerInfo.gender,Role.CUSTOMER,type,false, 0));
 	}	
+	
+	public User login(String username, String password) {
+		User user = users.findUser(username);
+		System.out.println(user.getUsername());
+		if(user != null && user.getPassword().equals(password)) {
+			return user;
+		}
+		else return null;
+	}
 }

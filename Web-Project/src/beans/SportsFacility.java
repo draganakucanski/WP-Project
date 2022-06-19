@@ -75,6 +75,15 @@ public class SportsFacility {
 	public SportsFacility() {
 		super();
 	}
+	public SportsFacility(String name, Location location, boolean works) {
+		this.name= name;
+		this.location = location;
+		this.works= works;
+	}
+	public SportsFacility(String name, boolean works) {
+		this.name = name;
+		this.works = works;
+	}
 	
 	
 }

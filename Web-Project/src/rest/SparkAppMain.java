@@ -17,9 +17,11 @@ import java.util.StringTokenizer;
 
 import com.google.gson.Gson;
 
+import beans.Facilities;
 import beans.Role;
 import beans.User;
 import beans.UserType;
+import beans.Facilities;
 import controller.UserController;
 import dao.UserDAO;
 import io.jsonwebtoken.Claims;
@@ -31,13 +33,10 @@ import spark.Session;
 import ws.WsHandler;
 
 public class SparkAppMain {
-
+	private static Facilities facilities = new Facilities();
 	private static Gson g = new Gson();
-
-	/**
-	 * Ključ za potpisivanje JWT tokena.
-	 * Biblioteka: https://github.com/jwtk/jjwt
-	 */
+	
+	// ovde sam obrisao nesto sto je bilo zakomentarisano jer je imalo karaktere koje ne podrzava program, ako bude greska savucao si na desktopu tekst
 	static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
 	public static void main(String[] args) throws Exception {
@@ -52,7 +51,7 @@ public class SparkAppMain {
 		UserController.getUser();
 		UserController.addUser();
 		UserController.Registration();
-		
+		UserController.login();
 
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
@@ -66,7 +65,9 @@ public class SparkAppMain {
 			}
 			return g.toJson(user);
 		});
-
+		
+		
+		
 		get("/rest/demo/testlogin", (req, res) -> {
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
