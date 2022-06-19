@@ -129,3 +129,62 @@ button{
     margin-top: auto;
     margin-bottom: auto;
   }
+  p.or {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(221, 199, 179); 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+ span { 
+     color:rgb(221, 199, 179); 
+     background: white;
+     padding:0 10px; 
+ }
+ .heroButtonReg:hover{
+    border: 3px solid rgb(242, 190, 141);
+    background: #f2be8d;
+    transition: 1.5s;
+}
+ input[type="button"].heroButtonReg{
+ 	font-family: serif;
+    font-size: 20px;
+    width: 235px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 25px;
+    border:3px solid rgb(242, 190, 141) ;
+    background: transparent;
+    color: rgb(0, 40, 101);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+p.reg, input.reg, th.reg, div.reg, option.reg, select.reg, label.reg{
+    font-size: 17px;
+    font-family: serif;
+    color: rgb(0, 40, 101);
+  }
+  p.reg {
+      margin-left: 45%;
+      color:antiquewhite;
+  }
+
+  th.reg {
+    font-size: 35px;
+    color: rgb(0, 40, 101);
+    text-align: center;
+    background-color: white;
+    padding-bottom: 15px;
+  }
+  input.reg {
+    width: 200px;
+    padding: 5px;
+  }
+  a.reg {
+    color: rgb(242, 190, 141);
+  }
+  .err{
+  	margin-left:45%;
+  }
