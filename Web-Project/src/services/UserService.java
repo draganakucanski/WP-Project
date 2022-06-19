@@ -21,5 +21,13 @@ public class UserService {
 	public void addUser(User user) {
 		this.users.addUser(user);
 	}
-
+	
+	public User login(String username, String password) {
+		User user = users.findUser(username);
+		System.out.println(user.getUsername());
+		if(user != null && user.getPassword().equals(password)) {
+			return user;
+		}
+		else return null;
+	}
 }

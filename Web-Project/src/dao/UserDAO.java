@@ -7,10 +7,13 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -48,7 +51,7 @@ public class UserDAO {
 					String password = st.nextToken().trim();
 					String firstName = st.nextToken().trim();
 					String lastName = st.nextToken().trim();
-					Date dateOfBirth = (new SimpleDateFormat("dd.MM.yyyy.")).parse(st.nextToken().trim());
+					String dateOfBirth = st.nextToken().trim();
 					Gender gender = Gender.valueOf(st.nextToken().trim());
 					UserTypeName typeName = UserTypeName.valueOf(st.nextToken().trim());
 					UserType type  = UserTypeDAO.getUserTypeByName(typeName);
@@ -89,7 +92,7 @@ public class UserDAO {
 			for (User user : users.values()) {
 				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
 						user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-						(new SimpleDateFormat("dd.MM.yyyy.")).format(user.getDateOfBirth()), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+						user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {

@@ -1,1 +1,1 @@
-pera;pera123;Petar;Petrovic;11.12.1997.;male;bronze;customer;FALSE;30
+pera;pera123;Petar;Petrovic;1998-12-11;MALE;BRONZE;CUSTOMER;FALSE;30

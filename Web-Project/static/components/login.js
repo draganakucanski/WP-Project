@@ -1,29 +1,61 @@
-Vue.component("login-check", {
-	data: function () {
-		    return {
-		      title: "Dodaj proizvod",
-		      value: "Dodaj",
-		      id : -1,
-		      product: {id: '', name:null, price:null}
-		    }
-	},
-	template: ` 
+Vue.component("login", {
+    data: function () {
+            return {
+            message: "test",
+            role: "",
+            login: {
+                username: "",
+                password: "",
+            }
+          }
+    },
+    template: ` 
 <div>
-	{{title}}
-	<form>
-		<label>Ime</label>
-		<input type = "text" v-model = "product.name" name = "name">
-		<label>Cena</label>
-		<input type = "number" v-model = "product.price" name = "price">
-		<input type = "submit" v-on:click = "editProduct" v-bind:value = "this.value">
-	</form>
-</div>		  
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <p>Username: </p>
+                    <input type="text" v-model = "login.username"></input>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Password: </p>
+                    <input type="password" v-model = "login.password"></input>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" style="text-align:center">
+                    <input type="submit" value="Login" v-on:click = "loginConfirm"></input>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 `
-	,
-	methods : {
-		loginClick : function(){
-			axios.get("rest/user/log/"),{params: {username: this.login.username , password: this.login.password}};	
-		
-			  					}
-				}
-})
+    , 
+    methods : {
+        loginConfirm : function() {
+           	event.preventDefault();
+            axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
+            .then(response => {
+                console.log(response);
+                /*this.role = response.data.role;
+                router.push(`/${this.role}`);*/
+            }).catch(error => {
+                console.log(error.response)
+            });
+            
+        }
+    },
+    mounted () {
+        /*this.id = this.$route.params.id;
+        if (this.id != -1){
+            axios
+              .get('rest/products/' + this.id)
+              .then(response => (this.product = response.data))
+        }*/
+    }
+});

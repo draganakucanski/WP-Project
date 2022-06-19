@@ -7,9 +7,11 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import dao.UserTypeDAO;
@@ -40,7 +42,7 @@ public class Users {
 					String password = st.nextToken().trim();
 					String firstName = st.nextToken().trim();
 					String lastName = st.nextToken().trim();
-					Date dateOfBirth = (new SimpleDateFormat("dd.MM.yyyy.")).parse(st.nextToken().trim());
+					String dateOfBirth =  st.nextToken().trim();
 					Gender gender = Gender.valueOf(st.nextToken().trim());
 					UserTypeName typeName = UserTypeName.valueOf(st.nextToken().trim());
 					UserType type  = UserTypeDAO.getUserTypeByName(typeName);
@@ -93,13 +95,22 @@ public class Users {
 		this.users.remove(id);
 	}
 	public void saveData(){
+		
 		PrintWriter writer;
 		try {
+			
 			writer = new PrintWriter("static/users.txt", "UTF-8");
+			
 			for (User user : users.values()) {
+				/*
+				 * String localDate =user.getDateOfBirth();//For reference DateTimeFormatter
+				 * formatter =
+				 * DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH); String
+				 * date = localDate.format(formatter);
+				 */
 				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
 						user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-						(new SimpleDateFormat("dd.MM.yyyy.")).format(user.getDateOfBirth()), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+						user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {

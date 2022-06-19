@@ -50,7 +50,7 @@ public class SparkAppMain {
 		UserController.getUsers();
 		UserController.getUser();
 		UserController.addUser();
-		
+		UserController.login();
 
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
@@ -65,10 +65,7 @@ public class SparkAppMain {
 			return g.toJson(user);
 		});
 		
-		get("/rest/facilities/getJustFacilities", (req, res) -> {
-			res.type("application/json");
-			return g.toJson(facilities.values());
-		});
+		
 		
 		get("/rest/demo/testlogin", (req, res) -> {
 			Session ss = req.session(true);
