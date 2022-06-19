@@ -19,7 +19,8 @@ Vue.component("registration", {
 	template: `
     <div class ="registration">
          <form name="registration" id="registration" method="post">
-          <table style="padding-bottom: 5px;">
+
+          <table style="padding-bottom: 5px;" class="reg">
             <tr>
               <th style="padding: 0%;">
                 <img width=15% height=60% src="../img/weights-1.png">
@@ -87,7 +88,6 @@ Vue.component("registration", {
          
       },
       Registration: function () {
-         alert('klik radi');
          this.validInfo.username = 'OK';
          this.validInfo.emptyInput = 'OK';
          

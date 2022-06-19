@@ -108,3 +108,24 @@ button{
     background: url("../img/magnifier.png") no-repeat;
     padding-left: 30px;
   }
+  .registration {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  input.inputF {
+    width: 220px;
+	}
+ table.reg {
+    background-color: white;
+    border: 2px solid rgb(221, 199, 179);
+    border-spacing: 3px;
+    font-size: 12px;
+    padding: 30px;
+    padding-bottom: 50px;
+    margin-left: 40%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }

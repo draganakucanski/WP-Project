@@ -7,7 +7,16 @@ Vue.component("mainpage", {
 	template: ` 
 <div>
 	 <section class="header">
-        
+	 	<nav>
+          <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">About us</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="facilities.html">Our facilities</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <div class="text-box">
             <h1>GymPass</h1>
@@ -30,7 +39,7 @@ Vue.component("mainpage", {
 		
 			  					},
 		redirectOnRegistration: function(){
-			axios.get("rest/user/sign/")
+			router.push('/registration');
 		}
 				},
 	 	
