@@ -1,3 +1,3 @@
-Sport GYMY;true;7;GYM;44-45-Dunavska,7,Novi Sad,21000
-Fitness Sport;false;8;SPORTSCENTER;44-45-Masarikova,12,Sabac,21000
-DensDens;false;6;DANCESTUDIO;44-45-Jevrejska,5,Subotica,21000
+Sport GYMY;true;3;GYM;44-45-Dunavska,7,Novi Sad,21000;img/logo.png
+Fitness Sport;false;4;SPORTSCENTER;44-45-Masarikova,12,Sabac,21000;img/logo.png
+DensDens;false;2;DANCESTUDIO;44-45-Jevrejska,5,Subotica,21000;img/logo.png

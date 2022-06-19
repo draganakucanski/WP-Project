@@ -31,5 +31,47 @@ public class FacilitiesController {
 			System.out.println(search);
 			return g.toJson(facilitiesService.SearchFacility(search));
 		});
-}
+	}
+		public static void GetGyms() {
+			get("rest/facilities/getGyms", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetGyms());
+			});
+		}
+		public static void GetPools() {
+			get("rest/facilities/getPools", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetPools());
+			});
+		}
+		public static void GetDanceS() {
+			get("rest/facilities/getDanceS", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetDanceS());
+			});
+		}
+		public static void GetSportsC() {
+			get("rest/facilities/getSportsC", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetSportsC());
+			});
+		}
+		public static void GetOpened() {
+			get("rest/facilities/getOpened", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetOpened());
+			});
+		}
+		public static void GetClosed() {
+			get("rest/facilities/getClosed", (req, res) -> {
+				res.type("application/json");
+				res.status(200);		
+				return g.toJson(facilitiesService.GetClosed());
+			});
+		}
 }

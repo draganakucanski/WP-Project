@@ -84,13 +84,14 @@ public class SportsFacility {
 		this.name = name;
 		this.works = works;
 	}
-	public SportsFacility(String name, FacilityType type, boolean works, Location location, double averageGrade) {
+	public SportsFacility(String name, FacilityType type, boolean works, Location location, double averageGrade, String logo) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.works = works;
 		this.location = location;
 		this.averageGrade = averageGrade;
+		this.logo = logo;
 	}
 	
 	
