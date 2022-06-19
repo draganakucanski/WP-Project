@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-/utils/
-=======
+/beans/
 /controller/
 /dao/
 /dto/
+/rest/
 /services/
 /utils/
-/rest/
-/beans/
->>>>>>> UserRegistration
+/ws/

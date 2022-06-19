@@ -11,8 +11,8 @@ public class FacilitiesController {
 	private static Gson g = new Gson();
 	private static FacilitiesService facilitiesService = new FacilitiesService();
 	
-	private static void getFacilities() {
-		get("/rest/facilities/getJustFacilities", (req, res) -> {
+	public static void getFacilities() {
+		get("rest/facilities/getJustFacilities/", (req, res) -> {
 			res.type("application/json");
 			return g.toJson(facilitiesService.getAll());
 			
