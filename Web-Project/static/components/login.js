@@ -10,18 +10,18 @@ Vue.component("login", {
           }
     },
     template: ` 
-<div>
-    <form>
+<div class="login">
+    <form class="login">
         <table>
             <tr>
                 <td>
-                    <p>Username: </p>
+                    <p class="loginP">Username: </p>
                     <input type="text" v-model = "login.username"></input>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p>Password: </p>
+                    <p class="loginP">Password: </p>
                     <input type="password" v-model = "login.password"></input>
                 </td>
             </tr>

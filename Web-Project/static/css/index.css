@@ -257,3 +257,17 @@ label.filterW{
 	margin-left:5px;
 	color:#FFFFFF;
 }
+.login{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  form.login{
+  padding-left:600px;
+  padding-top:30px;
+  }
+  p.loginP{
+  color:#FFFFFF;
+  }
