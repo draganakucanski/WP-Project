@@ -53,6 +53,8 @@ public class SparkAppMain {
 		UserController.addUser();
 		UserController.Registration();
 		UserController.login();
+		UserController.logout();
+		UserController.getLogedUser();
 		UserController.usernameExists();
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
@@ -75,6 +77,8 @@ public class SparkAppMain {
 			}
 			return g.toJson(user);
 		});
+		
+		
 		
 		
 		

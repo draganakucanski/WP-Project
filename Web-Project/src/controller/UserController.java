@@ -67,8 +67,30 @@ public class UserController {
             String password = req.queryParams("password");
             System.out.println(username);
             System.out.println(password);
-            return g.toJson(userService.login(username, password));
+            User us = userService.login(username, password);
+            if (us != null) {            	
+            	req.session().attribute("logedinUser", username);
+            }
+            return g.toJson(us);
 		});       
+	}
+	public static void logout() {
+		post("rest/logOut", (req, res) -> {
+			res.type("application/json");
+			req.session().invalidate();
+			return "OK logout";
+		});
+	}
+	public static void getLogedUser() {
+		get("rest/users/getLogedUser/", (req, res) -> {
+			res.type("application/json");
+            User us = userService.getUser(req.session().attribute("logedinUser"));
+            System.out.println("LOGED USER: " + us);
+            if (us == null) {            	
+            	return "404";
+            }
+            return g.toJson(us);
+		});   
 	}
 	
 }
