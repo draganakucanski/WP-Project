@@ -56,6 +56,7 @@ public class SparkAppMain {
 		UserController.logout();
 		UserController.getLogedUser();
 		UserController.usernameExists();
+		UserController.editUser();
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
 		FacilitiesController.GetGyms();

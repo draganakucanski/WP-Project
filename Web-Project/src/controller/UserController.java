@@ -6,6 +6,7 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.User;
+import dto.UserEditDTO;
 import dto.UserRegistrationDTO;
 import services.UserService;
 import utils.GsonSerializer;
@@ -92,5 +93,16 @@ public class UserController {
             return g.toJson(us);
 		});   
 	}
-	
+	public static void editUser() {
+		post("rest/users/editData/", (req, res) -> {
+			res.type("application/json");
+			// System.out.println(req.body());
+			UserEditDTO customerInfo = g.fromJson(req.body(),UserEditDTO.class);
+			//System.out.println(customerInfo.firstName);
+            User us = userService.editUser(customerInfo.username, customerInfo.firstName,customerInfo.lastName, customerInfo.password, customerInfo.dateOfBirth,customerInfo.gender);
+           
+            
+            return g.toJson(us);
+		});
+	}
 }

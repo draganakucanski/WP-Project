@@ -133,6 +133,15 @@ public class User {
 				+ sportsFacility + ", visitedFacility=" + visitedFacility + ", pointsCollected=" + pointsCollected
 				+ "]";
 	}
+	
+	public User(String firstName,String lastName,String password,String dateOfBirth) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.password=password;
+		this.dateOfBirth=dateOfBirth;
+				
+	}
+	
 	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
 			Role role, UserType type, boolean deleted, double pointsCollected) {
 		super();

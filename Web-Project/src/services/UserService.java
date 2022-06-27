@@ -2,7 +2,7 @@ package services;
 
 import java.util.Collection;
 
-
+import beans.Gender;
 import beans.Role;
 import beans.User;
 import beans.UserType;
@@ -48,5 +48,16 @@ public class UserService {
 			return user;
 		}
 		else return null;
+	}
+	
+	public User editUser(String username,String firstName, String lastName, String password, String dateOfBirth,Gender gender) {
+		User us = users.getUser(username);
+		us.setFirstName(firstName);
+		us.setLastName(lastName);
+		us.setPassword(password);
+		us.setDateOfBirth(dateOfBirth);
+		us.setGender(gender);
+		this.users.edit(username, us);
+		return us;
 	}
 }
