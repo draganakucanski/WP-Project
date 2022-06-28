@@ -1,2 +1,2 @@
-pera;pera123;Jason;Milo;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0
-milos;milos1;Milos;Obilic;12.11.2002.;MALE;BRONZE;CUSTOMER;false;30.0
+pera;pera123;Jason;Ultron;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0
+milos;milos1;Milos;Obilic;03.03.1994.;MALE;BRONZE;CUSTOMER;false;30.0
