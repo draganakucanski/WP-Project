@@ -16,7 +16,9 @@ public class UserService {
 
 	private Users users = new Users();
 	public Collection<User> getUsers() {
-		return this.users.getValues();
+		Collection<User> us = this.users.getValues();
+		System.out.println(us);
+		return us;
 	}
 	
 	public User getUser(String username) {

@@ -26,6 +26,13 @@ public class UserController {
 			return g.toJson(userService.getUsers());
 		});
 	}
+	public static void getAllUsers() {
+		get("rest/users/getAllUsers/", (req, res) -> {
+			res.type("application/json");
+			System.out.println("PROSLO");
+			return g.toJson(userService.getUsers());
+		});
+	}
 	
 	public static void getUser() {
 		get("rest/users/:id", (req, res) -> {
