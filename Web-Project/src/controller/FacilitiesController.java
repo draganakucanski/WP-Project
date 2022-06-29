@@ -1,10 +1,13 @@
 package controller;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 import com.google.gson.Gson;
 
+import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
+import dto.UserRegistrationDTO;
 import services.FacilitiesService;
 
 public class FacilitiesController {
@@ -72,6 +75,15 @@ public class FacilitiesController {
 				res.type("application/json");
 				res.status(200);		
 				return g.toJson(facilitiesService.GetClosed());
+			});
+		}
+		public static void addObjec() {
+			post("rest/facilities/addNewObject/", (req, res) -> {
+				res.type("application/json");
+				res.status(200);
+				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);
+				facilitiesService.FacilityAdding(objectInfo);
+			return "OK";
 			});
 		}
 }

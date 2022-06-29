@@ -6,8 +6,17 @@ import java.util.Collection;
 
 import beans.Facilities;
 import beans.FacilityType;
+import beans.Location;
+import beans.Role;
 import beans.SportsFacility;
+import beans.User;
+import beans.UserType;
+import beans.UserTypeName;
+import dao.FacilityTypeDAO;
+import dao.UserTypeDAO;
+import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
+import dto.UserRegistrationDTO;
 
 public class FacilitiesService {
 	
@@ -87,5 +96,9 @@ public ArrayList<SportsFacility> GetClosed() {
 		}
 		return ret;
 	}
+public void FacilityAdding(FacilityAddingDTO objectInfo) {
+	
+	this.facilities.addFacility(new SportsFacility(objectInfo.name,objectInfo.type,(boolean)objectInfo.status,objectInfo.location,objectInfo.grade, objectInfo.logo));
+}												//String name, FacilityType type, boolean works, Location location, double averageGrade, String logo
 }
 

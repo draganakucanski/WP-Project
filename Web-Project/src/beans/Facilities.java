@@ -2,7 +2,10 @@ package beans;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -88,6 +91,33 @@ public class Facilities {
 		}
 	}
 	
+public void saveData(){
+		
+		PrintWriter writer;
+		try {
+			
+			writer = new PrintWriter("static/facilities.txt", "UTF-8");
+			
+			for (SportsFacility facility : facilities.values()) {
+				/*
+				 * String localDate =user.getDateOfBirth();//For reference DateTimeFormatter
+				 * formatter =
+				 * DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH); String
+				 * date = localDate.format(formatter);
+				 */
+				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
+						facility.getName(), facility.getLocation(), facility.getType(),facility.getAverageGrade(), 
+						facility.isWorks(),facility.getLogo()));
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public Collection<SportsFacility> values() {
 		return facilities.values();
 	}
@@ -106,4 +136,13 @@ public class Facilities {
 	public ArrayList<SportsFacility> getfacilitiesList() {
 		return facilitiesList;
 	}
+	public void addFacility(SportsFacility facility) {
+		if (facilities.containsKey(facility.getName())) {
+			return;
+		} else {
+			this.facilities.put(facility.getName(), facility);
+			saveData();
+		}
+	}
+	
 }
