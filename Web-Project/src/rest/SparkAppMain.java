@@ -53,7 +53,11 @@ public class SparkAppMain {
 		UserController.addUser();
 		UserController.Registration();
 		UserController.login();
+		UserController.logout();
+		UserController.getLogedUser();
 		UserController.usernameExists();
+		UserController.editUser();
+		UserController.getAllUsers();
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
 		FacilitiesController.GetGyms();
@@ -62,6 +66,7 @@ public class SparkAppMain {
 		FacilitiesController.GetSportsC();
 		FacilitiesController.GetClosed();
 		FacilitiesController.GetOpened();
+		
 		
 		post("/rest/demo/login", (req, res) -> {
 			res.type("application/json");
@@ -75,6 +80,8 @@ public class SparkAppMain {
 			}
 			return g.toJson(user);
 		});
+		
+		
 		
 		
 		

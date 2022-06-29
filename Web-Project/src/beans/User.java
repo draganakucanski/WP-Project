@@ -125,6 +125,23 @@ public class User {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", role=" + role + ", type=" + type
+				+ ", deleted=" + deleted + ", history=" + history + ", membership=" + membership + ", sportsFacility="
+				+ sportsFacility + ", visitedFacility=" + visitedFacility + ", pointsCollected=" + pointsCollected
+				+ "]";
+	}
+	
+	public User(String firstName,String lastName,String password,String dateOfBirth) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.password=password;
+		this.dateOfBirth=dateOfBirth;
+				
+	}
+	
 	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
 			Role role, UserType type, boolean deleted, double pointsCollected) {
 		super();

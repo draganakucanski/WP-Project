@@ -5,6 +5,8 @@ const Products = { template: '<products></products>' }
 const Facilities = {template: '<facilities></facilities>'}
 const Login = {template: '<login></login>'}
 const Frontpage= {template: '<frontpage></frontpage>'}
+const Editpage = {template: '<editpage></editpage>'}
+const Userslist = {template: '<userslist></userslist>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -14,6 +16,8 @@ const router = new VueRouter({
 		{path:'/registration',component: Registration},
 		{path: '/facilities',component: Facilities},
 		{path: '/frontPage',component: Frontpage},
+		{path: '/editPage',component: Editpage},
+		{path: '/userslist',component: Userslist},
 	  ]
 });
 

@@ -26,9 +26,7 @@ Vue.component("mainpage", {
             <fieldset style="border: 0px;"><button class="hero-btn" type="button" v-on:click="redirectOnRegistration">Sign up</button></fieldset>
             </div>
         </div>
-		<script >
 		
-		</script>
     </section>
 </div>		  
 `

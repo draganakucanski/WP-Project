@@ -2,7 +2,7 @@ package services;
 
 import java.util.Collection;
 
-
+import beans.Gender;
 import beans.Role;
 import beans.User;
 import beans.UserType;
@@ -16,7 +16,9 @@ public class UserService {
 
 	private Users users = new Users();
 	public Collection<User> getUsers() {
-		return this.users.getValues();
+		Collection<User> us = this.users.getValues();
+		System.out.println(us);
+		return us;
 	}
 	
 	public User getUser(String username) {
@@ -48,5 +50,16 @@ public class UserService {
 			return user;
 		}
 		else return null;
+	}
+	
+	public User editUser(String username,String firstName, String lastName, String password, String dateOfBirth,Gender gender) {
+		User us = users.getUser(username);
+		us.setFirstName(firstName);
+		us.setLastName(lastName);
+		us.setPassword(password);
+		us.setDateOfBirth(dateOfBirth);
+		us.setGender(gender);
+		this.users.edit(username, us);
+		return us;
 	}
 }

@@ -6,6 +6,7 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.User;
+import dto.UserEditDTO;
 import dto.UserRegistrationDTO;
 import services.UserService;
 import utils.GsonSerializer;
@@ -22,6 +23,13 @@ public class UserController {
 	public static void getUsers() {
 		get("rest/users/", (req, res) -> {
 			res.type("application/json");
+			return g.toJson(userService.getUsers());
+		});
+	}
+	public static void getAllUsers() {
+		get("rest/users/getAllUsers/", (req, res) -> {
+			res.type("application/json");
+			System.out.println("PROSLO");
 			return g.toJson(userService.getUsers());
 		});
 	}
@@ -67,8 +75,41 @@ public class UserController {
             String password = req.queryParams("password");
             System.out.println(username);
             System.out.println(password);
-            return g.toJson(userService.login(username, password));
+            User us = userService.login(username, password);
+            if (us != null) {            	
+            	req.session().attribute("logedinUser", username);
+            }
+            return g.toJson(us);
 		});       
 	}
-	
+	public static void logout() {
+		post("rest/logOut", (req, res) -> {
+			res.type("application/json");
+			req.session().invalidate();
+			return "OK logout";
+		});
+	}
+	public static void getLogedUser() {
+		get("rest/users/getLogedUser/", (req, res) -> {
+			res.type("application/json");
+            User us = userService.getUser(req.session().attribute("logedinUser"));
+            System.out.println("LOGED USER: " + us);
+            if (us == null) {            	
+            	return "404";
+            }
+            return g.toJson(us);
+		});   
+	}
+	public static void editUser() {
+		post("rest/users/editData/", (req, res) -> {
+			res.type("application/json");
+			// System.out.println(req.body());
+			UserEditDTO customerInfo = g.fromJson(req.body(),UserEditDTO.class);
+			//System.out.println(customerInfo.firstName);
+            User us = userService.editUser(customerInfo.username, customerInfo.firstName,customerInfo.lastName, customerInfo.password, customerInfo.dateOfBirth,customerInfo.gender);
+           
+            
+            return g.toJson(us);
+		});
+	}
 }

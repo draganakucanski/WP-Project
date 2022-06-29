@@ -44,12 +44,14 @@ Vue.component("login", {
                 console.log(response);
                 /*this.role = response.data.role;
                 router.push(`/${this.role}`);*/
+                localStorage.setItem('logedInUser', response.data);
                 if(response.data.password != ""){
 				router.push('/frontpage');
 				} 
             }).catch(error => {
                 console.log(error.response)
             });
+            
             
         }
     },

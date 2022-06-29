@@ -29,6 +29,9 @@ public class UserType {
 		this.discount = discount;
 		this.requiredPoints = requiredPoints;
 	}
+	public UserType(UserTypeName utn) {
+		this.userTypeName = utn;
+	}
 	public UserType() {
 		super();
 	}
