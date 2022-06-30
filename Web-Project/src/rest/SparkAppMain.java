@@ -66,6 +66,7 @@ public class SparkAppMain {
 		FacilitiesController.GetSportsC();
 		FacilitiesController.GetClosed();
 		FacilitiesController.GetOpened();
+		FacilitiesController.AddObject();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

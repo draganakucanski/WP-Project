@@ -84,6 +84,10 @@ public class SportsFacility {
 		this.name = name;
 		this.works = works;
 	}
+	public SportsFacility(FacilityType type) {
+		this.type=type;
+			}
+	
 	public SportsFacility(String name, FacilityType type, boolean works, Location location, double averageGrade, String logo) {
 		super();
 		this.name = name;
@@ -93,6 +97,14 @@ public class SportsFacility {
 		this.averageGrade = averageGrade;
 		this.logo = logo;
 	}
+	public SportsFacility(String name, FacilityType type, Location location, String logo) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.location = location;
+		this.logo = logo;
+	}
+	
 	
 	
 }

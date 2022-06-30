@@ -7,6 +7,7 @@ const Login = {template: '<login></login>'}
 const Frontpage= {template: '<frontpage></frontpage>'}
 const Editpage = {template: '<editpage></editpage>'}
 const Userslist = {template: '<userslist></userslist>'}
+const AddFacilities = {template: '<addfacilities></addfacilities>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -18,6 +19,7 @@ const router = new VueRouter({
 		{path: '/frontPage',component: Frontpage},
 		{path: '/editPage',component: Editpage},
 		{path: '/userslist',component: Userslist},
+		{path: '/addFacilities',component: AddFacilities},
 	  ]
 });
 

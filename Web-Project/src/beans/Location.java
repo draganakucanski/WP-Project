@@ -32,6 +32,10 @@ public class Location {
 	public Location() {
 		super();
 	}
+	public Location(Address address) {
+		super();
+		this.address = address;
+	}
 	
 	
 }

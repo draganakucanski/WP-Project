@@ -1,12 +1,21 @@
 package beans;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+
+import javax.imageio.ImageIO;
 
 import beans.Facilities;
 import beans.SportsFacility;
@@ -88,6 +97,29 @@ public class Facilities {
 		}
 	}
 	
+public void saveData(){
+		
+		PrintWriter writer;
+		try {
+			
+			writer = new PrintWriter("static/facilities.txt", "UTF-8");
+			
+			for (SportsFacility facility : facilities.values()) {
+				/*
+				 44-45-Dunavska,7,Novi Sad,21000
+				 */
+				writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s", 
+						facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo()));
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public Collection<SportsFacility> values() {
 		return facilities.values();
 	}
@@ -105,5 +137,47 @@ public class Facilities {
 	/** Vraca listu fasilitija. */
 	public ArrayList<SportsFacility> getfacilitiesList() {
 		return facilitiesList;
+	}
+	public void addFacility(SportsFacility facility) {
+		if (facilities.containsKey(facility.getName())) {
+			return;
+		} else {
+			System.out.println(facility.getName());
+			this.facilities.put(facility.getName(), facility);
+			saveData();
+		}
+	}
+	public void AddFacilityLogo(SportsFacility sf, String imageFile) {
+		String imageString = imageFile.split(",")[1];
+		
+		BufferedImage image = null;
+	    byte[] imageByte;
+
+	    imageByte = Base64.getDecoder().decode(imageString);
+	    ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+	    try {
+			image = ImageIO.read(bis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    try {
+			bis.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    String imageName= "img/"+ sf.getName() + ".png";
+	   
+	    try {
+	    	File outputfile = new File(new File("./static").getCanonicalPath()+File.separator+imageName);
+			ImageIO.write(image, "png", outputfile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
+	    sf.setLogo(imageName);
+		saveData();
+		
+
 	}
 }

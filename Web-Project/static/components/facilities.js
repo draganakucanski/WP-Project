@@ -1,6 +1,7 @@
 Vue.component("facilities", {
 	data: function () {
 		    return {
+			  logedInUser: null,
 		      facilities: null,
 		      searchParam: {
 				name: "",
@@ -82,15 +83,32 @@ Vue.component("facilities", {
 			  </select></td></tr>
 			  <tr><td><button class="search" v-on:click="FacilitySearch">Search</button></td></tr>
 			</table>
-		</div>	  
+		</div>	
+		<fieldset style="border: 0px;"><button class="hero-btn" type="button" v-on:click="redirectOnAddingFacilities">Add a facility (only available to an admin)</button></fieldset>
+              
 </div>	
 `
 ,
-mounted () {
+
+	
+	mounted () {
         axios
           .get('/rest/facilities/getJustFacilities/')
           .then(response => (this.facilities = response.data.sort((b, a) => (a.works > b.works) ? 1 : ((b.works > a.works) ? -1 : 0))))
+          
+          axios
+			.get('/rest/users/getLogedUser/')
+			.then(response => {
+				if (response.data == '404'){
+					console.log('No loged in user.');
+				}
+				else {
+					this.logedInUser = response.data;
+					console.log('LOGED IN USER:' + this.logedInUser.username);
+				}
     },
+    )},
+    
 	methods: {
 			FacilitySearch: function () {
 				axios.get('rest/facilities/getFacilitiesSearch', { params: {
@@ -103,6 +121,12 @@ mounted () {
 						alert('Error on server');
 					});	
 	
+			},
+			redirectOnAddingFacilities: function(){
+				
+				if(this.logedInUser.role === "admin"){
+					router.push('/addfacilities')
+				}
 			},
 			sort: function () {
 			if (this.sortType == 'Opened') {
