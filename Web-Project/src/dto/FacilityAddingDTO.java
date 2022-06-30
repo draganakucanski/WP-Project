@@ -6,9 +6,13 @@ import beans.Location;
 public class FacilityAddingDTO {
 	
 	public String name;
-	public Location location;
-	public double grade;
+	public String number;
+	public String street;
+	public String city;
+	public String zip;
+	public String longi;
+	public String lat;
 	public FacilityType type;
-	public boolean status;
 	public String logo;
+	public String imageFile;
 }

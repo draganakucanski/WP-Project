@@ -77,8 +77,8 @@ public class FacilitiesController {
 				return g.toJson(facilitiesService.GetClosed());
 			});
 		}
-		public static void addObjec() {
-			post("rest/facilities/addNewObject/", (req, res) -> {
+		public static void AddObject() {
+			post("rest/addNewObject", (req, res) -> {
 				res.type("application/json");
 				res.status(200);
 				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);

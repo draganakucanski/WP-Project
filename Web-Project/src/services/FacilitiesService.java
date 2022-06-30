@@ -1,9 +1,17 @@
 package services;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 
+import javax.imageio.ImageIO;
+
+import beans.Address;
 import beans.Facilities;
 import beans.FacilityType;
 import beans.Location;
@@ -97,8 +105,12 @@ public ArrayList<SportsFacility> GetClosed() {
 		return ret;
 	}
 public void FacilityAdding(FacilityAddingDTO objectInfo) {
-	
-	this.facilities.addFacility(new SportsFacility(objectInfo.name,objectInfo.type,(boolean)objectInfo.status,objectInfo.location,objectInfo.grade, objectInfo.logo));
-}												//String name, FacilityType type, boolean works, Location location, double averageGrade, String logo
+	String logo = null;
+	Location location = new Location(Double.valueOf(objectInfo.longi),Double.valueOf(objectInfo.lat), new Address(objectInfo.street,objectInfo.number,objectInfo.city,Integer.valueOf(objectInfo.zip)));
+	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo);
+	this.facilities.addFacility(sf);
+	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
+}
+
 }
 

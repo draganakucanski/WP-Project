@@ -97,6 +97,14 @@ public class SportsFacility {
 		this.averageGrade = averageGrade;
 		this.logo = logo;
 	}
+	public SportsFacility(String name, FacilityType type, Location location, String logo) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.location = location;
+		this.logo = logo;
+	}
+	
 	
 	
 }
