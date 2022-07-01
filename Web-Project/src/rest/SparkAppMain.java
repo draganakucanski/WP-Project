@@ -23,6 +23,8 @@ import beans.User;
 import beans.UserType;
 import beans.Facilities;
 import controller.FacilitiesController;
+import controller.TrainingController;
+import controller.TrainingHistoryController;
 import controller.UserController;
 import dao.UserDAO;
 import io.jsonwebtoken.Claims;
@@ -67,6 +69,19 @@ public class SparkAppMain {
 		FacilitiesController.GetClosed();
 		FacilitiesController.GetOpened();
 		FacilitiesController.AddObject();
+		TrainingController.getTrainings();
+		TrainingHistoryController.getAllHistories();
+		TrainingHistoryController.getUsersHistories();
+		TrainingHistoryController.TrainingSearch();
+		TrainingHistoryController.getDateAscHistories();
+		TrainingHistoryController.getDateDiscHistories();
+		TrainingHistoryController.GetDanceS();
+		TrainingHistoryController.GetGyms();
+		TrainingHistoryController.GetPools();
+		TrainingHistoryController.GetSportsC();
+		TrainingHistoryController.GetGymTrainings();
+		TrainingHistoryController.GetGroup();
+		TrainingHistoryController.GetPersonal();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

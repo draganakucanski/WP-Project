@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class TrainingHistory {
 	
+	private int id;
 	private LocalDateTime dateTime;
 	private Training training;
 	private String customer;
@@ -42,6 +43,21 @@ public class TrainingHistory {
 	public TrainingHistory() {
 		super();
 	}
+	public TrainingHistory(int id, LocalDateTime dateTime, Training training, String customer, String trainer) {
+		super();
+		this.id = id;
+		this.dateTime = dateTime;
+		this.training = training;
+		this.customer = customer;
+		this.trainer = trainer;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 	
 }

@@ -271,3 +271,10 @@ label.filterW{
   p.loginP{
   color:#FFFFFF;
   }
+  .trainings{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }

@@ -84,7 +84,7 @@ Vue.component("facilities", {
 			  <tr><td><button class="search" v-on:click="FacilitySearch">Search</button></td></tr>
 			</table>
 		</div>	
-		<fieldset style="border: 0px;"><button class="hero-btn" type="button" v-on:click="redirectOnAddingFacilities">Add a facility (only available to an admin)</button></fieldset>
+		<fieldset style="border: 0px;"><button v-if="logedInUser.role === 'admin'" class="hero-btn" type="button" v-on:click="redirectOnAddingFacilities">Add a facility</button></fieldset>
               
 </div>	
 `

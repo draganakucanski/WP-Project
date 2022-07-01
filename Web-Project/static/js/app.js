@@ -8,6 +8,7 @@ const Frontpage= {template: '<frontpage></frontpage>'}
 const Editpage = {template: '<editpage></editpage>'}
 const Userslist = {template: '<userslist></userslist>'}
 const AddFacilities = {template: '<addfacilities></addfacilities>'}
+const Trainings = {template: '<trainings></trainings>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -20,6 +21,7 @@ const router = new VueRouter({
 		{path: '/editPage',component: Editpage},
 		{path: '/userslist',component: Userslist},
 		{path: '/addFacilities',component: AddFacilities},
+		{path: '/trainings',component: Trainings},
 	  ]
 });
 
