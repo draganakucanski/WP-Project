@@ -28,7 +28,7 @@ Vue.component("frontpage", {
 		<th>Date of birth</th>
 		<th>Gender</th>
 		<th>Role</th>
-		<th>Type</th>
+		<th v-if="logedInUser.role === 'customer'">Type</th>
 	</tr>
 		
 	<tr >
@@ -39,7 +39,7 @@ Vue.component("frontpage", {
 		<td>{{logedInUser.gender}} </td>
 		<td >{{logedInUser.role}}</td>
 		
-		<td>{{logedInUser.type.userTypeName}}</td>
+		<td v-if="logedInUser.role === 'customer'">{{logedInUser.type.userTypeName}}</td>
 	</tr>
 	</table>
 	</div>
@@ -71,9 +71,8 @@ Vue.component("frontpage", {
 			
 	},
 		redirectOnTrainings: function(){
-		if(this.logedInUser.role === "customer"){
-			router.push('/trainings');
-		} 
+		router.push('/trainings');
+		
 		
 	},
 	},

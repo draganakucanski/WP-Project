@@ -1,4 +1,5 @@
-pera;pera123;Jason;Ultron;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0
-adam;adam123;Adam;Adamovic;04.04.1992.;MALE;BRONZE;ADMIN;false;30.0
-milos;milos1;Milos;Obilic;03.03.1994.;MALE;BRONZE;CUSTOMER;false;30.0
-xyz;pirat;Charles;Vane;11.04.1719.;MALE;BRONZE;CUSTOMER;false;0.0
+pera;pera123;Jason;Ultron;1998-12-11;MALE;BRONZE;CUSTOMER;false;30.0;null
+maki;maki123;Marko;Markovic;12.08.1998.;MALE;null;MANAGER;false;0.0;DensDens
+adam;adam123;Adam;Adamovic;04.04.1992.;MALE;null;ADMIN;false;30.0;null
+milos;milos1;Milos;Obilic;03.03.1994.;MALE;BRONZE;CUSTOMER;false;30.0;null
+xyz;pirat;Charles;Vane;11.04.1719.;MALE;BRONZE;CUSTOMER;false;0.0;null

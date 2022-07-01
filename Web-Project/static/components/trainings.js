@@ -70,6 +70,17 @@ Vue.component("trainings", {
         <td>{{u.training.type}}</td>
     </tr>
     </table>
+    <table v-if="logedInUser.role === 'manager'" class="customTable">
+	<tr bgcolor="lightgrey">
+		<th>Name</th>
+		<th>Date and time</th>
+	</tr>
+    
+    <tr v-for="u in usersHistories">
+        <td>{{u.training.name}}</td>
+        <td>{{u.dateTime.date.day}}.{{u.dateTime.date.month}}.{{u.dateTime.date.year}} - {{u.dateTime.time.hour}}:{{u.dateTime.time.minute}}</td>
+    </tr>
+    </table>
     <div class="search">
 		  <h2 class="search">Search</h2>
 			<table>

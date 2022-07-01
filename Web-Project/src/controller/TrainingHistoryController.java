@@ -4,6 +4,7 @@ import static spark.Spark.get;
 
 import com.google.gson.Gson;
 
+import beans.Role;
 import beans.User;
 import dto.FacilitySearchDTO;
 import dto.TrainingSearchDTO;
@@ -28,7 +29,10 @@ public class TrainingHistoryController {
 		res.type("application/json");
 		User us = userService.getUser(req.session().attribute("logedinUser"));
 		String username = us.getUsername();
-		res.status(200);		
+		res.status(200);
+		if(us.getRole()==Role.MANAGER) {
+			return g.toJson(historyService.getManagersHistories(us.getSportsFacility().getName()));
+		}else	
 		return g.toJson(historyService.getUsersHistories(username));
 	});
 	}

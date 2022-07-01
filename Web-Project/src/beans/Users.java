@@ -44,14 +44,28 @@ public class Users {
 					String lastName = st.nextToken().trim();
 					String dateOfBirth =  st.nextToken().trim();
 					Gender gender = Gender.valueOf(st.nextToken().trim());
-					UserTypeName typeName = UserTypeName.valueOf(st.nextToken().trim());
-					UserTypeDAO ut = new UserTypeDAO();
-					UserType type  = ut.getUserTypeByName(typeName);
+					String typeNameString = st.nextToken().trim(); 
+					UserType type = null;
+					if(typeNameString.equals("null")) {
+						type = null;
+					}else {
+						UserTypeName typeName = UserTypeName.valueOf(typeNameString);
+						UserTypeDAO ut = new UserTypeDAO();
+						type  = ut.getUserTypeByName(typeName);
+					}
 					Role role = Role.valueOf(st.nextToken().trim());
 					boolean deleted = Boolean.valueOf(st.nextToken().trim());
 					double points = Double.valueOf(st.nextToken().trim()); 
+					String facName = st.nextToken().trim();
+					SportsFacility sf = null;
+					if(facName.equals("null")) {
+						sf = null;
+					} else {
+						Facilities fac = new Facilities();
+						sf = fac.getFacility(facName);
+					}
 					users.put(username, new User(username, password, firstName, lastName, 
-												 dateOfBirth, gender, role, type, deleted, points));
+												 dateOfBirth, gender, role, type, deleted,sf, points));
 				}
 				
 			}
@@ -110,9 +124,24 @@ public class Users {
 				 * DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH); String
 				 * date = localDate.format(formatter);
 				 */
-				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
+				if(user.getRole()==Role.CUSTOMER) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;null", 
+							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+							user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+				}else if(user.getRole()==Role.ADMIN) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;null", 
+							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+				}else if(user.getRole()==Role.MANAGER) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;%s", 
+							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected(), user.getSportsFacility().getName()));
+				}
+				/*
+				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
 						user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-						user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+						user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected(), user.getSportsFacility().getName()));
+				*/
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {

@@ -29,6 +29,14 @@ private TrainingHistories trainings = new TrainingHistories();
 		}
 		return users;
 	}
+	public ArrayList<TrainingHistory> getManagersHistories(String name){
+		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+		for(TrainingHistory t : trainings.values()) {
+			if(t.getTraining().getSportsFacility().getName().equals(name))
+				users.add(t);
+		}
+		return users;
+	}
 public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search) {
 		
 		ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		

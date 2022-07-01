@@ -156,5 +156,20 @@ public class User {
 		this.deleted = deleted;
 		this.pointsCollected = pointsCollected;
 	}
+	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
+			Role role, UserType type, boolean deleted, SportsFacility sportsFacility, double pointsCollected) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.role = role;
+		this.type = type;
+		this.deleted = deleted;
+		this.sportsFacility = sportsFacility;
+		this.pointsCollected = pointsCollected;
+	}
 	
 }
