@@ -6,8 +6,10 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.User;
+import dto.FacilitySearchDTO;
 import dto.UserEditDTO;
 import dto.UserRegistrationDTO;
+import dto.UserSearchDTO;
 import services.UserService;
 import utils.GsonSerializer;
 
@@ -110,6 +112,78 @@ public class UserController {
            
             
             return g.toJson(us);
+		});
+	}
+	public static void getCustomers() {
+		get("rest/users/getCustomers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getCustomers());
+		});
+	}
+	
+	public static void getManagers() {
+		get("rest/users/getManagers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getManagers());
+		});
+	}
+	public static void getTrainers() {
+		get("rest/users/getTrainers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getTrainers());
+		});
+	}
+	public static void getAdmins() {
+		get("rest/users/getAdmins/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getAdmins());
+		});
+	}
+	public static void getBronzeUsers() {
+		get("rest/users/getBronzeUsers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getBronzeUsers());
+		});
+	}
+	public static void getSilverUsers() {
+		get("rest/users/getSilverUsers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getSilverUsers());
+		});
+	}
+	public static void getGoldUsers() {
+		get("rest/users/getGoldUsers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getGoldUsers());
+		});
+	}
+	
+	public static void getAllTypesOfUsers() {
+		get("rest/users/getAllTypesOfUsers/", (req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			return g.toJson(userService.getAllTypesOfUsers());
+		});
+	}
+	
+	public static void UserSearch() {
+		get("rest/users/getUsersSearch/", (req, res) -> {
+			res.type("application/json");
+			String firstName = req.queryParams("firstName");
+			String lastName = req.queryParams("lastName");
+			String username = req.queryParams("username");
+			
+			UserSearchDTO search = new UserSearchDTO(firstName, lastName, username);
+			res.status(200);		
+			System.out.println(search);
+			return g.toJson(userService.SearchUser(search));
 		});
 	}
 }

@@ -60,6 +60,15 @@ public class SparkAppMain {
 		UserController.usernameExists();
 		UserController.editUser();
 		UserController.getAllUsers();
+		UserController.getCustomers();
+		UserController.getManagers();
+		UserController.getTrainers();
+		UserController.getAdmins();
+		UserController.getBronzeUsers();
+		UserController.getSilverUsers();
+		UserController.getGoldUsers();
+		UserController.getAllTypesOfUsers();
+		UserController.UserSearch();
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
 		FacilitiesController.GetGyms();

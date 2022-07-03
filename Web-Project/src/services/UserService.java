@@ -1,15 +1,20 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
+import beans.FacilityType;
 import beans.Gender;
 import beans.Role;
+import beans.SportsFacility;
 import beans.User;
 import beans.UserType;
 import beans.UserTypeName;
 import beans.Users;
 import dao.UserTypeDAO;
+import dto.FacilitySearchDTO;
 import dto.UserRegistrationDTO;
+import dto.UserSearchDTO;
 
 
 public class UserService {
@@ -62,4 +67,127 @@ public class UserService {
 		this.users.edit(username, us);
 		return us;
 	}
+	public ArrayList<User> getCustomers() {
+		
+		ArrayList<User> ret = new ArrayList<User>();		
+		for(User us : this.users.getValues()) {
+			System.out.println( us.getRole());
+			if(us.getRole().equals(Role.CUSTOMER))
+				ret.add(us);
+				
+		}
+		/*
+		 * System.out.println("VRACENI CUSTOMERI :"); System.out.println(ret);
+		 */
+		return ret;
+	}
+	public ArrayList<User> getManagers() {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		System.out.println( us.getRole());
+		if(us.getRole().equals(Role.MANAGER))
+			ret.add(us);
+			
+	}
+	/*
+	 * System.out.println("VRACENI MANAGERI :"); System.out.println(ret);
+	 */
+	return ret;
+}
+	public ArrayList<User> getTrainers() {
+		
+		ArrayList<User> ret = new ArrayList<User>();		
+		for(User us : this.users.getValues()) {
+			System.out.println( us.getRole());
+			if(us.getRole().equals(Role.TRAINER))
+				ret.add(us);
+				
+		}
+		/*
+		 * System.out.println("VRACENI TRAINERI :"); System.out.println(ret);
+		 */
+		return ret;
+	}
+public ArrayList<User> getAdmins() {
+		
+		ArrayList<User> ret = new ArrayList<User>();		
+		for(User us : this.users.getValues()) {
+			
+			if(us.getRole().equals(Role.ADMIN))
+				ret.add(us);
+				
+		}
+		
+		return ret;
+	}
+public ArrayList<User> getGoldUsers() {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		
+		if(us.getRole().equals(Role.CUSTOMER)) {
+			if(us.getType().getUserTypeName().equals(UserTypeName.GOLD))
+				ret.add(us);
+		}
+	}
+	
+	return ret;
+}
+public ArrayList<User> getSilverUsers() {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		if(us.getRole().equals(Role.CUSTOMER)) {
+			if(us.getType().getUserTypeName().equals(UserTypeName.SILVER))
+				ret.add(us);
+		}
+	}
+	
+	return ret;
+}
+public ArrayList<User> getBronzeUsers() {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		if(us.getRole().equals(Role.CUSTOMER)) {
+			if(us.getType().getUserTypeName().equals(UserTypeName.BRONZE))
+				ret.add(us);
+		}
+			
+	}
+	
+	return ret;
+}
+
+public ArrayList<User> getAllTypesOfUsers() {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		if(us.getRole().equals(Role.CUSTOMER)) {
+			if(us.getType().getUserTypeName().equals(UserTypeName.BRONZE) || us.getType().getUserTypeName().equals(UserTypeName.SILVER) || us.getType().getUserTypeName().equals(UserTypeName.GOLD) )
+				ret.add(us);
+		}
+			
+	}
+	
+	return ret;
+}
+public ArrayList<User> SearchUser(UserSearchDTO search) {
+	
+	ArrayList<User> ret = new ArrayList<User>();		
+	for(User us : this.users.getValues()) {
+		
+			if(us.getFirstName().toLowerCase().contains(search.firstName.toLowerCase())){
+				if(us.getLastName().toLowerCase().contains(search.lastName.toLowerCase())) {
+					if(us.getUsername().contains(search.username)) {
+						ret.add(us);
+						}	
+					}
+				}
+			
+		}
+	
+	return ret;
+}
 }
