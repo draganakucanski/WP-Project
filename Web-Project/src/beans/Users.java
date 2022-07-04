@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
@@ -44,18 +45,27 @@ public class Users {
 					String lastName = st.nextToken().trim();
 					String dateOfBirth =  st.nextToken().trim();
 					Gender gender = Gender.valueOf(st.nextToken().trim());
-					String typeNameString = st.nextToken().trim(); 
+					//String typeNameString = st.nextToken().trim(); 
 					UserType type = null;
-					if(typeNameString.equals("null")) {
+					/*if(typeNameString.equals("null")) {
 						type = null;
 					}else {
 						UserTypeName typeName = UserTypeName.valueOf(typeNameString);
 						UserTypeDAO ut = new UserTypeDAO();
 						type  = ut.getUserTypeByName(typeName);
-					}
+					} */
+					
 					Role role = Role.valueOf(st.nextToken().trim());
 					boolean deleted = Boolean.valueOf(st.nextToken().trim());
-					double points = Double.valueOf(st.nextToken().trim()); 
+					String pointsString = st.nextToken().trim(); 
+					double points = 0;
+					if(pointsString.equals("null")) {
+						points = 0;
+					}else {
+						points = Double.valueOf(pointsString);
+						type = getUserType(points);
+					} 
+					//double points = Double.valueOf(st.nextToken().trim()); 
 					String facName = st.nextToken().trim();
 					SportsFacility sf = null;
 					if(facName.equals("null")) {
@@ -125,17 +135,17 @@ public class Users {
 				 * date = localDate.format(formatter);
 				 */
 				if(user.getRole()==Role.CUSTOMER) {
-					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;null", 
-							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-							user.getDateOfBirth(), user.getGender(), user.getType().getUserTypeName(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
-				}else if(user.getRole()==Role.ADMIN) {
-					writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;null", 
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;null", 
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
 							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
-				}else if(user.getRole()==Role.MANAGER) {
-					writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;%s", 
+				}else if(user.getRole()==Role.ADMIN) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;null", 
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
-							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected(), user.getSportsFacility().getName()));
+							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted()));
+				}else if(user.getRole()==Role.MANAGER) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;%s", 
+							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(), user.getSportsFacility().getName()));
 				}
 				/*
 				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
@@ -158,5 +168,48 @@ public class Users {
 		}
 		return null;
 	}
-	
+	public void updatePoints(String username, Membership m) {
+		User customer = findUser(username);
+		ArrayList<TrainingHistory> visitsInMembershipTime = new ArrayList<TrainingHistory>();
+		TrainingHistories ths = new TrainingHistories();
+		for (TrainingHistory th : ths.values()) {
+			if(th.getCustomer().equals(username) && th.getDateTime().isAfter(m.getPayDate().atStartOfDay()) && th.getDateTime().isBefore(m.getValidTime()))
+				visitsInMembershipTime.add(th);
+		}
+		double price = m.getPrice();
+		int visits = m.getDailyVisit();
+		int sumVisits = 0;
+		double points = customer.getPointsCollected();
+		if(m.getType()==MembershipType.MONTHLY) {
+			sumVisits = visits*16;
+		}else 
+			sumVisits = visits*30;
+		if( visitsInMembershipTime.size() >= sumVisits/3 ) {
+			points+= 133*price/1000*customer.getVisitedFacility().size();
+			customer.setPointsCollected(points);
+			this.users.put(username, customer);
+		}else {
+			points -= price/1000*133*4;
+			customer.setPointsCollected(points);
+			this.users.put(username, customer);
+		} 
+	}
+	public void setMembership(String username, Membership m) {
+		User u = getUser(username);
+		u.setMembership(m);
+		this.users.put(username, u);
+		saveData();
+	}
+	public UserType getUserType(Double points) {
+		UserTypeDAO ut = new UserTypeDAO();
+		UserType ret = ut.getUserTypeByName(UserTypeName.BRONZE);
+		UserType silver  = ut.getUserTypeByName(UserTypeName.SILVER);
+		UserType gold  = ut.getUserTypeByName(UserTypeName.GOLD);
+		if(points>= silver.getRequiredPoints()) {
+			ret = silver;
+		} else if(points >= gold.getRequiredPoints()) {
+			ret = gold;
+		}
+		return ret;
+	}
 }

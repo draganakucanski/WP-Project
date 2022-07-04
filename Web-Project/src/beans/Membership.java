@@ -13,6 +13,7 @@ public class Membership {
 	private String customer;
 	private boolean active;
 	private int dailyVisit;
+	private boolean gotPoints;
 	public String getId() {
 		return id;
 	}
@@ -75,6 +76,25 @@ public class Membership {
 	}
 	public Membership() {
 		super();
+	}
+	public Membership(String id, MembershipType type, LocalDate payDate, LocalDateTime validTime, double price,
+			String customer, boolean active, int dailyVisit, boolean gotPoints) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.payDate = payDate;
+		this.validTime = validTime;
+		this.price = price;
+		this.customer = customer;
+		this.active = active;
+		this.dailyVisit = dailyVisit;
+		this.gotPoints = gotPoints;
+	}
+	public boolean isGotPoints() {
+		return gotPoints;
+	}
+	public void setGotPoints(boolean gotPoints) {
+		this.gotPoints = gotPoints;
 	}
 	
 	

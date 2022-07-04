@@ -23,6 +23,7 @@ import beans.User;
 import beans.UserType;
 import beans.Facilities;
 import controller.FacilitiesController;
+import controller.MembershipController;
 import controller.TrainingController;
 import controller.TrainingHistoryController;
 import controller.UserController;
@@ -82,6 +83,8 @@ public class SparkAppMain {
 		TrainingHistoryController.GetGymTrainings();
 		TrainingHistoryController.GetGroup();
 		TrainingHistoryController.GetPersonal();
+		MembershipController.getMemberships();
+		MembershipController.CreateMembership();
 		
 		
 		post("/rest/demo/login", (req, res) -> {
