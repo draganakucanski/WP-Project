@@ -84,8 +84,9 @@ Vue.component("facilities", {
 			  <tr><td><button class="search" v-on:click="FacilitySearch">Search</button></td></tr>
 			</table>
 		</div>	
+		<div v-if="logedInUser != null">
 		<fieldset style="border: 0px;"><button v-if="logedInUser.role === 'admin'" class="hero-btn" type="button" v-on:click="redirectOnAddingFacilities">Add a facility</button></fieldset>
-              
+         </div>     
 </div>	
 `
 ,
@@ -96,18 +97,19 @@ Vue.component("facilities", {
           .get('/rest/facilities/getJustFacilities/')
           .then(response => (this.facilities = response.data.sort((b, a) => (a.works > b.works) ? 1 : ((b.works > a.works) ? -1 : 0))))
           
-          axios
+         axios
 			.get('/rest/users/getLogedUser/')
 			.then(response => {
 				if (response.data == '404'){
+					this.logedInUser = null;
 					console.log('No loged in user.');
 				}
 				else {
 					this.logedInUser = response.data;
 					console.log('LOGED IN USER:' + this.logedInUser.username);
-				}
-    },
-    )},
+				} 
+    }, 
+)},
     
 	methods: {
 			FacilitySearch: function () {

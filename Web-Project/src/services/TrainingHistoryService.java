@@ -37,11 +37,11 @@ private TrainingHistories trainings = new TrainingHistories();
 		}
 		return users;
 	}
-public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search) {
+public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search, String username) {
 		
 		ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory t : this.trainings.getValues()) {
-			if(t.getTraining().getName().toLowerCase().contains(search.name.toLowerCase())){
+		for(TrainingHistory t : getUsersHistories(username)) {
+			if(t.getTraining().getSportsFacility().getName().toLowerCase().contains(search.name.toLowerCase())){
 				if(search.from != null && search.to!=null) {
 					if(t.getDateTime().toLocalDate().isBefore(search.to)&& t.getDateTime().toLocalDate().isAfter(search.from)) {
 							ret.add(t);
@@ -53,12 +53,29 @@ public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search) {
 		
 		return ret;
 	}
+public ArrayList<TrainingHistory> SearchManagerTrainings(TrainingSearchDTO search, String username) {
+	
+	ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
+	for(TrainingHistory t : getManagersHistories(username)) {
+		if(t.getTraining().getSportsFacility().getName().toLowerCase().contains(search.name.toLowerCase())){
+			if(search.from != null && search.to!=null) {
+				if(t.getDateTime().toLocalDate().isBefore(search.to)&& t.getDateTime().toLocalDate().isAfter(search.from)) {
+						ret.add(t);
+				}
+			}else 
+				ret.add(t);
+		}
+	}
+	
+	return ret;
+}
     public ArrayList<TrainingHistory> getDateAscUsersHistories(String username){
-		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
-		for(TrainingHistory t : trainings.values()) {
+		//ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+		/*for(TrainingHistory t : trainings.values()) {
 			if(t.getCustomer().equals(username))
 				users.add(t);
-		}
+		} */
+    	ArrayList<TrainingHistory> users = getUsersHistories(username);
 		Comparator<TrainingHistory> comparatorAsc = (prod1, prod2) -> prod1.getDateTime()
                 .compareTo(prod2.getDateTime());
  
@@ -68,11 +85,12 @@ public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search) {
 		return users;
 }
     public ArrayList<TrainingHistory> getDateDiscUsersHistories(String username){
-		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+		/*ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
 		for(TrainingHistory t : trainings.values()) {
 			if(t.getCustomer().equals(username))
 				users.add(t);
-		}
+		} */
+    	ArrayList<TrainingHistory> users = getUsersHistories(username);
 		Comparator<TrainingHistory> comparatorDesc = (prod1, prod2) -> prod2.getDateTime()
                 .compareTo(prod1.getDateTime());
  
@@ -81,64 +99,121 @@ public ArrayList<TrainingHistory> SearchTrainings(TrainingSearchDTO search) {
         Collections.sort(users, comparatorDesc);
 		return users;
 }
-public ArrayList<TrainingHistory> GetGyms() {
+    public ArrayList<TrainingHistory> getManagerDateAscUsersHistories(String username){
+		//ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+		/*for(TrainingHistory t : trainings.values()) {
+			if(t.getCustomer().equals(username))
+				users.add(t);
+		} */
+    	ArrayList<TrainingHistory> users = getManagersHistories(username);
+		Comparator<TrainingHistory> comparatorAsc = (prod1, prod2) -> prod1.getDateTime()
+                .compareTo(prod2.getDateTime());
+ 
+ 
+        // 2.1 pass above Comparator and sort in ascending order
+        Collections.sort(users, comparatorAsc);
+		return users;
+}
+    public ArrayList<TrainingHistory> getManagerDateDiscUsersHistories(String username){
+		/*ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+		for(TrainingHistory t : trainings.values()) {
+			if(t.getCustomer().equals(username))
+				users.add(t);
+		} */
+    	ArrayList<TrainingHistory> users = getManagersHistories(username);
+		Comparator<TrainingHistory> comparatorDesc = (prod1, prod2) -> prod2.getDateTime()
+                .compareTo(prod1.getDateTime());
+ 
+ 
+        // 2.1 pass above Comparator and sort in ascending order
+        Collections.sort(users, comparatorDesc);
+		return users;
+}
+public ArrayList<TrainingHistory> GetGyms(String username) {
 		
 		ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getSportsFacility().getType().equals(FacilityType.GYM))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetPools() {
+  public ArrayList<TrainingHistory> GetPools(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getSportsFacility().getType().equals(FacilityType.POOL))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetDanceS() {
+  public ArrayList<TrainingHistory> GetDanceS(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getSportsFacility().getType().equals(FacilityType.DANCESTUDIO))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetSportsC() {
+  public ArrayList<TrainingHistory> GetSportsC(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getSportsFacility().getType().equals(FacilityType.SPORTSCENTER))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetGymsT() {
+  public ArrayList<TrainingHistory> GetGymsT(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getType().equals(TrainingType.GYM))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetGroup() {
+  public ArrayList<TrainingHistory> GetGroup(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
 			if(th.getTraining().getType().equals(TrainingType.GROUP))
 				ret.add(th);
 		}
 		return ret;
 	}
-  public ArrayList<TrainingHistory> GetPersonal() {
+  public ArrayList<TrainingHistory> GetPersonal(String username) {
 		
 	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
-		for(TrainingHistory th : this.trainings.getValues()) {
+		for(TrainingHistory th : getUsersHistories(username)) {
+			if(th.getTraining().getType().equals(TrainingType.PERSONAL))
+				ret.add(th);
+		}
+		return ret;
+	}
+  public ArrayList<TrainingHistory> GetManagerGymsT(String username) {
+		
+	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
+		for(TrainingHistory th : getManagersHistories(username)) {
+			if(th.getTraining().getType().equals(TrainingType.GYM))
+				ret.add(th);
+		}
+		return ret;
+	}
+  public ArrayList<TrainingHistory> GetManagerGroup(String username) {
+		
+	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
+		for(TrainingHistory th : getManagersHistories(username)) {
+			if(th.getTraining().getType().equals(TrainingType.GROUP))
+				ret.add(th);
+		}
+		return ret;
+	}
+  public ArrayList<TrainingHistory> GetManagerPersonal(String username) {
+		
+	  ArrayList<TrainingHistory> ret = new ArrayList<TrainingHistory>();		
+		for(TrainingHistory th : getManagersHistories(username)) {
 			if(th.getTraining().getType().equals(TrainingType.PERSONAL))
 				ret.add(th);
 		}

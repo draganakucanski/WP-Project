@@ -45,9 +45,14 @@ public class TrainingHistoryController {
 			String dateFrom = req.queryParams("dateFrom");
 			String dateTo = req.queryParams("dateTo");
 			TrainingSearchDTO search = new TrainingSearchDTO(name, priceFrom, priceTo, dateFrom, dateTo);
-			res.status(200);		
-			System.out.println(search);
-			return g.toJson(historyService.SearchTrainings(search));
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
+			res.status(200);
+			if(us.getRole()==Role.MANAGER) {
+				String facName = us.getSportsFacility().getName();
+				return g.toJson(historyService.SearchManagerTrainings(search,facName));
+			}else	
+				return g.toJson(historyService.SearchTrainings(search, username));
 		});
 	}
 	public static void getDateAscHistories() {
@@ -55,8 +60,12 @@ public class TrainingHistoryController {
 		res.type("application/json");
 		User us = userService.getUser(req.session().attribute("logedinUser"));
 		String username = us.getUsername();
-		res.status(200);		
-		return g.toJson(historyService.getDateAscUsersHistories(username));
+		res.status(200);
+		if(us.getRole()==Role.MANAGER) {
+			String facName = us.getSportsFacility().getName();
+			return g.toJson(historyService.getManagerDateAscUsersHistories(facName));
+		}else	
+			return g.toJson(historyService.getDateAscUsersHistories(username));
 	});
 	}
 	public static void getDateDiscHistories() {
@@ -64,57 +73,87 @@ public class TrainingHistoryController {
 		res.type("application/json");
 		User us = userService.getUser(req.session().attribute("logedinUser"));
 		String username = us.getUsername();
-		res.status(200);		
-		return g.toJson(historyService.getDateDiscUsersHistories(username));
+		res.status(200);	
+		if(us.getRole()==Role.MANAGER) {
+			String facName = us.getSportsFacility().getName();
+			return g.toJson(historyService.getManagerDateDiscUsersHistories(facName));
+		}else	
+			return g.toJson(historyService.getDateDiscUsersHistories(username));
 	});
 	}
 	public static void GetGyms() {
 		get("rest/trainings/getGyms", (req, res) -> {
 			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
 			res.status(200);		
-			return g.toJson(historyService.GetGyms());
+			return g.toJson(historyService.GetGyms(username));
 		});
 	}
 	public static void GetPools() {
 		get("rest/trainings/getPools", (req, res) -> {
 			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
 			res.status(200);		
-			return g.toJson(historyService.GetPools());
+			return g.toJson(historyService.GetPools(username));
 		});
 	}
 	public static void GetDanceS() {
 		get("rest/trainings/getDanceS", (req, res) -> {
 			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
 			res.status(200);		
-			return g.toJson(historyService.GetDanceS());
+			return g.toJson(historyService.GetDanceS(username));
 		});
 	}
 	public static void GetSportsC() {
 		get("rest/trainings/getSportsC", (req, res) -> {
 			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
 			res.status(200);		
-			return g.toJson(historyService.GetSportsC());
+			return g.toJson(historyService.GetSportsC(username));
 		});
 	}
 	public static void GetGymTrainings() {
 		get("rest/trainings/getGymsT", (req, res) -> {
 			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
 			res.status(200);		
-			return g.toJson(historyService.GetGymsT());
+			if(us.getRole()==Role.MANAGER) {
+				String facName = us.getSportsFacility().getName();
+				return g.toJson(historyService.GetManagerGymsT(facName));
+			}else	
+				return g.toJson(historyService.GetGymsT(username));
 		});
 	}
 	public static void GetGroup() {
 		get("rest/trainings/getGroup", (req, res) -> {
 			res.type("application/json");
-			res.status(200);		
-			return g.toJson(historyService.GetGroup());
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
+			res.status(200);	
+			if(us.getRole()==Role.MANAGER) {
+				String facName = us.getSportsFacility().getName();
+				return g.toJson(historyService.GetManagerGroup(facName));
+			}else	
+				return g.toJson(historyService.GetGroup(username));
 		});
 	}
 	public static void GetPersonal() {
 		get("rest/trainings/getPersonal", (req, res) -> {
 			res.type("application/json");
-			res.status(200);		
-			return g.toJson(historyService.GetPersonal());
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			String username = us.getUsername();
+			res.status(200);	
+			if(us.getRole()==Role.MANAGER) {
+				String facName = us.getSportsFacility().getName();
+				return g.toJson(historyService.GetManagerPersonal(facName));
+			}else	
+				return g.toJson(historyService.GetPersonal(username));
 		});
 	}
 }

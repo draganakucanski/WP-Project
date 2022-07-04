@@ -12,6 +12,7 @@ Vue.component("frontpage", {
                 <ul>
                     <li v-if="logedInUser.role === 'admin'"><a @click="redirectOnRegistratedList" >List of all users</a></li>
                     <li v-if="logedInUser.role != 'admin'" ><a @click="redirectOnTrainings" >Trainings</a></li>
+                    <li v-if="logedInUser.role === 'customer'"><a @click="redirectOnMemberships" >Memberships</a></li>
                     <li><a @click="redirectOnEdit" >Edit profile info</a></li>
                     <li><a @click="redirectOnFacilities">Our Facilities</a></li>
                     <li><a @click="redirectOnMain">Log Out</a></li>
@@ -59,6 +60,9 @@ Vue.component("frontpage", {
 		
 		redirectOnFacilities: function(){
 			router.push('/facilities');
+		},
+		redirectOnMemberships: function(){
+			router.push('/memberships');
 		},
 		redirectOnEdit : function(){
 		router.push('/editpage');
