@@ -17,9 +17,14 @@ import beans.FacilityType;
 import beans.Location;
 import beans.Role;
 import beans.SportsFacility;
+import beans.Training;
+import beans.TrainingHistories;
+import beans.TrainingHistory;
+import beans.Trainings;
 import beans.User;
 import beans.UserType;
 import beans.UserTypeName;
+import beans.Users;
 import dao.FacilityTypeDAO;
 import dao.UserTypeDAO;
 import dto.FacilityAddingDTO;
@@ -111,6 +116,33 @@ public void FacilityAdding(FacilityAddingDTO objectInfo) {
 	this.facilities.addFacility(sf);
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
 }
-
+public SportsFacility GetManagersFacility(String username) {
+	Users u = new Users();
+	User manager = u.getUser(username);
+	return manager.getSportsFacility();
+}
+public ArrayList<User> GetFacilityTrainers(SportsFacility sf) {
+	Trainings train = new Trainings();
+	Users u = new Users();
+	ArrayList<User> ret = new ArrayList<User>();
+	for(Training t : train.getValues()) {
+		if(t.getSportsFacility().getName().equals(sf.getName()) && !(ret.contains(u.getUser(t.getTrainer())))) {
+				ret.add(u.getUser(t.getTrainer()));
+		}
+	}
+	return ret;
+}
+public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {
+	TrainingHistories train = new TrainingHistories();
+	Users u = new Users();
+	ArrayList<User> ret = new ArrayList<User>();
+	for(TrainingHistory th : train.getValues()){
+		if(th.getTraining().getSportsFacility() !=null && th.getTraining().getSportsFacility().getName().equals(sf.getName()) && !(ret.contains(u.getUser(th.getCustomer())))) {
+				ret.add(u.getUser(th.getCustomer()));
+			
+		}
+	}
+	return ret;
+}
 }
 

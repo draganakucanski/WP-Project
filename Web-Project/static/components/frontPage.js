@@ -65,6 +65,9 @@ Vue.component("frontpage", {
 		redirectOnMemberships: function(){
 			router.push('/memberships');
 		},
+		redirectOnMyFacility: function(){
+			router.push('/managersFacility');
+		},
 		redirectOnEdit : function(){
 		router.push('/editpage');
 	},

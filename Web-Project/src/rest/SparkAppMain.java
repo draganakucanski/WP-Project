@@ -95,6 +95,9 @@ public class SparkAppMain {
 		MembershipController.getMemberships();
 		MembershipController.CreateMembership();
 		UserController.AddManagerTrainer();
+		FacilitiesController.getManagersFacility();
+		FacilitiesController.getFacilityCustomers();
+		FacilitiesController.getFacilityTrainers();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

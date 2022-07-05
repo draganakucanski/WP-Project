@@ -5,15 +5,19 @@ import static spark.Spark.post;
 
 import com.google.gson.Gson;
 
+import beans.SportsFacility;
+import beans.User;
 import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
 import dto.UserRegistrationDTO;
 import services.FacilitiesService;
+import services.UserService;
 
 public class FacilitiesController {
 	
 	private static Gson g = new Gson();
 	private static FacilitiesService facilitiesService = new FacilitiesService();
+	private static UserService userService = new UserService();
 	
 	public static void getFacilities() {
 		get("rest/facilities/getJustFacilities/", (req, res) -> {
@@ -22,6 +26,7 @@ public class FacilitiesController {
 			
 		});
 	}
+	
 	public static void FacilitySearch() {
 		get("rest/facilities/getFacilitiesSearch", (req, res) -> {
 			res.type("application/json");
@@ -84,6 +89,36 @@ public class FacilitiesController {
 				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);
 				facilitiesService.FacilityAdding(objectInfo);
 			return "OK";
+			});
+		}
+		public static void getManagersFacility() {
+			get("rest/facilities/getManagersFacility", (req, res) -> {
+				res.type("application/json");
+				User us = userService.getUser(req.session().attribute("logedinUser"));
+				String username = us.getUsername();
+				return g.toJson(facilitiesService.GetManagersFacility(username));
+				
+			});
+		}
+		public static void getFacilityTrainers() {
+			get("rest/facilities/getFacilityTrainers", (req, res) -> {
+				res.type("application/json");
+				User us = userService.getUser(req.session().attribute("logedinUser"));
+				String username = us.getUsername();
+				SportsFacility objectInfo = facilitiesService.GetManagersFacility(username);
+				System.out.println("here ;)");
+				return g.toJson(facilitiesService.GetFacilityTrainers(objectInfo));
+				
+			});
+		}
+		public static void getFacilityCustomers() {
+			get("rest/facilities/getFacilityCustomers", (req, res) -> {
+				res.type("application/json");
+				User us = userService.getUser(req.session().attribute("logedinUser"));
+				String username = us.getUsername();
+				SportsFacility objectInfo = facilitiesService.GetManagersFacility(username);
+				return g.toJson(facilitiesService.GetFacilityCustomers(objectInfo));
+				
 			});
 		}
 }
