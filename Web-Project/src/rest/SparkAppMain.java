@@ -69,6 +69,8 @@ public class SparkAppMain {
 		UserController.getGoldUsers();
 		UserController.getAllTypesOfUsers();
 		UserController.UserSearch();
+		UserController.getFreeManagers();
+		/* UserController.setManagersFacility(); */
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
 		FacilitiesController.GetGyms();

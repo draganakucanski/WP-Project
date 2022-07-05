@@ -3,6 +3,7 @@ Vue.component("facilities", {
 		    return {
 			  logedInUser: null,
 		      facilities: null,
+		      managers: null,
 		      searchParam: {
 				name: "",
 				type: "",
@@ -54,9 +55,10 @@ Vue.component("facilities", {
 		<th>Grade</th>
 		<th>Location</th>
 		<th>Status</th>
+		
 	</tr>
 		
-	<tr v-for="f in facilities">
+	<tr v-for="f in facilities" >
 		<td>{{f.name}}</td>
 		<td>
 		<img :src="photoPath(f)""> 
@@ -66,7 +68,8 @@ Vue.component("facilities", {
 		<td>{{f.location.address.street}}, {{f.location.address.number}},{{f.location.address.city}}, {{f.location.address.zipCode}} </td>
 		<td v-if="f.works">Open</td>
 		<td v-else>Closed</td>
-	</tr>
+		
+		</tr>
 </table>
 <div class="search">
 		  <h2 class="search">Search</h2>
@@ -105,9 +108,17 @@ Vue.component("facilities", {
 				else {
 					this.logedInUser = response.data;
 					console.log('LOGED IN USER:' + this.logedInUser.username);
-				}
+				};
+		 
+		 	
+    })
+    	 axios
+		 	.get('/rest/users/getManagers/')
+		 	.then(response =>{
+		 		this.managers = response.data;
+		 		
+		 		})
     },
-    )},
     
 	methods: {
 			FacilitySearch: function () {
@@ -119,12 +130,15 @@ Vue.component("facilities", {
 				} })
 					.then(response => (this.facilities = response.data)).catch(function (error) {
 						alert('Error on server');
+						
 					});	
 	
 			},
 			redirectOnAddingFacilities: function(){
 				
 				if(this.logedInUser.role === "admin"){
+					console.log("Managers:");
+		 				console.log(this.managers);
 					router.push('/addfacilities')
 				}
 			},

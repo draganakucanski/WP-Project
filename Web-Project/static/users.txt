@@ -3,3 +3,9 @@ maki;maki123;Marko;Markovic;12.08.1998.;MALE;null;MANAGER;false;0.0;DensDens
 adam;adam123;Adam;Adamovic;04.04.1992.;MALE;null;ADMIN;false;30.0;null
 milos;milos1;Milos;Obilic;03.03.1994.;MALE;BRONZE;CUSTOMER;false;30.0;null
 zoran;pirat;Charles;Vane;11.04.1719.;MALE;BRONZE;CUSTOMER;false;0.0;null
+sadio;sadio123;Mane;Bajramovic;12.08.1998.;MALE;null;MANAGER;false;0.0;MissFit
+mo;mo123;Mahmud;Salahovic;12.08.1998.;MALE;null;MANAGER;false;0.0;Sport GYMY
+bobi;bobi123;Marko;Markovic;12.08.1998.;MALE;null;MANAGER;false;0.0;Work
+covek;covek123;Djuradj;Brankovic;12.08.1998.;MALE;null;MANAGER;false;0.0;Fitness Sport
+jovan;jovan123;Jovan;Jovanovic;11.02.1992.;MALE;null;MANAGER;false;0.0;null
+milena;milena123;Milena;Milenkovic;11.11.1968.;FEMALE;null;MANAGER;false;0.0;null

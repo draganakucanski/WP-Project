@@ -3,3 +3,4 @@ MissFit;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/MissF
 Sport GYMY;true;3.0;GYM;44.0-45.0-Dunavska,7,Novi Sad,21000;img/logo.png
 Work;false;0.0;SPORTSCENTER;23.0-42.0-Ulc,1,Nis,491999;img/Work.png
 Fitness Sport;false;4.0;SPORTSCENTER;44.0-45.0-Masarikova,12,Sabac,21000;img/logo2.png
+teretana;false;0.0;GYM;32.0-4.0-ad,2,s,32;img/teretana.png

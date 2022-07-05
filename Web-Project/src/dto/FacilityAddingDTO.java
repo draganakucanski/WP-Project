@@ -15,4 +15,5 @@ public class FacilityAddingDTO {
 	public FacilityType type;
 	public String logo;
 	public String imageFile;
+	public String username;
 }

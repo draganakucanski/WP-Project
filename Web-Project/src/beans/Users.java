@@ -104,6 +104,8 @@ public class Users {
 
 	public void edit(String username, User u) {
 		this.users.put(username, u);
+	
+		System.out.println(users);
 		saveData();
 	}
 
