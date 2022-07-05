@@ -109,12 +109,13 @@ public ArrayList<SportsFacility> GetClosed() {
 		}
 		return ret;
 	}
-public void FacilityAdding(FacilityAddingDTO objectInfo) {
+public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	String logo = null;
 	Location location = new Location(Double.valueOf(objectInfo.longi),Double.valueOf(objectInfo.lat), new Address(objectInfo.street,objectInfo.number,objectInfo.city,Integer.valueOf(objectInfo.zip)));
 	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo);
 	this.facilities.addFacility(sf);
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
+	return sf;
 }
 public SportsFacility GetManagersFacility(String username) {
 	Users u = new Users();

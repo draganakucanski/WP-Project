@@ -1,4 +1,4 @@
-package controller;
+ package controller;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -7,12 +7,10 @@ import com.google.gson.Gson;
 
 import beans.User;
 import dto.AddManagerTrainerDTO;
-import dto.FacilitySearchDTO;
 import dto.UserEditDTO;
 import dto.UserRegistrationDTO;
 import dto.UserSearchDTO;
 import services.UserService;
-import utils.GsonSerializer;
 
 
 
@@ -115,6 +113,18 @@ public class UserController {
             return g.toJson(us);
 		});
 	}
+	
+	/*
+	 * public static void setManagersFacility() {
+	 * post("rest/users/setManagersFacility/", (req, res) -> {
+	 * res.type("application/json"); System.out.println(req.body()); UserFacilityDTO
+	 * customerInfo = g.fromJson(req.body(),UserFacilityDTO.class);
+	 * System.out.println(customerInfo.name); User us =
+	 * userService.editUsersFacility(customerInfo.username, customerInfo.name);
+	 * 
+	 * 
+	 * return g.toJson(us); }); }
+	 */
 	public static void getCustomers() {
 		get("rest/users/getCustomers/", (req, res) -> {
 			res.type("application/json");
@@ -127,7 +137,16 @@ public class UserController {
 		get("rest/users/getManagers/", (req, res) -> {
 			res.type("application/json");
 			res.status(200);		
+			System.out.println("Uslo");
 			return g.toJson(userService.getManagers());
+		});
+	}
+	public static void getFreeManagers() {
+		get("rest/users/getFreeManagers/",(req, res) -> {
+			res.type("application/json");
+			res.status(200);		
+			System.out.println("Usloo");
+			return g.toJson(userService.getFreeManagers());
 		});
 	}
 	public static void getTrainers() {

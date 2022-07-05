@@ -1,7 +1,7 @@
 Vue.component("addfacilities", {
 	data: function () {
 		   return {
-			
+			freeManagers: null,
             name: '',
             location: '',
             type: '',
@@ -13,6 +13,7 @@ Vue.component("addfacilities", {
             street: '',
             city: '',
             zip: '',
+           username:'',
             validInfo: {
                name: 'OK',
                emptyInput: 'OK'
@@ -74,7 +75,9 @@ Vue.component("addfacilities", {
 			 </div>
 			 <br>    
             </tr>
-            
+            <tr>
+            	<td ><select v-model="username"><option v-for="m in freeManagers">{{m.username}} </option></select></td>
+            </tr>
             <tr>
                   <td><input class="heroButtonReg" type="button" id="addObjectButton" v-on:click="AddNewObject" value="Add new object"/></td>
             </tr>
@@ -90,6 +93,15 @@ Vue.component("addfacilities", {
         
     </div>
     `,
+    mounted () {
+       
+    	 axios
+		 	.get('/rest/users/getFreeManagers/')
+		 	.then(response =>{
+		 		this.freeManagers = response.data;
+		 		console.log(this.freeManagers);
+		 		})
+    },
 	methods : {	
 		promenaFajla: function (e) {
             const file = e.target.files[0];
@@ -124,14 +136,18 @@ Vue.component("addfacilities", {
 
           if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
 
-          axios.post('rest/addNewObject', { "name": this.name, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
+          axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
               .then(response => {
+			 axios.post('/rest/users/setManagersFacility/' ,{"name":this.name, "username": this.username}) 
+       		   .then(response => {
+			
+})
                  alert('Successfully adding!');
 
                 })
               .catch(() => {alert('Error while adding.')});
-              
-       
+          
+         
     }
 		
 	},

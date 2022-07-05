@@ -9,7 +9,6 @@ import beans.SportsFacility;
 import beans.User;
 import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
-import dto.UserRegistrationDTO;
 import services.FacilitiesService;
 import services.UserService;
 
@@ -18,6 +17,7 @@ public class FacilitiesController {
 	private static Gson g = new Gson();
 	private static FacilitiesService facilitiesService = new FacilitiesService();
 	private static UserService userService = new UserService();
+
 	
 	public static void getFacilities() {
 		get("rest/facilities/getJustFacilities/", (req, res) -> {
@@ -87,7 +87,9 @@ public class FacilitiesController {
 				res.type("application/json");
 				res.status(200);
 				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);
-				facilitiesService.FacilityAdding(objectInfo);
+				SportsFacility sf = facilitiesService.FacilityAdding(objectInfo);
+				System.out.println(sf.getName());
+				userService.editUsersFacility(objectInfo.username, sf);
 			return "OK";
 			});
 		}

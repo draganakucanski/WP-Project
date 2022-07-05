@@ -3,7 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import beans.FacilityType;
+import beans.Facilities;
 import beans.Gender;
 import beans.Role;
 import beans.SportsFacility;
@@ -21,6 +21,7 @@ import dto.UserSearchDTO;
 public class UserService {
 
 	private Users users = new Users();
+	private Facilities facilities =new Facilities();
 	public Collection<User> getUsers() {
 		Collection<User> us = this.users.getValues();
 		System.out.println(us);
@@ -68,6 +69,13 @@ public class UserService {
 		this.users.edit(username, us);
 		return us;
 	}
+	public User editUsersFacility(String username,SportsFacility sportsFacility) {
+		User us = users.getUser(username);
+		us.setSportsFacility(sportsFacility);
+		this.users.edit(username, us);
+		return us;
+		
+	}
 	public ArrayList<User> getCustomers() {
 		
 		ArrayList<User> ret = new ArrayList<User>();		
@@ -96,6 +104,20 @@ public class UserService {
 	 */
 	return ret;
 }
+	public ArrayList<User> getFreeManagers() {
+		
+		ArrayList<User> ret = new ArrayList<User>();		
+		for(User us : this.users.getValues()) {
+			System.out.println( us.getRole());
+			if(us.getRole().equals(Role.MANAGER) && us.getSportsFacility()==null)
+				ret.add(us);
+				
+		}
+		
+		  System.out.println("VRACENI free MANAGERI :"); System.out.println(ret);
+		 
+		return ret;
+	}
 	public ArrayList<User> getTrainers() {
 		
 		ArrayList<User> ret = new ArrayList<User>();		
@@ -174,6 +196,7 @@ public ArrayList<User> getAllTypesOfUsers() {
 	
 	return ret;
 }
+
 public ArrayList<User> SearchUser(UserSearchDTO search) {
 	
 	ArrayList<User> ret = new ArrayList<User>();		

@@ -6,13 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.StringTokenizer;
 
 import dao.UserTypeDAO;
