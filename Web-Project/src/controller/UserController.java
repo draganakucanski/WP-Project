@@ -6,6 +6,7 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.User;
+import dto.AddManagerTrainerDTO;
 import dto.FacilitySearchDTO;
 import dto.UserEditDTO;
 import dto.UserRegistrationDTO;
@@ -184,6 +185,15 @@ public class UserController {
 			res.status(200);		
 			System.out.println(search);
 			return g.toJson(userService.SearchUser(search));
+		});
+	}
+	public static void AddManagerTrainer() {
+		post("rest/addManagerTrainer", (req, res) -> {
+			res.type("application/json");
+			res.status(200);
+			AddManagerTrainerDTO userInfo = g.fromJson(req.body(),AddManagerTrainerDTO.class);
+			userService.AddManagerTrainer(userInfo);
+		return "OK";
 		});
 	}
 }

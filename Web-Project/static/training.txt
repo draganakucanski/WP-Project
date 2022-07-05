@@ -1,1 +1,2 @@
-Trening#1;DensDens;pera;Plesni trening;img/logo3.png;GROUP;2
+Trening#1;DensDens;Tamara;Plesni trening;img/logo3.png;GROUP;2
+Trening#2;MissFit;Tamara;Personalni trening;img/logo3.png;PERSONAL;2

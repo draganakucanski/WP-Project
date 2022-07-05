@@ -94,6 +94,7 @@ public class SparkAppMain {
 		TrainingHistoryController.GetPersonal();
 		MembershipController.getMemberships();
 		MembershipController.CreateMembership();
+		UserController.AddManagerTrainer();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

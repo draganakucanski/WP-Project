@@ -143,9 +143,20 @@ public class Users {
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
 							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted()));
 				}else if(user.getRole()==Role.MANAGER) {
-					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;%s", 
+					if(user.getSportsFacility()==null) {
+						writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;null", 
+								user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+								user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted()));
+					} else {
+							writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;%s", 
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
 							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(), user.getSportsFacility().getName()));
+							}
+				}
+				else if(user.getRole()==Role.TRAINER) {
+					writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;null;null", 
+							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted()));
 				}
 				/*
 				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", 
@@ -211,5 +222,18 @@ public class Users {
 			ret = gold;
 		}
 		return ret;
+	}
+	public void addTrainingHistory(String username, TrainingHistory th) {
+		User u = getUser(username);
+		ArrayList<TrainingHistory> history = new ArrayList<TrainingHistory>();
+		if( u.getHistory() == null) {
+			history.add(th);
+		} else {
+			history = u.getHistory();
+			history.add(th);
+		}
+		u.setHistory(history);
+		this.users.put(username, u);
+		saveData();
 	}
 }

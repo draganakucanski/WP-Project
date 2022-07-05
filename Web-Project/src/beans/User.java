@@ -15,7 +15,8 @@ public class User {
 	private UserType type;
 	private boolean deleted;
 	
-	private TrainingHistory history;
+	//private TrainingHistory history;
+	private ArrayList<TrainingHistory> history;
 	private Membership membership;
 	private SportsFacility sportsFacility;
 	private ArrayList<SportsFacility> visitedFacility;
@@ -68,12 +69,13 @@ public class User {
 	public void setType(UserType type) {
 		this.type = type;
 	}
+	/*
 	public TrainingHistory getHistory() {
 		return history;
 	}
 	public void setHistory(TrainingHistory history) {
 		this.history = history;
-	}
+	} */
 	public Membership getMembership() {
 		return membership;
 	}
@@ -110,7 +112,7 @@ public class User {
 		this.gender = gender;
 		this.role = role;
 		this.type = type;
-		this.history = history;
+		//this.history = history;
 		this.membership = membership;
 		this.sportsFacility = sportsFacility;
 		this.visitedFacility = visitedFacility;
@@ -170,6 +172,24 @@ public class User {
 		this.deleted = deleted;
 		this.sportsFacility = sportsFacility;
 		this.pointsCollected = pointsCollected;
+	}
+	public User(String username, String password, String firstName, String lastName, String dateOfBirth, Gender gender,
+			Role role, boolean deleted) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.role = role;
+		this.deleted = deleted;
+	}
+	public ArrayList<TrainingHistory> getHistory() {
+		return history;
+	}
+	public void setHistory(ArrayList<TrainingHistory> history) {
+		this.history = history;
 	}
 	
 }

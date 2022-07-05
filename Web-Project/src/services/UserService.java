@@ -12,6 +12,7 @@ import beans.UserType;
 import beans.UserTypeName;
 import beans.Users;
 import dao.UserTypeDAO;
+import dto.AddManagerTrainerDTO;
 import dto.FacilitySearchDTO;
 import dto.UserRegistrationDTO;
 import dto.UserSearchDTO;
@@ -190,4 +191,8 @@ public ArrayList<User> SearchUser(UserSearchDTO search) {
 	
 	return ret;
 }
+public void AddManagerTrainer(AddManagerTrainerDTO userInfo) {
+	Role userRole = Role.valueOf(userInfo.type.toUpperCase());
+	this.users.addUser(new User(userInfo.username,userInfo.password,userInfo.firstname,userInfo.lastname,userInfo.dateOfBirth, userInfo.gender,userRole,false));
+}	
 }

@@ -32,7 +32,7 @@ Vue.component("userslist", {
                 </ul>
             </div>
         </nav>
-        <h3 class="list">List of all users:</h3>
+        <h2 class="list">List of all users:</h2>
 	<div>
 			   <label class="sort">Sort by:</label>
 			   <select name="sort" v-on:change="sort" v-model="sortType">
@@ -63,7 +63,7 @@ Vue.component("userslist", {
 				<option value="SILVER">Silver</option>
 				
 			  </select>
-			  
+			  <button class="addNew" v-on:click="addNew">Add new manager/trainer</button>
 			<br>
 			<br>
 		  </div>
@@ -121,6 +121,9 @@ Vue.component("userslist", {
 		
 		redirectOnFacilities: function(){
 			router.push('/facilities');
+		},
+		addNew: function(){
+			router.push('/addManagerTrainer');
 		},
 		UserSearch: function () {
 				axios.get('rest/users/getUsersSearch/', { params: {

@@ -1,15 +1,19 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
 import beans.FacilityType;
+import beans.Role;
 import beans.SportsFacility;
 import beans.TrainingHistories;
 import beans.TrainingHistory;
 import beans.TrainingType;
+import beans.User;
+import beans.Users;
 import dto.FacilitySearchDTO;
 import dto.TrainingSearchDTO;
 
@@ -22,13 +26,32 @@ private TrainingHistories trainings = new TrainingHistories();
 		return trainings.values();
 	}
 	public ArrayList<TrainingHistory> getUsersHistories(String username){
+		Users u = new Users();
+		User user = u.getUser(username);
+		if(user.getRole() == Role.CUSTOMER) {
+			ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+			for(TrainingHistory t : trainings.values()) {
+				if(t.getCustomer().equals(username) && t.getDateTime().isAfter(LocalDateTime.now().minusMonths(1)))
+					users.add(t);
+			}
+			return users;
+		}else {
+			ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
+			for(TrainingHistory t : trainings.values()) {
+				if(t.getTrainer().equals(username))
+					users.add(t);
+			}
+			return users;
+		}
+	}
+	/*public ArrayList<TrainingHistory> getTrainersHistories(String username){
 		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
 		for(TrainingHistory t : trainings.values()) {
-			if(t.getCustomer().equals(username))
+			if(t.getTrainer().equals(username))
 				users.add(t);
 		}
 		return users;
-	}
+	} */
 	public ArrayList<TrainingHistory> getManagersHistories(String name){
 		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
 		for(TrainingHistory t : trainings.values()) {

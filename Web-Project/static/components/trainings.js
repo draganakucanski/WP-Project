@@ -17,7 +17,7 @@ Vue.component("trainings", {
 	},
 	template: ` 
 <div class="trainings">
-	<h2 class="list">History of trainings:</h2>
+	<h2 class="list">History of trainings in last 30 days:</h2>
     <label class="sort">Sort by:</label>
 			   <select name="sort" v-on:change="sort" v-model="sortType">
 				<option v-if="logedInUser.role != 'manager'" value="NameAsc">Name A-Z</option>
@@ -61,6 +61,7 @@ Vue.component("trainings", {
 		<th>Sports Facility</th>
 		<th>Date and time</th>
         <th>Type</th>
+        <th>Manage</th>
 	</tr>
     
     <tr v-for="u in usersHistories">
@@ -68,6 +69,8 @@ Vue.component("trainings", {
         <td>{{u.training.sportsFacility.name}}</td>
         <td>{{u.dateTime.date.day}}.{{u.dateTime.date.month}}.{{u.dateTime.date.year}} - {{u.dateTime.time.hour}}:{{u.dateTime.time.minute}}</td>
         <td>{{u.training.type}}</td>
+        <td v-if="u.training.type === 'personal'">dugme</td>
+		<td v-else></td>
     </tr>
     </table>
     <table v-if="logedInUser.role === 'manager'" class="customTable">

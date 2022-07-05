@@ -194,6 +194,11 @@ p.reg, input.reg, th.reg, div.reg, option.reg, select.reg, label.reg{
     border-color: rgb(0, 40, 101); 
     color: rgb(0, 40, 101);
   }
+  select.addNew {
+    width: 220px; 
+    font-size: 12px; 
+    background-color: white; 
+  }
 
   th.reg {
     font-size: 35px;
@@ -223,6 +228,20 @@ p.reg, input.reg, th.reg, div.reg, option.reg, select.reg, label.reg{
 	font-family:Arial;
 	font-size:10px;
 	padding:9px 43px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+  }
+  button.addNew{
+  background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+  width: 250px;
+	padding:5px 10px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #283966;
   }
@@ -260,7 +279,7 @@ table.customTable thead {
   background-color: #7CA9F8;
 }
 h2.list{
-	padding-top:3%;
+	padding-top:2%;
 	margin-bottom:1%;
 	margin-left: 45%;
 	color:#FFFFFF;
@@ -309,6 +328,13 @@ label.filterW{
   color:#FFFFFF;
   }
   .trainings{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  .addManagerTrainer{
     height: 100%;
     width: 100%;
     background-image: linear-gradient(rgba(36, 40, 58, 0.7),rgba(36, 40, 58, 0.7)),url("../img/background.jpg");

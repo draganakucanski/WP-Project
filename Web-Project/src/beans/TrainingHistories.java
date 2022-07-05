@@ -62,6 +62,8 @@ public class TrainingHistories {
 					trainerUsername = st.nextToken().trim();
 					Trainings t = new Trainings();
 					training  = t.getTraining(trainingName);
+					Users u = new Users();
+					u.addTrainingHistory(trainerUsername, new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername));
 				}
 				TrainingHistory history = new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername);
 				histories.put(id, history);

@@ -33,7 +33,7 @@ public class TrainingHistoryController {
 		if(us.getRole()==Role.MANAGER) {
 			return g.toJson(historyService.getManagersHistories(us.getSportsFacility().getName()));
 		}else	
-		return g.toJson(historyService.getUsersHistories(username));
+			return g.toJson(historyService.getUsersHistories(username));
 	});
 	}
 	public static void TrainingSearch() {
