@@ -69,7 +69,6 @@ public class UserService {
 	}
 	public User editUsersFacility(String username,SportsFacility sportsFacility) {
 		User us = users.getUser(username);
-		
 		us.setSportsFacility(sportsFacility);
 		this.users.edit(username, us);
 		return us;

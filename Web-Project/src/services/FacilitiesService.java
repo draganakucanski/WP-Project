@@ -110,7 +110,6 @@ public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo);
 	this.facilities.addFacility(sf);
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
-	System.out.println(sf.getName());
 	return sf;
 }
 

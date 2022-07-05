@@ -104,8 +104,6 @@ public class Users {
 
 	public void edit(String username, User u) {
 		this.users.put(username, u);
-	
-		System.out.println(users);
 		saveData();
 	}
 
@@ -135,6 +133,11 @@ public class Users {
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
 							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
 				}else if(user.getRole()==Role.MANAGER) {
+					if(user.getSportsFacility() == null) {
+						writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;null", 
+								user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
+								user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected()));
+					} else
 					writer.println(String.format("%s;%s;%s;%s;%s;%s;null;%s;%s;%s;%s", 
 							user.getUsername(), user.getPassword(), user.getFirstName(), user.getLastName(),
 							user.getDateOfBirth(), user.getGender(),user.getRole(),user.isDeleted(),user.getPointsCollected(), user.getSportsFacility().getName()));
