@@ -17,6 +17,8 @@ import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
+import dto.TrainingAddingDTO;
+
 public class Trainings {
 
 	private HashMap<String, Training> trainings = new HashMap<String, Training>();
@@ -124,5 +126,45 @@ public void saveData(){
 			this.trainings.put(training.getName(), training);
 			saveData();
 		}
+	}
+	public void AddTrainingLogo(Training t, String imageFile) {
+		String imageString = imageFile.split(",")[1];
+		
+		BufferedImage image = null;
+	    byte[] imageByte;
+
+	    imageByte = Base64.getDecoder().decode(imageString);
+	    ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+	    try {
+			image = ImageIO.read(bis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    try {
+			bis.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    String imageName= "img/"+ t.getName() + ".png";
+	   
+	    try {
+	    	File outputfile = new File(new File("./static").getCanonicalPath()+File.separator+imageName);
+			ImageIO.write(image, "png", outputfile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
+	    t.setPicture(imageName);
+		saveData();
+		
+
+	}
+	public void edit(Training t, TrainingAddingDTO objectInfo) {
+		this.trainings.put(t.getName(), t);
+		if(objectInfo.imageFile!=null) {
+			AddTrainingLogo(t, objectInfo.imageFile);
+		}
+		saveData();
 	}
 }

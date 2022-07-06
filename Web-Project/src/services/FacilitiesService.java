@@ -143,6 +143,7 @@ public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {
 			
 		}
 	}
+	
 	return ret;
 }
 }

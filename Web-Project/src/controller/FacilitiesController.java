@@ -108,7 +108,6 @@ public class FacilitiesController {
 				User us = userService.getUser(req.session().attribute("logedinUser"));
 				String username = us.getUsername();
 				SportsFacility objectInfo = facilitiesService.GetManagersFacility(username);
-				System.out.println("here ;)");
 				return g.toJson(facilitiesService.GetFacilityTrainers(objectInfo));
 				
 			});

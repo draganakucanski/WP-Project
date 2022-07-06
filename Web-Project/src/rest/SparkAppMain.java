@@ -100,6 +100,10 @@ public class SparkAppMain {
 		FacilitiesController.getManagersFacility();
 		FacilitiesController.getFacilityCustomers();
 		FacilitiesController.getFacilityTrainers();
+		TrainingController.getManagersTrainings();
+		TrainingController.AddTraining();
+		TrainingController.ContentNameExists();
+		TrainingController.editTraining();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

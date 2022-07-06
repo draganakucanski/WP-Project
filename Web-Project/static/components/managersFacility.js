@@ -5,7 +5,11 @@ Vue.component("managersFacility", {
 			  managersFacility: null,
 			  facilityTrainers:null,
 			  facilityCustomers:null,
-		     
+			  trainings:null,
+			  buttonClicked: 'false',
+		      selectedTraining:null,
+			  trainers: null,
+			  imageView:'',
 		    }
 	},
 	template: ` 
@@ -27,7 +31,7 @@ Vue.component("managersFacility", {
 		<tr>
 			<td>{{managersFacility.name}}</td>
 			<td>
-			<img :src="photoPath(managersFacility)""> 
+			<img :src="photoPath(managersFacility)"> 
 			</td>
 			<td>{{managersFacility.type}}</td>
 			<td>{{managersFacility.averageGrade}}</td>
@@ -37,6 +41,57 @@ Vue.component("managersFacility", {
 		</tr>
 		</table>
 
+		<h2 class="list">Facility content</h2>
+			  <button class="addNew" style="float:right" v-on:click="redirectOnAddingContent">Add new content</button>
+			  <table  class="customTable">
+			  <tr bgcolor="lightgrey">
+				  <th>Name</th>
+				  <th>Duration</th>
+				  <th>Trainer</th>
+				  <th>Description</th>
+				  <th>Picture</th>
+				  <th>Type</th>
+				  <th>Manage</th>
+			  </tr>
+			  <tr v-for="tr in trainings">
+				  <td>{{tr.name}}</td>
+				  <td>{{tr.duration}} hours</td>
+				  <td>{{tr.trainer}}</td>
+				  <td>{{tr.description}} </td>
+				  <td><img :src="photoPathPic(tr)"></td>
+				  <td>{{tr.type}}</td>
+				  <td><button class="addNew" style="width:60px" v-on:click="Edit(tr)">Edit</button></td>
+			  </tr>
+			  </table>
+			  <br>
+			  <br>
+		<div style="background-color: #FFF7E1; border: 2px solid #283966;
+		border-radius: 10px;"  v-if="buttonClicked=='true'">
+			<br>
+			<table width="100%">
+				<th>Name</th>
+				<td><input type="text" name = "name" v-model = "selectedTraining.name"></td> 
+				<th>Duration in hours</th>
+				<td><input type="text" name = "duration" v-model = "selectedTraining.duration"></td> 
+				<th>Trainer</th>
+				<td><select v-model="selectedTraining.trainer"><option v-for="t in trainers">{{t.username}} </option></select></td> 
+				<th>Description </th>
+				<td><input type="text" name = "description" v-model = "selectedTraining.description"></td> 
+				<th>Picture</th>
+				<td><img :src="photoPathPic(selectedTraining)" v-if="imageView==''">
+				<img :src="imageView" style="width: 20px; height:20px;" v-else>
+				</td>
+				<td><input type="file" @change="promenaFajla"></td>
+				<th>Type</th>
+				<td><select name="Type" v-model="selectedTraining.type">
+					<option value="group">Group</option>
+					<option value="personal">Personal</option>
+					<option value="gym">Gym</option>
+			  </select></td>
+			  <th><button class="addNew" style="width:80px" v-on:click="EditData">Confirm</button></th>
+			</table>
+			<br>
+		</div>
 		<h2 class="list">Facility trainers</h2>
 		<table  class="customTable">
 		<tr bgcolor="lightgrey">
@@ -87,6 +142,10 @@ mounted () {
 	axios
 	.get('/rest/facilities/getManagersFacility')
 	.then(response => (this.managersFacility = response.data))
+	
+	axios
+	.get('rest/trainings/getMTrainings')
+	.then(response => (this.trainings = response.data))
 
 	axios
 	.get('/rest/facilities/getFacilityTrainers')
@@ -95,6 +154,11 @@ mounted () {
 	axios
 	.get('/rest/facilities/getFacilityCustomers')
 	.then(response => (this.facilityCustomers = response.data))
+
+	axios
+	.get('rest/users/getTrainers/')
+	.then(response =>{
+		this.trainers = response.data;})
 	
 	
 }
@@ -108,7 +172,9 @@ mounted () {
 			})
 			router.push('/');	
 		},
-		
+		redirectOnAddingContent: function(){
+			router.push('/addContent');
+		},
 		redirectOnFacilities: function(){
 			router.push('/facilities');
 		},
@@ -119,6 +185,39 @@ mounted () {
 				return f.logo;	
 			}
 		},
+		photoPathPic: function (t) {
+			if (t.picture === 'None') {
+				return 'img/logo.png';
+			} else {
+				return t.picture;	
+			}
+		},
+		Edit: function(tr){
+			this.buttonClicked = 'true';
+			this.selectedTraining = tr;
+		},
+		promenaFajla: function (e) {
+            const file = e.target.files[0];
+            this.makeBase64Image(file);
+        },
+        makeBase64Image: function (file) {
+            const reader= new FileReader();
+            reader.onload = (e) =>{
+                this.imageFile = e.target.result;
+            }
+			reader.readAsDataURL(file);
+			this.selectedTraining.picture = URL.createObjectURL(file);
+			
+        },
+		EditData: function(){
+			axios
+				.post('/rest/trainings/editData/', { "name": this.selectedTraining.name, "type" : this.selectedTraining.type, "duration" : this.selectedTraining.duration,"description" : this.selectedTraining.description,"trainer": this.selectedTraining.trainer,"logo" : this.selectedTraining.picture,"imageFile": this.imageFile })
+				.then(response => {
+					alert("Training edited!");
+				})
+			
+			
+	},
 		
 	},
 				
