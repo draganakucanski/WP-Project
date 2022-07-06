@@ -1,5 +1,5 @@
-/controller/
-/services/
-/rest/
-/dto/
 /beans/
+/controller/
+/dto/
+/rest/
+/services/

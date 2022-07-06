@@ -140,6 +140,7 @@ Vue.component("addManagerTrainer", {
                   
    
                }).catch(function (error) { alert('Error on server')});
+               
          }	
 			
 		}

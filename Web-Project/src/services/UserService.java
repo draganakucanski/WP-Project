@@ -70,7 +70,9 @@ public class UserService {
 		return us;
 	}
 	public User editUsersFacility(String username,SportsFacility sportsFacility) {
+		System.out.println(username);
 		User us = users.getUser(username);
+		System.out.println(us);
 		us.setSportsFacility(sportsFacility);
 		this.users.edit(username, us);
 		return us;

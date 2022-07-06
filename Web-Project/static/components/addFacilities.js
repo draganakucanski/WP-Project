@@ -13,11 +13,20 @@ Vue.component("addfacilities", {
             street: '',
             city: '',
             zip: '',
+            username: '',
+            password: '',
+            confirmPassword: '',
+            firstname: '',
+            lastname: '',
+            gender: 'opt',
+            dateOfBirth: '',		
+            type: 'opt',
            username:'',
             validInfo: {
                name: 'OK',
+               username: 'OK',
                emptyInput: 'OK'
-            }
+            },
 							
 			}
 	},
@@ -78,19 +87,67 @@ Vue.component("addfacilities", {
             <tr>
             	<td ><select v-model="username"><option v-for="m in freeManagers">{{m.username}} </option></select></td>
             </tr>
-            <tr>
+            
+             <tr class="reg"  v-if="freeManagers.length === 0 ">
+        <td class="reg"><div class="reg" style="text-align: center;">Register new manager</div><br></td>
+        </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" v-model="username" autofocus></td>
+    </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name" v-model="firstname"></td>
+        </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name" v-model="lastname"></td>
+    </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td>
+                <select  class="addNew" name="gender" id="gender" v-model="gender">
+                    <option value="opt" selected disabled hidden>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+        </td>
+    </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td>
+                <select  class="addNew"  name="type" id="type" v-model="type">
+                    <option value="opt" selected disabled hidden>Type</option>
+                    <option value="manager">Manager</option>
+                    
+                </select>
+        </td>
+    </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="date" class="inputF" name="dateOfBirth" id="dateOfBirth" v-model="dateOfBirth" placeholder="Date of Birth"></td>
+        </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="password" class="inputF" name="password" id="password" v-model="password" placeholder="Password"></td>
+    </tr>
+    <tr  v-if="freeManagers.length === 0 ">
+        <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" v-model="confirmPassword" name="confirmPassword" placeholder="Confirm password"></td>
+    </tr>
+    
+   	
+    
+            <tr >
                   <td><input class="heroButtonReg" type="button" id="addObjectButton" v-on:click="AddNewObject" value="Add new object"/></td>
             </tr>
             
           </table>
         </form>
-         <div class="err" v-if="validInfo.name!='OK'"><br>
+         <div class="err"  v-if="freeManagers.length === 0 " v-if="validInfo.name!='OK'"><br>
             <label style="color: red;">{{validInfo.name}}</label>
          </div>
         <div class="err" v-if="validInfo.emptyInput != 'OK'"> <br>
                <label style="color: red;">{{validInfo.emptyInput}}</label>
         </div>
-        
+       <div class="err" v-if="validInfo.username!='OK'"><br>
+    <label style="color: red;">{{validInfo.username}}</label>
+    </div>
+    <div class="err" v-if="validInfo.emptyInput != 'OK'"> <br>
+        <label style="color: red;">{{validInfo.emptyInput}}</label>
+    </div>
     </div>
     `,
     mounted () {
@@ -102,7 +159,12 @@ Vue.component("addfacilities", {
 		 		console.log(this.freeManagers);
 		 		})
     },
-	methods : {	
+	methods : {
+		 InputValid: function () {
+            
+                
+         
+      },	
 		promenaFajla: function (e) {
             const file = e.target.files[0];
             this.makeBase64Image(file);
@@ -135,6 +197,54 @@ Vue.component("addfacilities", {
           if (this.type == '') {this.validInfo.emptyInput = 'You must choose a type'; return;}
 
           if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
+           this.validInfo.username = 'OK';
+            this.validInfo.emptyInput = 'OK';
+            
+            if (this.username == '') {
+               this.validInfo.username = 'You must enter username';
+               return false;
+            }
+           
+           /* if (this.firstname == '') { this.validInfo.emptyInput = 'You must enter firstname'; return;}
+          
+            if (this.lastname == '') {this.validInfo.emptyInput = 'You must enter lastname'; return;}
+            
+            if (this.gender == '') {this.validInfo.emptyInput = 'You must choose gender'; return;}
+
+            if (this.type == 'opt') {this.validInfo.emptyInput = 'You must choose type'; return;}
+            
+            if (this.dateOfBirth == '') {this.validInfo.emptyInput = 'You must enter date of birth'; return;}
+            
+            if (this.password == '') {this.validInfo.emptyInput = 'You must enter password'; return;}
+            
+            if (this.password != this.confirmPassword) {this.validInfo.emptyInput = 'Passwords are not the same'; return;}
+   */
+   			console.log(this.freeManagers.length);
+   			if(this.freeManagers.length == 0){
+
+				axios.post('rest/addManagerTrainer', { "username": this.username, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth, "type": this.type })
+                .then(response => {
+                   alert('Successfully added!');
+                  
+                  })
+                .catch(() => {alert('Error while adding.')});
+			
+			}
+   			
+            
+            axios.post('rest/usernameExists', this.username).
+               then(response => {
+                  let notUnique = response.data;
+                  if (notUnique) {
+                     this.validInfo.username = 'Username already exists';
+                     return;
+                  }
+                  else {
+                     this.InputValid();   
+                  }
+                  
+   
+               }).catch(function (error) { alert('Error on server')});
 
           axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
               .then(response => {
@@ -142,10 +252,11 @@ Vue.component("addfacilities", {
        		   .then(response => {
 			
 })
-                 alert('Successfully adding!');
+                 alert('Successfully added!');
 
                 })
               .catch(() => {alert('Error while adding.')});
+          
           
          
     }
