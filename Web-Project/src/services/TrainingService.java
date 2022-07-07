@@ -49,7 +49,7 @@ public class TrainingService {
 		t.setDuration(Double.valueOf(objectInfo.duration));
 		t.setTrainer(objectInfo.trainer);
 		t.setType(objectInfo.type);
-		t.setPicture(null);
+		//t.setPicture(null);
 		this.trainings.edit(t, objectInfo);
 	}
 }

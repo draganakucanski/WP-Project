@@ -8,6 +8,7 @@ Vue.component("managersFacility", {
 			  trainings:null,
 			  buttonClicked: 'false',
 		      selectedTraining:null,
+			  backup:null,
 			  trainers: null,
 			  imageView:'',
 		    }
@@ -67,7 +68,7 @@ Vue.component("managersFacility", {
 			  <br>
 		<div style="background-color: #FFF7E1; border: 2px solid #283966;
 		border-radius: 10px;"  v-if="buttonClicked=='true'">
-			<br>
+			<button class="addNew" style="width:80px; float:right;" v-on:click="Cancel">Cancel</button>
 			<table width="100%">
 				<th>Name</th>
 				<td><input type="text" name = "name" v-model = "selectedTraining.name"></td> 
@@ -81,7 +82,7 @@ Vue.component("managersFacility", {
 				<td><img :src="photoPathPic(selectedTraining)" v-if="imageView==''">
 				<img :src="imageView" style="width: 20px; height:20px;" v-else>
 				</td>
-				<td><input type="file" @change="promenaFajla"></td>
+				<td><input type="file" @change="fileChange"></td>
 				<th>Type</th>
 				<td><select name="Type" v-model="selectedTraining.type">
 					<option value="group">Group</option>
@@ -192,11 +193,16 @@ mounted () {
 				return t.picture;	
 			}
 		},
+		Cancel: function(){
+			this.buttonClicked = 'false';
+			this.selectedTraining = this.backup;
+		},
 		Edit: function(tr){
 			this.buttonClicked = 'true';
 			this.selectedTraining = tr;
+			this.backup = this.selectedTraining;
 		},
-		promenaFajla: function (e) {
+		fileChange: function (e) {
             const file = e.target.files[0];
             this.makeBase64Image(file);
         },
