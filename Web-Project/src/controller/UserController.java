@@ -114,17 +114,6 @@ public class UserController {
 		});
 	}
 	
-	/*
-	 * public static void setManagersFacility() {
-	 * post("rest/users/setManagersFacility/", (req, res) -> {
-	 * res.type("application/json"); System.out.println(req.body()); UserFacilityDTO
-	 * customerInfo = g.fromJson(req.body(),UserFacilityDTO.class);
-	 * System.out.println(customerInfo.name); User us =
-	 * userService.editUsersFacility(customerInfo.username, customerInfo.name);
-	 * 
-	 * 
-	 * return g.toJson(us); }); }
-	 */
 	public static void getCustomers() {
 		get("rest/users/getCustomers/", (req, res) -> {
 			res.type("application/json");
@@ -137,7 +126,6 @@ public class UserController {
 		get("rest/users/getManagers/", (req, res) -> {
 			res.type("application/json");
 			res.status(200);		
-			System.out.println("Uslo");
 			return g.toJson(userService.getManagers());
 		});
 	}
@@ -145,7 +133,6 @@ public class UserController {
 		get("rest/users/getFreeManagers/",(req, res) -> {
 			res.type("application/json");
 			res.status(200);		
-			System.out.println("Usloo");
 			return g.toJson(userService.getFreeManagers());
 		});
 	}

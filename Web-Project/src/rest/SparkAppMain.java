@@ -7,27 +7,18 @@ import static spark.Spark.staticFiles;
 import static spark.Spark.webSocket;
 
 import java.io.File;
-import java.io.IOException;
 import java.security.Key;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
+
 
 import com.google.gson.Gson;
 
-import beans.Facilities;
-import beans.Role;
+
 import beans.User;
-import beans.UserType;
-import beans.Facilities;
 import controller.FacilitiesController;
 import controller.MembershipController;
 import controller.TrainingController;
 import controller.TrainingHistoryController;
 import controller.UserController;
-import dao.UserDAO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -37,7 +28,6 @@ import spark.Session;
 import ws.WsHandler;
 
 public class SparkAppMain {
-	private static Facilities facilities = new Facilities();
 	private static Gson g = new Gson();
 	
 	// ovde sam obrisao nesto sto je bilo zakomentarisano jer je imalo karaktere koje ne podrzava program, ako bude greska savucao si na desktopu tekst
@@ -71,7 +61,6 @@ public class SparkAppMain {
 		UserController.getAllTypesOfUsers();
 		UserController.UserSearch();
 		UserController.getFreeManagers();
-		/* UserController.setManagersFacility(); */
 		FacilitiesController.getFacilities();
 		FacilitiesController.FacilitySearch();
 		FacilitiesController.GetGyms();
@@ -81,6 +70,8 @@ public class SparkAppMain {
 		FacilitiesController.GetClosed();
 		FacilitiesController.GetOpened();
 		FacilitiesController.AddObject();
+		FacilitiesController.nameExists();
+		FacilitiesController.AddFacilityWithManager();
 		TrainingController.getTrainings();
 		TrainingHistoryController.getAllHistories();
 		TrainingHistoryController.getUsersHistories();

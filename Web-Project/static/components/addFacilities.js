@@ -4,7 +4,7 @@ Vue.component("addfacilities", {
 			freeManagers: null,
             name: '',
             location: '',
-            type: '',
+            type: 'opt',
             logo: '',
             imageView: '',
             longi: '',
@@ -19,9 +19,7 @@ Vue.component("addfacilities", {
             firstname: '',
             lastname: '',
             gender: 'opt',
-            dateOfBirth: '',		
-            type: 'opt',
-           username:'',
+            dateOfBirth: '',
             validInfo: {
                name: 'OK',
                username: 'OK',
@@ -37,8 +35,7 @@ Vue.component("addfacilities", {
           <table style="padding-bottom: 5px;" class="reg">
             <tr class="reg" >
               <th class="reg" style="padding: 0%;">
-                <img width=15% height=60% src="../img/weights-1.png">
-                GymPass
+                Add new facility
                 </th>
             </tr>
             
@@ -67,7 +64,7 @@ Vue.component("addfacilities", {
             <tr>
                 <td class="reg">
                         <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="type" id="type" v-model="type">
-                          <option value="" disabled selected hidden>Choose a type</option>
+                          <option value="opt" disabled selected hidden>Choose a type</option>
                           <option value="gym">Gym</option>
                           <option value="pool">Pool</option>
                           <option value="sportsCenter">Sports Center</option>
@@ -85,58 +82,53 @@ Vue.component("addfacilities", {
 			 <br>    
             </tr>
             <tr>
-            	<td ><select v-model="username"><option v-for="m in freeManagers">{{m.username}} </option></select></td>
+            	<td v-if="freeManagers.length != 0 "><select v-model="username"><option v-for="m in freeManagers">{{m.username}} </option></select></td>
+                <td v-else><label style="color: red;">There is no free manager, register a new one.</label></td>
             </tr>
-            
-             <tr class="reg"  v-if="freeManagers.length === 0 ">
-        <td class="reg"><div class="reg" style="text-align: center;">Register new manager</div><br></td>
-        </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" v-model="username" autofocus></td>
-    </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name" v-model="firstname"></td>
-        </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name" v-model="lastname"></td>
-    </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td>
-                <select  class="addNew" name="gender" id="gender" v-model="gender">
-                    <option value="opt" selected disabled hidden>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-        </td>
-    </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td>
-                <select  class="addNew"  name="type" id="type" v-model="type">
-                    <option value="opt" selected disabled hidden>Type</option>
-                    <option value="manager">Manager</option>
-                    
-                </select>
-        </td>
-    </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="date" class="inputF" name="dateOfBirth" id="dateOfBirth" v-model="dateOfBirth" placeholder="Date of Birth"></td>
-        </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="password" class="inputF" name="password" id="password" v-model="password" placeholder="Password"></td>
-    </tr>
-    <tr  v-if="freeManagers.length === 0 ">
-        <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" v-model="confirmPassword" name="confirmPassword" placeholder="Confirm password"></td>
-    </tr>
-    
-   	
-    
+            <div v-if="freeManagers.length === 0 ">
+            <tr class="reg">
+            <th class="reg" style="padding: 0%; font-size:18px">
+              Register new manager
+              </th>
+            </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="username" id="username" placeholder="Username" v-model="username" autofocus></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="firstName" id="firstName" placeholder="First name" v-model="firstname"></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="inputF" name="lastName" id="lastName" placeholder="Last name" v-model="lastname"></td>
+            </tr>
+            <tr>
+                <td>
+                        <select  class="addNew" name="gender" id="gender" v-model="gender">
+                            <option value="opt" selected disabled hidden>Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="date" class="inputF" name="dateOfBirth" id="dateOfBirth" v-model="dateOfBirth" placeholder="Date of Birth"></td>
+                </tr>
+            <tr>
+                <td><input type="password" class="inputF" name="password" id="password" v-model="password" placeholder="Password"></td>
+            </tr>
+            <tr>
+                <td><input type="password" id="confirmPassword" style="margin-bottom: 20px;" class="inputF" v-model="confirmPassword" name="confirmPassword" placeholder="Confirm password"></td>
+            </tr>
             <tr >
-                  <td><input class="heroButtonReg" type="button" id="addObjectButton" v-on:click="AddNewObject" value="Add new object"/></td>
+                  <td><input class="heroButtonReg" type="button" id="add" v-on:click="AddNewFacilityAndManager" value="Add facility and manager"/></td>
+            </tr>
+            </div>
+            <tr v-if="freeManagers.length != 0">
+                  <td><input class="heroButtonReg" type="button" id="addObjectButton" v-on:click="AddNewObject" value="Add new facility"/></td>
             </tr>
             
           </table>
         </form>
-         <div class="err"  v-if="freeManagers.length === 0 " v-if="validInfo.name!='OK'"><br>
+         <div class="err"  v-if="freeManagers.length === 0 && validInfo.name!='OK'"><br>
             <label style="color: red;">{{validInfo.name}}</label>
          </div>
         <div class="err" v-if="validInfo.emptyInput != 'OK'"> <br>
@@ -160,11 +152,24 @@ Vue.component("addfacilities", {
 		 		})
     },
 	methods : {
-		 InputValid: function () {
-            
-                
+		 InputValidManager: function () {
+            // poziv za pravljenje sa menag
+            axios.post('rest/addNewObjectWithManager', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth })
+              .then(response => {
+                 alert('Successfully added!');
+                 router.push('/facilities');
+                })
+              .catch(() => {alert('Error while adding.')});   
          
-      },	
+        },	
+        InputValid: function(){
+            axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
+              .then(response => {
+                 alert('Successfully added!');
+                 router.push('/facilities');
+                })
+              .catch(() => {alert('Error while adding.')});
+        },
 		promenaFajla: function (e) {
             const file = e.target.files[0];
             this.makeBase64Image(file);
@@ -199,67 +204,80 @@ Vue.component("addfacilities", {
           if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
            this.validInfo.username = 'OK';
             this.validInfo.emptyInput = 'OK';
-            
-            if (this.username == '') {
-               this.validInfo.username = 'You must enter username';
-               return false;
-            }
-           
-           /* if (this.firstname == '') { this.validInfo.emptyInput = 'You must enter firstname'; return;}
-          
-            if (this.lastname == '') {this.validInfo.emptyInput = 'You must enter lastname'; return;}
-            
-            if (this.gender == '') {this.validInfo.emptyInput = 'You must choose gender'; return;}
 
-            if (this.type == 'opt') {this.validInfo.emptyInput = 'You must choose type'; return;}
-            
-            if (this.dateOfBirth == '') {this.validInfo.emptyInput = 'You must enter date of birth'; return;}
-            
-            if (this.password == '') {this.validInfo.emptyInput = 'You must enter password'; return;}
-            
-            if (this.password != this.confirmPassword) {this.validInfo.emptyInput = 'Passwords are not the same'; return;}
-   */
-   			console.log(this.freeManagers.length);
-   			if(this.freeManagers.length == 0){
-
-				axios.post('rest/addManagerTrainer', { "username": this.username, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth, "type": this.type })
-                .then(response => {
-                   alert('Successfully added!');
-                  
-                  })
-                .catch(() => {alert('Error while adding.')});
-			
-			}
-   			
-            
-            axios.post('rest/usernameExists', this.username).
-               then(response => {
-                  let notUnique = response.data;
-                  if (notUnique) {
-                     this.validInfo.username = 'Username already exists';
-                     return;
-                  }
-                  else {
-                     this.InputValid();   
-                  }
-                  
-   
-               }).catch(function (error) { alert('Error on server')});
-
-          axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
-              .then(response => {
-			 axios.post('/rest/users/setManagersFacility/' ,{"name":this.name, "username": this.username}) 
-       		   .then(response => {
-			
-})
-                 alert('Successfully added!');
-
-                })
-              .catch(() => {alert('Error while adding.')});
+            axios.post('rest/facilities/nameExists', this.name).
+            then(response => {
+               let notUnique = response.data;
+               if (notUnique) {
+                  this.validInfo.name = 'Name already exists';
+                  return;
+               }
+               else {
+                  this.InputValid();   
+               }
+               
+ 
+            }).catch(function (error) { alert('Error on server')});
           
           
          
-    }
+    }, 
+    AddNewFacilityAndManager: function () {
+        this.validInfo.username = 'OK';
+        this.validInfo.emptyInput = 'OK';
+        
+        if (this.username == '') {
+           this.validInfo.username = 'You must enter username';
+           return false;
+        }
+       
+        if (this.firstname == '') { this.validInfo.emptyInput = 'You must enter firstname'; return;}
+      
+        if (this.lastname == '') {this.validInfo.emptyInput = 'You must enter lastname'; return;}
+        
+        if (this.gender == '') {this.validInfo.emptyInput = 'You must choose gender'; return;}
+        
+        if (this.dateOfBirth == '') {this.validInfo.emptyInput = 'You must enter date of birth'; return;}
+        
+        if (this.password == '') {this.validInfo.emptyInput = 'You must enter password'; return;}
+        
+        if (this.password != this.confirmPassword) {this.validInfo.emptyInput = 'Passwords are not the same'; return;}
+
+        if (this.name == '') { this.validInfo.emptyInput = 'You must enter name'; return;}
+       
+        if (this.longi == '') {this.validInfo.emptyInput = 'You must enter longitude'; return;}
+          
+        if (this.lat == '') {this.validInfo.emptyInput = 'You must enter latitude'; return;}
+          
+        if (this.number == '') {this.validInfo.emptyInput = 'You must enter number'; return;}
+          
+        if (this.street == '') {this.validInfo.emptyInput = 'You must enter street'; return;}
+
+        if (this.city == '') {this.validInfo.emptyInput = 'You must enter city'; return;}
+
+        if (this.zip == '') {this.validInfo.emptyInput = 'You must enter zip'; return;}
+
+        if (this.type == '') {this.validInfo.emptyInput = 'You must choose a type'; return;}
+
+        if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
+           this.validInfo.username = 'OK';
+            this.validInfo.emptyInput = 'OK';
+
+        
+        axios.post('rest/usernameExists', this.username).
+           then(response => {
+              let notUnique = response.data;
+              if (notUnique) {
+                 this.validInfo.username = 'Username already exists';
+                 return;
+              }
+              else {
+                 this.InputValidManager();   
+              }
+              
+
+           }).catch(function (error) { alert('Error on server')});
+     }
 		
 	},
 });

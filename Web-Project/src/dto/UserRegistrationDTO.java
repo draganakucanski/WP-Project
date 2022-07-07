@@ -10,4 +10,5 @@ public class UserRegistrationDTO {
 	public String lastname;
 	public Gender gender;
 	public String dateOfBirth;
+	
 }

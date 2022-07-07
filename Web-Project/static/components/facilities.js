@@ -16,7 +16,7 @@ Vue.component("facilities", {
 		    }
 	},
 	template: ` 
-<div class="facilities">
+<div class="registration">
 	<h2 class="list">List of facilities:</h2>
 	<div>
 			   <label class="sort">Sort by:</label>
@@ -44,6 +44,9 @@ Vue.component("facilities", {
 				<option value="true">Opened</option>
 				<option value="false">Closed</option>
 			  </select>
+			  <div v-if="logedInUser != null">
+			  <button v-if="logedInUser.role === 'admin'" class="search" type="button" style="float:right;" v-on:click="redirectOnAddingFacilities">Add a facility</button>
+			  </div>
 			<br>
 			<br>
 		  </div>
@@ -86,10 +89,7 @@ Vue.component("facilities", {
 			  </select></td></tr>
 			  <tr><td><button class="search" v-on:click="FacilitySearch">Search</button></td></tr>
 			</table>
-		</div>	
-		<div v-if="logedInUser != null">
-		<fieldset style="border: 0px;"><button v-if="logedInUser.role === 'admin'" class="hero-btn" type="button" v-on:click="redirectOnAddingFacilities">Add a facility</button></fieldset>
-         </div>     
+		</div>	     
 </div>	
 `
 ,

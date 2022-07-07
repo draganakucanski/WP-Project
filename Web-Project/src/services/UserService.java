@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import beans.Facilities;
 import beans.Gender;
 import beans.Role;
 import beans.SportsFacility;
@@ -13,7 +12,6 @@ import beans.UserTypeName;
 import beans.Users;
 import dao.UserTypeDAO;
 import dto.AddManagerTrainerDTO;
-import dto.FacilitySearchDTO;
 import dto.UserRegistrationDTO;
 import dto.UserSearchDTO;
 
@@ -21,7 +19,6 @@ import dto.UserSearchDTO;
 public class UserService {
 
 	private Users users = new Users();
-	private Facilities facilities =new Facilities();
 	public Collection<User> getUsers() {
 		Collection<User> us = this.users.getValues();
 		System.out.println(us);
@@ -72,7 +69,6 @@ public class UserService {
 	public User editUsersFacility(String username,SportsFacility sportsFacility) {
 		System.out.println(username);
 		User us = users.getUser(username);
-		System.out.println(us);
 		us.setSportsFacility(sportsFacility);
 		this.users.edit(username, us);
 		return us;
@@ -87,9 +83,6 @@ public class UserService {
 				ret.add(us);
 				
 		}
-		/*
-		 * System.out.println("VRACENI CUSTOMERI :"); System.out.println(ret);
-		 */
 		return ret;
 	}
 	public ArrayList<User> getManagers() {
@@ -101,9 +94,6 @@ public class UserService {
 			ret.add(us);
 			
 	}
-	/*
-	 * System.out.println("VRACENI MANAGERI :"); System.out.println(ret);
-	 */
 	return ret;
 }
 	public ArrayList<User> getFreeManagers() {
@@ -115,8 +105,6 @@ public class UserService {
 				ret.add(us);
 				
 		}
-		
-		  System.out.println("VRACENI free MANAGERI :"); System.out.println(ret);
 		 
 		return ret;
 	}
