@@ -7,8 +7,10 @@ import com.google.gson.Gson;
 
 import beans.SportsFacility;
 import beans.User;
+import dto.AddManagerTrainerDTO;
 import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
+import dto.UserFacilityDTO;
 import services.FacilitiesService;
 import services.UserService;
 
@@ -88,9 +90,29 @@ public class FacilitiesController {
 				res.status(200);
 				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);
 				SportsFacility sf = facilitiesService.FacilityAdding(objectInfo);
-				System.out.println(sf.getName());
 				userService.editUsersFacility(objectInfo.username, sf);
 			return "OK";
+			});
+		}
+		public static void AddFacilityWithManager() {
+			post("rest/addNewObjectWithManager", (req, res) -> {
+				res.type("application/json");
+				res.status(200);
+				UserFacilityDTO allInfo = g.fromJson(req.body(),UserFacilityDTO.class);
+				FacilityAddingDTO objectInfo = new FacilityAddingDTO(allInfo.name, allInfo.number, allInfo.street, allInfo.city, allInfo.zip, allInfo.longi, allInfo.lat, allInfo.type, allInfo.logo, allInfo.imageFile, allInfo.username);
+				AddManagerTrainerDTO userInfo = new AddManagerTrainerDTO(allInfo.username, allInfo.password, allInfo.firstname, allInfo.lastname, allInfo.gender, allInfo.dateOfBirth, "MANAGER");
+				userService.AddManagerTrainer(userInfo);
+				SportsFacility sf = facilitiesService.FacilityAdding(objectInfo);
+				userService.editUsersFacility(objectInfo.username, sf);
+			return "OK";
+			});
+		}
+		public static void nameExists() {
+			post("rest/facilities/nameExists", (req, res) -> {
+				res.type("application/json");
+				res.status(200);
+				String name = g.fromJson(req.body(),String.class);
+				return facilitiesService.NameExists(name);
 			});
 		}
 		public static void getManagersFacility() {

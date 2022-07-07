@@ -109,6 +109,13 @@ public ArrayList<SportsFacility> GetClosed() {
 		}
 		return ret;
 	}
+public boolean NameExists(String name) {
+	for (SportsFacility sf : this.facilities.getValues()) {
+		if(sf.getName().equals(name)) 
+			return true;
+	}
+	return false;
+}
 public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	String logo = null;
 	Location location = new Location(Double.valueOf(objectInfo.longi),Double.valueOf(objectInfo.lat), new Address(objectInfo.street,objectInfo.number,objectInfo.city,Integer.valueOf(objectInfo.zip)));
