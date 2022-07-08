@@ -203,6 +203,7 @@ Vue.component("addfacilities", {
           if (this.zip == '') {this.validInfo.emptyInput = 'You must enter zip'; return;}
 
           if (this.type == '') {this.validInfo.emptyInput = 'You must choose a type'; return;}
+          if (this.workingHours == '') {this.validInfo.emptyInput = 'You must enter working hours'; return;}
 
           if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
            this.validInfo.username = 'OK';
@@ -261,6 +262,7 @@ Vue.component("addfacilities", {
         if (this.zip == '') {this.validInfo.emptyInput = 'You must enter zip'; return;}
 
         if (this.type == '') {this.validInfo.emptyInput = 'You must choose a type'; return;}
+        if (this.workingHours == '') {this.validInfo.emptyInput = 'You must enter working hours'; return;}
 
         if (this.imageView == '') {this.validInfo.emptyInput = 'You must add a logo'; return;}
            this.validInfo.username = 'OK';
