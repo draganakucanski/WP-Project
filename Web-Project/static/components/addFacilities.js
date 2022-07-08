@@ -13,6 +13,7 @@ Vue.component("addfacilities", {
             street: '',
             city: '',
             zip: '',
+            workingHours: '',
             username: '',
             password: '',
             confirmPassword: '',
@@ -60,7 +61,9 @@ Vue.component("addfacilities", {
             <tr>
             <td><input type="text" class="inputF" placeholder="Latitude" v-model="lat" name="lat"  id="lat">	</td>
             </tr>
-            
+            <tr>
+            <td><input type="text" class="inputF" placeholder="Working hours" v-model="workingHours" id="wHours"></td>
+            </tr>
             <tr>
                 <td class="reg">
                         <select style="width: 236px; background-color: white; border-color: white; color:rgb(169, 169, 169)" name="type" id="type" v-model="type">
@@ -154,7 +157,7 @@ Vue.component("addfacilities", {
 	methods : {
 		 InputValidManager: function () {
             // poziv za pravljenje sa menag
-            axios.post('rest/addNewObjectWithManager', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth })
+            axios.post('rest/addNewObjectWithManager', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat , "workingHours": this.workingHours,"logo" : this.logo,"imageFile": this.imageFile, "password" : this.password,"firstname" : this.firstname,"lastname" : this.lastname,"gender": this.gender,"dateOfBirth": this.dateOfBirth })
               .then(response => {
                  alert('Successfully added!');
                  router.push('/facilities');
@@ -163,7 +166,7 @@ Vue.component("addfacilities", {
          
         },	
         InputValid: function(){
-            axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat ,"logo" : this.logo,"imageFile": this.imageFile})
+            axios.post('rest/addNewObject', { "name": this.name, "username": this.username, "type" : this.type,"street" : this.street,"number": this.number, "city":this.city,"zip":this.zip,"longi":this.longi, "lat":this.lat,"workingHours":this.workingHours ,"logo" : this.logo,"imageFile": this.imageFile})
               .then(response => {
                  alert('Successfully added!');
                  router.push('/facilities');

@@ -12,6 +12,7 @@ public class UserFacilityDTO {
 	public String zip;
 	public String longi;
 	public String lat;
+	public String workingHours;
 	public FacilityType type;
 	public String logo;
 	public String imageFile;

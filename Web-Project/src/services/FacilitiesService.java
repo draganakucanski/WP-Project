@@ -118,7 +118,7 @@ public boolean NameExists(String name) {
 public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	String logo = null;
 	Location location = new Location(Double.valueOf(objectInfo.longi),Double.valueOf(objectInfo.lat), new Address(objectInfo.street,objectInfo.number,objectInfo.city,Integer.valueOf(objectInfo.zip)));
-	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo);
+	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo, objectInfo.workingHours);
 	this.facilities.addFacility(sf);
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
 	return sf;

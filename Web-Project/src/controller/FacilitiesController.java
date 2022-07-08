@@ -99,7 +99,7 @@ public class FacilitiesController {
 				res.type("application/json");
 				res.status(200);
 				UserFacilityDTO allInfo = g.fromJson(req.body(),UserFacilityDTO.class);
-				FacilityAddingDTO objectInfo = new FacilityAddingDTO(allInfo.name, allInfo.number, allInfo.street, allInfo.city, allInfo.zip, allInfo.longi, allInfo.lat, allInfo.type, allInfo.logo, allInfo.imageFile, allInfo.username);
+				FacilityAddingDTO objectInfo = new FacilityAddingDTO(allInfo.name, allInfo.number, allInfo.street, allInfo.city, allInfo.zip, allInfo.longi, allInfo.lat, allInfo.workingHours, allInfo.type, allInfo.logo, allInfo.imageFile, allInfo.username);
 				AddManagerTrainerDTO userInfo = new AddManagerTrainerDTO(allInfo.username, allInfo.password, allInfo.firstname, allInfo.lastname, allInfo.gender, allInfo.dateOfBirth, "MANAGER");
 				userService.AddManagerTrainer(userInfo);
 				SportsFacility sf = facilitiesService.FacilityAdding(objectInfo);

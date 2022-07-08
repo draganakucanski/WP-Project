@@ -52,7 +52,7 @@ public class Facilities {
 	}
 	
 	private void readFacilities(BufferedReader in) {
-		String line, name = "", wholeLoc="", wholeAdd="", street="", number="", city="", logo="";
+		String line, name = "", wholeLoc="", wholeAdd="", street="", number="", city="", logo="", workingHours="";
 		double grade = 0;
 		double lat;
 		double longi;
@@ -60,8 +60,6 @@ public class Facilities {
 		int zip;
 		FacilityType type =FacilityType.GYM;
 		Location loc = new Location();
-		//Location location = new Location();
-		//boolean works = true;// ovo je drugacije, bio je string
 		StringTokenizer st;
 		try {
 			while ((line = in.readLine()) != null) {
@@ -71,7 +69,6 @@ public class Facilities {
 				st = new StringTokenizer(line, ";");
 				while (st.hasMoreTokens()) {
 					name = st.nextToken().trim();
-//					location = st.nextToken().trim();
 					works = Boolean.valueOf(st.nextToken().trim());
 					grade = Double.valueOf(st.nextToken().trim());
 					type = FacilityType.valueOf(st.nextToken().trim());
@@ -87,8 +84,9 @@ public class Facilities {
 					zip = Integer.valueOf(arrAdd[3]);
 					loc = new Location(lat,longi,new Address(street,number,city,zip));
 					logo = st.nextToken().trim();
+					workingHours = st.nextToken().trim();
 				}
-				SportsFacility facility = new SportsFacility(name,type, works,loc,grade, logo);
+				SportsFacility facility = new SportsFacility(name,type, works,loc,grade, logo, workingHours);
 				facilities.put(name, facility);
 				facilitiesList.add(facility);
 			}
@@ -105,11 +103,12 @@ public void saveData(){
 			writer = new PrintWriter("static/facilities.txt", "UTF-8");
 			
 			for (SportsFacility facility : facilities.values()) {
-				/*
-				 44-45-Dunavska,7,Novi Sad,21000
-				 */
-				writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s", 
-						facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo()));
+				if(facility.getWorkingHours()==null) {
+					writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;null", 
+							facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo()));
+				}else
+				writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;%s", 
+						facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo(), facility.getWorkingHours()));
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
