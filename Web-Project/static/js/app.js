@@ -13,6 +13,7 @@ const Memberships = {template: '<memberships></memberships>'}
 const AddManagerTrainer = {template: '<addManagerTrainer></addManagerTrainer>'}
 const ManagersFacility = {template: '<managersFacility></managersFacility>'}
 const AddContent = {template: '<addContent></addContent>'}
+const FacilityView = {template: '<facilityView></facilityView>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -30,6 +31,7 @@ const router = new VueRouter({
 		{path: '/addManagerTrainer',component: AddManagerTrainer},
 		{path: '/managersFacility',component: ManagersFacility},
 		{path: '/addContent',component: AddContent},
+		{path: '/facilityView/:name',component: FacilityView},
 	  ]
 });
 

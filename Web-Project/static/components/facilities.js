@@ -61,7 +61,7 @@ Vue.component("facilities", {
 		
 	</tr>
 		
-	<tr v-for="f in facilities" >
+	<tr v-for="f in facilities" v-on:click="facilityView(f)">
 		<td>{{f.name}}</td>
 		<td>
 		<img :src="photoPath(f)""> 
@@ -145,6 +145,9 @@ Vue.component("facilities", {
 		 				//console.log(this.managers);
 					router.push('/addfacilities')
 				}
+			},
+			facilityView: function (f) {
+				window.location.href = "#/facilityView/"+f.name;
 			},
 			sort: function () {
 			if (this.sortType == 'Opened') {

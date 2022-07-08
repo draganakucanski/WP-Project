@@ -1,35 +1,23 @@
 package services;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.Collection;
 
-import javax.imageio.ImageIO;
 
 import beans.Address;
 import beans.Facilities;
 import beans.FacilityType;
 import beans.Location;
-import beans.Role;
 import beans.SportsFacility;
 import beans.Training;
 import beans.TrainingHistories;
 import beans.TrainingHistory;
 import beans.Trainings;
 import beans.User;
-import beans.UserType;
-import beans.UserTypeName;
 import beans.Users;
-import dao.FacilityTypeDAO;
-import dao.UserTypeDAO;
 import dto.FacilityAddingDTO;
 import dto.FacilitySearchDTO;
-import dto.UserRegistrationDTO;
 
 public class FacilitiesService {
 	
@@ -109,6 +97,17 @@ public ArrayList<SportsFacility> GetClosed() {
 		}
 		return ret;
 	}
+public SportsFacility GetFacilityByName(String name) {
+	
+	SportsFacility ret = null;		
+	for(SportsFacility sf : this.facilities.getValues()) {
+		if(sf.getName().equals(name)) {
+			ret = sf;
+			break;
+		}
+	}
+	return ret;
+}
 public boolean NameExists(String name) {
 	for (SportsFacility sf : this.facilities.getValues()) {
 		if(sf.getName().equals(name)) 

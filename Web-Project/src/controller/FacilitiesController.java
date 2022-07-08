@@ -144,4 +144,12 @@ public class FacilitiesController {
 				
 			});
 		}
+		public static void getFacilityByName() {
+			get("rest/facilities/getFacilityByName", (req, res) -> {
+				res.type("application/json");
+				String name = req.queryParams("name");
+				return g.toJson(facilitiesService.GetFacilityByName(name));
+				
+			});
+		}
 }

@@ -68,4 +68,12 @@ public class TrainingController {
             return "OK";
 		});
 	}
+	public static void getFacilityTrainings() {
+		get("rest/trainings/getFTrainings", (req, res) -> {
+			res.type("application/json");
+			String name = req.queryParams("name");
+			return g.toJson(trainingService.getManagersAll(name));
+			
+		});
+	}
 }

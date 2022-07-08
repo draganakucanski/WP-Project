@@ -72,7 +72,9 @@ public class SparkAppMain {
 		FacilitiesController.AddObject();
 		FacilitiesController.nameExists();
 		FacilitiesController.AddFacilityWithManager();
+		FacilitiesController.getFacilityByName();
 		TrainingController.getTrainings();
+		TrainingController.getFacilityTrainings();
 		TrainingHistoryController.getAllHistories();
 		TrainingHistoryController.getUsersHistories();
 		TrainingHistoryController.TrainingSearch();
