@@ -5,6 +5,9 @@ Vue.component("facilityView", {
 		      facility: null,
 			  trainings:null,
 			  comments:null,
+			  signUpClicked:'false',
+			  selectedTraining:null,
+			  scheduledFor:'',
 		    }
 	},
 	template: ` 
@@ -42,6 +45,7 @@ Vue.component("facilityView", {
 				  <th>Description</th>
 				  <th>Picture</th>
 				  <th>Type</th>
+				  <th v-if="logedInUser != null && logedInUser.role=='customer'"></th>
 			  </tr>
 			  <tr v-for="tr in trainings">
 				  <td>{{tr.name}}</td>
@@ -50,8 +54,20 @@ Vue.component("facilityView", {
 				  <td>{{tr.description}} </td>
 				  <td><img :src="photoPathPic(tr)"></td>
 				  <td>{{tr.type}}</td>
+				  <td v-if="logedInUser != null && logedInUser.role=='customer'"><button class="addNew" style="width:90px; margin:0px" v-on:click="SignUp(tr)">Sign up</button></td>
 			  </tr>
 			  </table>
+			  <br>
+			  <div v-if="signUpClicked=='true'">
+				  <table width="50%" style="margin-left: auto;
+				  margin-right: auto; background-color: #FFF7E1;">
+					  <th>Choose training date</th>
+					  <td><input type="datetime-local" v-model="scheduledFor"></td> 
+					  <th><button class="addNew" style="width:80px; margin:0px" v-on:click="SignUpForTraining">Confirm</button></th>
+					  <th><button class="addNew" style="width:80px; margin:0px" v-on:click="Cancel">Cancel</button></th>
+				  </table>
+				  <br>
+			  </div>
 		
 	<div v-if="logedInUser != null">
 		<div class="leftcolumn" v-if="logedInUser.role=='admin' || logedInUser.role=='manager'">
@@ -164,5 +180,22 @@ Vue.component("facilityView", {
 				return t.picture;	
 			}
 		},
+		SignUp: function(tr){
+			this.signUpClicked = 'true';
+			this.selectedTraining = tr;
+		},
+		Cancel: function(){
+			this.buttonClicked = 'false';
+		},
+		SignUpForTraining: function()
+		{ alert(this.scheduledFor);
+			axios
+				.post('/rest/histories/signUp', { "date": this.scheduledFor, "customer" : this.logedInUser.username,"trainingName" : this.selectedTraining.name})
+				.then(response => {
+					alert("Succesfully signed up!");
+				})
+			
+			
+	},
 		}
    });

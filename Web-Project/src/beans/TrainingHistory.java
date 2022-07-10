@@ -10,6 +10,8 @@ public class TrainingHistory {
 	private String customer;
 	private String trainer;
 	private boolean canceled;
+	private LocalDateTime scheduledFor;
+	
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
@@ -63,6 +65,33 @@ public class TrainingHistory {
 	}
 	public void setCanceled(boolean canceled) {
 		this.canceled = canceled;
+	}
+	public LocalDateTime getScheduledFor() {
+		return scheduledFor;
+	}
+	public void setScheduledFor(LocalDateTime scheduledFor) {
+		this.scheduledFor = scheduledFor;
+	}
+	public TrainingHistory(int id, LocalDateTime dateTime, Training training, String customer, String trainer,
+			boolean canceled, LocalDateTime scheduledFor) {
+		super();
+		this.id = id;
+		this.dateTime = dateTime;
+		this.training = training;
+		this.customer = customer;
+		this.trainer = trainer;
+		this.canceled = canceled;
+		this.scheduledFor = scheduledFor;
+	}
+	public TrainingHistory(LocalDateTime dateTime, Training training, String customer, String trainer, boolean canceled,
+			LocalDateTime scheduledFor) {
+		super();
+		this.dateTime = dateTime;
+		this.training = training;
+		this.customer = customer;
+		this.trainer = trainer;
+		this.canceled = canceled;
+		this.scheduledFor = scheduledFor;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,9 +11,11 @@ import beans.Comment;
 import beans.FacilityType;
 import beans.Role;
 import beans.SportsFacility;
+import beans.Training;
 import beans.TrainingHistories;
 import beans.TrainingHistory;
 import beans.TrainingType;
+import beans.Trainings;
 import beans.User;
 import beans.Users;
 import dto.FacilitySearchDTO;
@@ -244,9 +247,20 @@ public ArrayList<TrainingHistory> GetGyms(String username) {
 		return ret;
 	}
   public void Cancel(TrainingHistory th) {
-	   if(th.getDateTime().isAfter((LocalDateTime.now().plusDays(2)))) {
+	   if(th.getScheduledFor().isAfter((LocalDateTime.now().plusDays(2)))) {
 		   	th.setCanceled(true);
 			this.trainings.Edit(th);
 	   }
 	}
+  public void SignUp(String dateFor, String customer, String trainingName) {
+	  Users u = new Users();
+	  User cus = u.getUser(customer);
+	  //if(cus.getMembership()== null || cus.getMembership().isActive()==false || cus.ge)
+	  LocalDateTime scheduledFor = LocalDateTime.parse(dateFor);
+	  LocalDateTime signUpTime = LocalDateTime.now();
+	  Trainings trains = new Trainings();
+	  Training t = trains.getTraining(trainingName);
+	  TrainingHistory th = new TrainingHistory(signUpTime, t, customer, t.getTrainer(), false, scheduledFor);
+	  this.trainings.addTrainingHistory(th);
+  }
 }

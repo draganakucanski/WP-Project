@@ -45,8 +45,10 @@ public class TrainingHistories {
 	private void readHistories(BufferedReader in) {
 		int id = 0;
 		LocalDateTime dateTime= null;
+		LocalDateTime forSh= null;
 		String line, trainingName = "", customerUsername="", trainerUsername="";
 		Training training = null;
+		boolean canceled = false;
 		StringTokenizer st;
 		try {
 			while ((line = in.readLine()) != null) {
@@ -60,12 +62,14 @@ public class TrainingHistories {
 					trainingName = st.nextToken().trim();
 					customerUsername = st.nextToken().trim();
 					trainerUsername = st.nextToken().trim();
+					canceled = Boolean.valueOf(st.nextToken().trim());
+					forSh = LocalDateTime.parse(st.nextToken().trim());
 					Trainings t = new Trainings();
 					training  = t.getTraining(trainingName);
 					Users u = new Users();
-					u.addTrainingHistory(trainerUsername, new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername));
+					u.addTrainingHistory(trainerUsername, new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername, canceled, forSh));
 				}
-				TrainingHistory history = new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername);
+				TrainingHistory history = new TrainingHistory(id, dateTime, training, customerUsername, trainerUsername, canceled, forSh);
 				histories.put(id, history);
 				historyList.add(history);
 			}
@@ -82,7 +86,7 @@ public void saveData(){
 			writer = new PrintWriter("static/trainingHistories.txt", "UTF-8");
 			
 			for (TrainingHistory history : histories.values()) {
-				writer.println(String.format("%s;%s;%s;%s;%s", history.getId(), history.getDateTime(),history.getTraining().getName(), history.getCustomer(), history.getTrainer()
+				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s", history.getId(), history.getDateTime(),history.getTraining().getName(), history.getCustomer(), history.getTrainer(), history.isCanceled(), history.getScheduledFor()
 						));
 			}
 			writer.close();

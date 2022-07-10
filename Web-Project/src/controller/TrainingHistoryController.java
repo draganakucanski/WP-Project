@@ -9,7 +9,9 @@ import beans.Comment;
 import beans.Role;
 import beans.TrainingHistory;
 import beans.User;
+import dto.AddManagerTrainerDTO;
 import dto.FacilitySearchDTO;
+import dto.ScheduleTrainingDTO;
 import dto.TrainingSearchDTO;
 import services.TrainingHistoryService;
 import services.UserService;
@@ -165,6 +167,17 @@ public class TrainingHistoryController {
 			TrainingHistory th = g.fromJson(req.body(),TrainingHistory.class);
             historyService.Cancel(th);
             return th.isCanceled();
+		});
+	}
+	public static void SignUp() {
+		post("/rest/histories/signUp", (req, res) -> {
+			res.type("application/json");
+			ScheduleTrainingDTO info = g.fromJson(req.body(),ScheduleTrainingDTO.class);
+			String scheduledFor = info.date;
+			String customer = info.customer;
+			String trainingName = info.trainingName;
+            historyService.SignUp(scheduledFor, customer, trainingName);
+            return "OK";
 		});
 	}
 }
