@@ -1,0 +1,3 @@
+1;milos;MissFit;super;5;true
+2;milos;DensDens;okej;3;true
+3;milos;DensDens;super;4;false

@@ -4,6 +4,7 @@ Vue.component("facilityView", {
 			  logedInUser: null,
 		      facility: null,
 			  trainings:null,
+			  comments:null,
 		    }
 	},
 	template: ` 
@@ -51,23 +52,53 @@ Vue.component("facilityView", {
 				  <td>{{tr.type}}</td>
 			  </tr>
 			  </table>
-		<div class="leftcolumn">
+		
+	<div v-if="logedInUser != null">
+		<div class="leftcolumn" v-if="logedInUser.role=='admin' || logedInUser.role=='manager'">
 			<div id="comments" class="card">
 				<h2> Comments and grades</h2>
 				
 				<div id="commentsList">
-							  <div class="commentDiv">
+							  <div class="commentDiv" v-for="c in comments">
 								  <div class="row">
 									  <div class="leftColumnComment">
-										<label>Grade</label>
+										<label>{{c.grade}}</label>
 									  </div>
 									  <div class="middleColumn">
 										<table style="max-width:400px; word-wrap:break-word;">
-										  <tr><td>text</td></tr>
+										  <tr><td>{{c.content}}</td></tr>
 										</table>
 									  </div>
 									  <div class="authorRight">
-										 user
+										 {{c.customer}}
+									  </div>
+								  </div>
+							  </div>
+				  
+				  
+				</div>
+			  </div>
+			</div>
+		</div>
+
+
+		<div class="leftcolumn" v-if="logedInUser==null || logedInUser.role=='customer' || logedInUser.role=='trainer'">
+			<div id="comments" class="card">
+				<h2> Comments and grades</h2>
+				
+				<div id="commentsList" v-for="c in comments">
+							  <div class="commentDiv" v-if="c.approved">
+								  <div class="row">
+									  <div class="leftColumnComment">
+										<label>{{c.grade}}</label>
+									  </div>
+									  <div class="middleColumn">
+										<table style="max-width:400px; word-wrap:break-word;">
+										  <tr><td>{{c.content}}</td></tr>
+										</table>
+									  </div>
+									  <div class="authorRight">
+										 {{c.customer}}
 									  </div>
 								  </div>
 							  </div>
@@ -110,6 +141,12 @@ Vue.component("facilityView", {
 					  name: name
 					}})
 				.then(response => (this.trainings = response.data))
+				axios
+				.get('rest/comments/getFComments', {
+					params: {
+					  name: name
+					}})
+				.then(response => (this.comments = response.data))
     },
     
 	methods: {

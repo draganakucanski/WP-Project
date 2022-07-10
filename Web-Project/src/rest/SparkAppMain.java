@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 
 import beans.User;
+import controller.CommentController;
 import controller.FacilitiesController;
 import controller.MembershipController;
 import controller.TrainingController;
@@ -97,6 +98,9 @@ public class SparkAppMain {
 		TrainingController.AddTraining();
 		TrainingController.ContentNameExists();
 		TrainingController.editTraining();
+		CommentController.getAll();
+		CommentController.approveComment();
+		CommentController.getFacilityComments();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

@@ -61,14 +61,14 @@ Vue.component("managersFacility", {
 				  <td>{{tr.description}} </td>
 				  <td><img :src="photoPathPic(tr)"></td>
 				  <td>{{tr.type}}</td>
-				  <td><button class="addNew" style="width:60px" v-on:click="Edit(tr)">Edit</button></td>
+				  <td><button class="addNew" style="width:60px; margin:0px" v-on:click="Edit(tr)">Edit</button></td>
 			  </tr>
 			  </table>
 			  <br>
 			  <br>
 		<div style="background-color: #FFF7E1; border: 2px solid #283966;
 		border-radius: 10px;"  v-if="buttonClicked=='true'">
-			<button class="addNew" style="width:80px; float:right;" v-on:click="Cancel">Cancel</button>
+			<button class="addNew" style="width:80px; float:right; margin:10px" v-on:click="Cancel">Cancel</button>
 			<table width="100%">
 				<th>Name</th>
 				<td><input type="text" name = "name" v-model = "selectedTraining.name"></td> 
@@ -89,7 +89,7 @@ Vue.component("managersFacility", {
 					<option value="personal">Personal</option>
 					<option value="gym">Gym</option>
 			  </select></td>
-			  <th><button class="addNew" style="width:80px" v-on:click="EditData">Confirm</button></th>
+			  <th><button class="addNew" style="width:80px; margin:0px" v-on:click="EditData">Confirm</button></th>
 			</table>
 			<br>
 		</div>

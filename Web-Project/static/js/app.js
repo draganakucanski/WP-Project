@@ -14,6 +14,7 @@ const AddManagerTrainer = {template: '<addManagerTrainer></addManagerTrainer>'}
 const ManagersFacility = {template: '<managersFacility></managersFacility>'}
 const AddContent = {template: '<addContent></addContent>'}
 const FacilityView = {template: '<facilityView></facilityView>'}
+const ManageComments = {template: '<manageComments></manageComments>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -32,6 +33,7 @@ const router = new VueRouter({
 		{path: '/managersFacility',component: ManagersFacility},
 		{path: '/addContent',component: AddContent},
 		{path: '/facilityView/:name',component: FacilityView},
+		{path: '/manageComments',component: ManageComments},
 	  ]
 });
 
