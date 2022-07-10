@@ -193,8 +193,8 @@ public void saveData(){
 			}
 			if(gradeCounter!=0) {
 			f.setAverageGrade(avGrade/gradeCounter);
-			saveData();
 			}
 		}
+		saveData();
 	}
 }
