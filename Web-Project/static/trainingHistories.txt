@@ -1,3 +1,4 @@
 1;2022-06-23T10:15:30;Trening#1;milos;Tamara
 2;2022-07-03T10:15:30;Trening#1;milos;Tamara
 3;2022-07-03T10:15:30;Trening#2;milos;Tamara
+4;2022-07-15T10:15:30;Trening#2;milos;Tamara

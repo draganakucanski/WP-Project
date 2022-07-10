@@ -125,4 +125,8 @@ public void saveData(){
                     max = history.getId();
         return max + 1;
     }
+	public void Edit(TrainingHistory th) {
+		this.histories.put(th.getId(), th);
+		saveData();
+	}
 }

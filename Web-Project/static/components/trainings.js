@@ -69,7 +69,7 @@ Vue.component("trainings", {
         <td>{{u.training.sportsFacility.name}}</td>
         <td>{{u.dateTime.date.day}}.{{u.dateTime.date.month}}.{{u.dateTime.date.year}} - {{u.dateTime.time.hour}}:{{u.dateTime.time.minute}}</td>
         <td>{{u.training.type}}</td>
-        <td v-if="u.training.type === 'personal'">dugme</td>
+        <td v-if="u.training.type === 'personal' && u.canceled != 'true'"><button class="addNew" style="width:80px; margin:0px;" v-on:click="Cancel(u)">Cancel</button></td>
 		<td v-else></td>
     </tr>
     </table>
@@ -209,6 +209,18 @@ Vue.component("trainings", {
                             });	
                         }
             
+                    },
+                    Cancel: function(u){
+                        axios
+                            .post('/rest/histories/cancel', u)
+                            .then(response => {
+                                if (response.data == true){
+                                    alert('Training is canceled');
+                                }
+                                else {
+                                    alert('You can only cancel trainings 2 days before!');
+                                }
+                            })
                     },
 			
 		}

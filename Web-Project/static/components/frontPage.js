@@ -11,7 +11,7 @@ Vue.component("frontpage", {
           <div class="nav-links">
                 <ul>
 					<li v-if="logedInUser.role === 'manager'"><a @click="redirectOnMyFacility" >My Facility</a></li>
-                    <li v-if="logedInUser.role === 'admin'"><a @click="redirectOnRegistratedList" >List of all users</a></li>
+                    <li v-if="logedInUser.role === 'admin'"><a @click="redirectOnRegistratedList" >Users</a></li>
 					<li v-if="logedInUser.role === 'admin'"><a @click="redirectOnManageComments" >Manage Comments</a></li>
                     <li v-if="logedInUser.role != 'admin'" ><a @click="redirectOnTrainings" >Trainings</a></li>
                     <li v-if="logedInUser.role === 'customer'"><a @click="redirectOnMemberships" >Memberships</a></li>

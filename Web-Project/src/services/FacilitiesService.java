@@ -137,6 +137,7 @@ public ArrayList<User> GetFacilityTrainers(SportsFacility sf) {
 				ret.add(u.getUser(t.getTrainer()));
 		}
 	}
+	System.out.println(ret);
 	return ret;
 }
 public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {

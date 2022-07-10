@@ -9,6 +9,7 @@ public class TrainingHistory {
 	private Training training;
 	private String customer;
 	private String trainer;
+	private boolean canceled;
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
@@ -56,6 +57,12 @@ public class TrainingHistory {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public boolean isCanceled() {
+		return canceled;
+	}
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
 	}
 	
 	

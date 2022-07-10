@@ -1,10 +1,13 @@
 package controller;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 import com.google.gson.Gson;
 
+import beans.Comment;
 import beans.Role;
+import beans.TrainingHistory;
 import beans.User;
 import dto.FacilitySearchDTO;
 import dto.TrainingSearchDTO;
@@ -154,6 +157,14 @@ public class TrainingHistoryController {
 				return g.toJson(historyService.GetManagerPersonal(facName));
 			}else	
 				return g.toJson(historyService.GetPersonal(username));
+		});
+	}
+	public static void CancelTraining() {
+		post("/rest/histories/cancel", (req, res) -> {
+			res.type("application/json");
+			TrainingHistory th = g.fromJson(req.body(),TrainingHistory.class);
+            historyService.Cancel(th);
+            return th.isCanceled();
 		});
 	}
 }

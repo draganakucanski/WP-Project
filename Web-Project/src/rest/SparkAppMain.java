@@ -88,6 +88,7 @@ public class SparkAppMain {
 		TrainingHistoryController.GetGymTrainings();
 		TrainingHistoryController.GetGroup();
 		TrainingHistoryController.GetPersonal();
+		TrainingHistoryController.CancelTraining();
 		MembershipController.getMemberships();
 		MembershipController.CreateMembership();
 		UserController.AddManagerTrainer();

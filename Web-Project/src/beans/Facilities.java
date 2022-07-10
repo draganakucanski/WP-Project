@@ -37,6 +37,7 @@ public class Facilities {
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			readFacilities(in);
+			setGrades();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -178,5 +179,22 @@ public void saveData(){
 		saveData();
 		
 
+	}
+	private void setGrades() {
+		Comments comments = new Comments();
+		for(SportsFacility f: facilities.values()) {
+			double avGrade = 0;
+			int gradeCounter = 0;
+			for(Comment c: comments.GetValues()) {
+				if(c.getFacilityName().equals(f.getName()) && c.isApproved()) {
+					avGrade += c.getGrade();
+					gradeCounter++;
+				}
+			}
+			if(gradeCounter!=0) {
+			f.setAverageGrade(avGrade/gradeCounter);
+			saveData();
+			}
+		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
+import beans.Comment;
 import beans.FacilityType;
 import beans.Role;
 import beans.SportsFacility;
@@ -241,5 +242,11 @@ public ArrayList<TrainingHistory> GetGyms(String username) {
 				ret.add(th);
 		}
 		return ret;
+	}
+  public void Cancel(TrainingHistory th) {
+	   if(th.getDateTime().isAfter((LocalDateTime.now().plusDays(2)))) {
+		   	th.setCanceled(true);
+			this.trainings.Edit(th);
+	   }
 	}
 }
