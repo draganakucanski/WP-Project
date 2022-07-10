@@ -190,13 +190,16 @@ public class Users {
 		if(m.getType()==MembershipType.MONTHLY) {
 			sumVisits = visits*16;
 		}else 
-			sumVisits = visits*30;
+			sumVisits = visits*30*12;
 		if( visitsInMembershipTime.size() >= sumVisits/3 ) {
 			points+= 133*price/1000*customer.getVisitedFacility().size();
 			customer.setPointsCollected(points);
 			this.users.put(username, customer);
 		}else {
 			points -= price/1000*133*4;
+			if(points<0) {
+				points = 0;
+			}
 			customer.setPointsCollected(points);
 			this.users.put(username, customer);
 		} 

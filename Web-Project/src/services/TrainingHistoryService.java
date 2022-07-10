@@ -9,6 +9,9 @@ import java.util.Comparator;
 
 import beans.Comment;
 import beans.FacilityType;
+import beans.Membership;
+import beans.MembershipType;
+import beans.Memberships;
 import beans.Role;
 import beans.SportsFacility;
 import beans.Training;
@@ -252,15 +255,50 @@ public ArrayList<TrainingHistory> GetGyms(String username) {
 			this.trainings.Edit(th);
 	   }
 	}
-  public void SignUp(String dateFor, String customer, String trainingName) {
-	  Users u = new Users();
-	  User cus = u.getUser(customer);
-	  //if(cus.getMembership()== null || cus.getMembership().isActive()==false || cus.ge)
+  public boolean SignUp(String dateFor, String customer, String trainingName) {
+	  Memberships mems = new Memberships();
+	  Membership mem = null;
+	  for(Membership m: mems.values()) {
+		  if(m.getCustomer().equals(customer))
+		  mem = m;
+	  }
 	  LocalDateTime scheduledFor = LocalDateTime.parse(dateFor);
+	  if(mem==null || mem.isActive()==false || isLimitReached(mem, customer, scheduledFor)) {
+		  return false;
+	  }
 	  LocalDateTime signUpTime = LocalDateTime.now();
 	  Trainings trains = new Trainings();
 	  Training t = trains.getTraining(trainingName);
 	  TrainingHistory th = new TrainingHistory(signUpTime, t, customer, t.getTrainer(), false, scheduledFor);
 	  this.trainings.addTrainingHistory(th);
+	  return true;
   }
+  public boolean isLimitReached(Membership mem, String customer, LocalDateTime sch) {
+	   int visits = mem.getDailyVisit();
+	   int visitsInMembershipTime = 0;
+	   if(mem.getType()==MembershipType.MONTHLY) {
+		   visitsInMembershipTime = 16*visits;
+	   } else 
+		   visitsInMembershipTime = 30*12*visits;
+	   int usedToday = 0;
+	   for(TrainingHistory th : trainings.values()) {
+			   if(th.getCustomer().equals(customer) && th.isCanceled()==false && th.getScheduledFor().toLocalDate().equals(sch.toLocalDate()))
+				   usedToday++;
+	   }
+	   System.out.println(visits);
+	   System.out.println(usedToday);
+	   if(usedToday>=visits)
+		   return true;
+	   int usedInMembershipTime = 0;
+	   for(TrainingHistory th : trainings.values()) {
+			   if(th.getCustomer().equals(customer) && th.isCanceled()==false && th.getScheduledFor().isAfter(mem.getPayDate().atStartOfDay()) && th.getScheduledFor().isBefore(mem.getValidTime()))
+				   usedInMembershipTime++;
+	  }
+	   //provera je l istekla clanarina tad!
+	   if(sch.isBefore(mem.getPayDate().atStartOfDay()) || sch.isAfter(mem.getValidTime()))
+		   return true;
+	   if(usedInMembershipTime>=visitsInMembershipTime)
+		   return true;
+	   return false;
+	}
 }

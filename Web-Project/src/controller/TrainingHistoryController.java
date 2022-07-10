@@ -176,8 +176,7 @@ public class TrainingHistoryController {
 			String scheduledFor = info.date;
 			String customer = info.customer;
 			String trainingName = info.trainingName;
-            historyService.SignUp(scheduledFor, customer, trainingName);
-            return "OK";
+            return historyService.SignUp(scheduledFor, customer, trainingName);
 		});
 	}
 }

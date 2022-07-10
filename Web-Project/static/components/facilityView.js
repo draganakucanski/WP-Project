@@ -185,14 +185,19 @@ Vue.component("facilityView", {
 			this.selectedTraining = tr;
 		},
 		Cancel: function(){
-			this.buttonClicked = 'false';
+			this.signUpClicked = 'false';
 		},
 		SignUpForTraining: function()
-		{ alert(this.scheduledFor);
+		{ 
 			axios
 				.post('/rest/histories/signUp', { "date": this.scheduledFor, "customer" : this.logedInUser.username,"trainingName" : this.selectedTraining.name})
 				.then(response => {
-					alert("Succesfully signed up!");
+					if (response.data == false){
+						alert("Error while signing up!");
+					}
+					else {
+						alert("Succesfully signed up!");
+					}
 				})
 			
 			

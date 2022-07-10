@@ -82,8 +82,8 @@ public class Memberships {
 					}
 					if(active == true) {
 						us.setMembership(customer, new Membership(id, type, payDate, validDateTime, price, customer, active, visits, gotPoints));
-						//User u = us.getUser(customer); OVO JE BILO SAMO TESTIRANJE JESU UCITANI
-						//System.out.println(u.getMembership().getId());
+						User u = us.getUser(customer); //OVO JE BILO SAMO TESTIRANJE JESU UCITANI
+						System.out.println(u.getMembership().getId());
 					}
 				}
 				Membership membership = new Membership(id, type, payDate, validDateTime, price, customer, active, visits, gotPoints);
