@@ -8,6 +8,7 @@ import java.util.Random;
 import beans.Membership;
 import beans.MembershipType;
 import beans.Memberships;
+import beans.UserType;
 import beans.Users;
 
 public class MembershipService {
@@ -21,6 +22,8 @@ private Memberships memberships = new Memberships();
 		MembershipType mt = MembershipType.valueOf(type.toUpperCase());
 		LocalDate date = LocalDate.now();
 		LocalDateTime valid = null;
+		Users users = new Users();
+		UserType userType = users.getUser(username).getType();
 		if(mt == MembershipType.MONTHLY) {
 			valid = LocalDateTime.now().plusMonths(1);
 		} else 
@@ -35,6 +38,7 @@ private Memberships memberships = new Memberships();
 			visits = 1;
 		} else 
 			visits = 3;
+		price = price - price*userType.getDiscount()/100;
 		addMembership(new Membership(generateNewID(), mt, date, valid, price, username, true, visits, false)); 
 	}	
 	public void addMembership(Membership m) {
