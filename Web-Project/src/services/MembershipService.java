@@ -45,8 +45,8 @@ private Memberships memberships = new Memberships();
 		for(Membership mem: this.memberships.values()) {
 			if(mem.getCustomer().equals(m.getCustomer()) && mem.isActive()) {
 				this.memberships.ChangeToInactive(mem);
-				//Users us = new Users();
-				//us.updatePoints(m.getCustomer(), m);
+				Users us = new Users();
+				us.updatePoints(m.getCustomer(), m);
 				this.memberships.ChangeToGotPoints(mem);
 			}
 		}

@@ -180,7 +180,7 @@ public class Users {
 		ArrayList<TrainingHistory> visitsInMembershipTime = new ArrayList<TrainingHistory>();
 		TrainingHistories ths = new TrainingHistories();
 		for (TrainingHistory th : ths.values()) {
-			if(th.getCustomer().equals(username) && th.getDateTime().isAfter(m.getPayDate().atStartOfDay()) && th.getDateTime().isBefore(m.getValidTime()))
+			if(th.getCustomer().equals(username) && th.getScheduledFor().isAfter(m.getPayDate().atStartOfDay()) && th.getScheduledFor().isBefore(m.getValidTime()))
 				visitsInMembershipTime.add(th);
 		}
 		double price = m.getPrice();
@@ -192,9 +192,10 @@ public class Users {
 		}else 
 			sumVisits = visits*30*12;
 		if( visitsInMembershipTime.size() >= sumVisits/3 ) {
-			points+= 133*price/1000*customer.getVisitedFacility().size();
+			points+= 133*price/1000*visitsInMembershipTime.size();
 			customer.setPointsCollected(points);
 			this.users.put(username, customer);
+			saveData();
 		}else {
 			points -= price/1000*133*4;
 			if(points<0) {
@@ -202,6 +203,7 @@ public class Users {
 			}
 			customer.setPointsCollected(points);
 			this.users.put(username, customer);
+			saveData();
 		} 
 	}
 	public void setMembership(String username, Membership m) {

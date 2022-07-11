@@ -119,27 +119,30 @@ public class FacilitiesController {
 			get("rest/facilities/getManagersFacility", (req, res) -> {
 				res.type("application/json");
 				User us = userService.getUser(req.session().attribute("logedinUser"));
-				String username = us.getUsername();
-				return g.toJson(facilitiesService.GetManagersFacility(username));
+				//String username = us.getUsername();
+				return g.toJson(facilitiesService.GetManagersFacility(us));
 				
 			});
 		}
+		/*
 		public static void getFacilityTrainers() {
 			get("rest/facilities/getFacilityTrainers", (req, res) -> {
 				res.type("application/json");
 				User us = userService.getUser(req.session().attribute("logedinUser"));
-				String username = us.getUsername();
-				SportsFacility objectInfo = facilitiesService.GetManagersFacility(username);
-				return g.toJson(facilitiesService.GetFacilityTrainers(objectInfo));
+				//String username = us.getUsername();
+				SportsFacility objectInfo = facilitiesService.GetManagersFacility(us);
+				if(objectInfo==null)
+					return null;
+				return g.toJson(facilitiesService.GetFacilityTrainers(objectInfo.getName()));
 				
 			});
-		}
+		} */
 		public static void getFacilityCustomers() {
 			get("rest/facilities/getFacilityCustomers", (req, res) -> {
 				res.type("application/json");
 				User us = userService.getUser(req.session().attribute("logedinUser"));
-				String username = us.getUsername();
-				SportsFacility objectInfo = facilitiesService.GetManagersFacility(username);
+				//String username = us.getUsername();
+				SportsFacility objectInfo = facilitiesService.GetManagersFacility(us);
 				return g.toJson(facilitiesService.GetFacilityCustomers(objectInfo));
 				
 			});

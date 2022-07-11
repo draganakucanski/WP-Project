@@ -77,7 +77,7 @@ public class Memberships {
 					gotPoints = Boolean.valueOf(st.nextToken().trim());
 					Users us = new Users();
 					if(validDateTime.isBefore(current) && gotPoints==false) {
-						//us.updatePoints(customer, new Membership(id, type, payDate, validDateTime, price, customer, active, visits, gotPoints));
+						us.updatePoints(customer, new Membership(id, type, payDate, validDateTime, price, customer, active, visits, gotPoints));
 						gotPoints = true;
 					}
 					if(active == true) {

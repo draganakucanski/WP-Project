@@ -123,17 +123,17 @@ public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
 	return sf;
 }
-public SportsFacility GetManagersFacility(String username) {
-	Users u = new Users();
-	User manager = u.getUser(username);
+public SportsFacility GetManagersFacility(User manager) {
+	//Users u = new Users();
+	//User manager = u.getUser(username);
 	return manager.getSportsFacility();
 }
-public ArrayList<User> GetFacilityTrainers(SportsFacility sf) {
+public ArrayList<User> GetFacilityTrainers(String sfName) {
 	Trainings train = new Trainings();
 	Users u = new Users();
 	ArrayList<User> ret = new ArrayList<User>();
 	for(Training t : train.getValues()) {
-		if(t.getSportsFacility().getName().equals(sf.getName()) && !(ret.contains(u.getUser(t.getTrainer())))) {
+		if(t.getSportsFacility().getName().equals(sfName) && !(ret.contains(u.getUser(t.getTrainer())))) {
 				ret.add(u.getUser(t.getTrainer()));
 		}
 	}
@@ -145,7 +145,7 @@ public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {
 	Users u = new Users();
 	ArrayList<User> ret = new ArrayList<User>();
 	for(TrainingHistory th : train.getValues()){
-		if(th.getTraining().getSportsFacility() !=null && th.getTraining().getSportsFacility().getName().equals(sf.getName()) && !(ret.contains(u.getUser(th.getCustomer())))) {
+		if(th.getTraining().getSportsFacility() !=null && sf!=null && th.getTraining().getSportsFacility().getName().equals(sf.getName()) && !(ret.contains(u.getUser(th.getCustomer())))) {
 				ret.add(u.getUser(th.getCustomer()));
 			
 		}

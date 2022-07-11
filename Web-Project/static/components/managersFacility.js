@@ -143,15 +143,17 @@ mounted () {
 	axios
 	.get('/rest/facilities/getManagersFacility')
 	.then(response => (this.managersFacility = response.data))
-	
+	axios
+	.get('rest/trainings/getMTrainers')
+	.then(response => (this.facilityTrainers = response.data))
 	axios
 	.get('rest/trainings/getMTrainings')
 	.then(response => (this.trainings = response.data))
-
-	axios
+	
+	/*axios
 	.get('/rest/facilities/getFacilityTrainers')
 	.then(response => (this.facilityTrainers = response.data))
-
+	*/
 	axios
 	.get('/rest/facilities/getFacilityCustomers')
 	.then(response => (this.facilityCustomers = response.data))

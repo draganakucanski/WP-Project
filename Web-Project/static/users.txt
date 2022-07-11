@@ -1,5 +1,5 @@
-pera;pera123;Jason;Ultron;1998-12-11;MALE;CUSTOMER;false;30.0;null
-maki;maki123;Marko;Markovic;12.08.1998.;MALE;MANAGER;false;null;null
+pera;pera123;Jason;Ultron;1998-12-11;MALE;CUSTOMER;false;0.0;null
+maki;maki123;Marko;Markovic;12.08.1998.;MALE;MANAGER;false;null;DensDens
 Tamara;tasa;Tamara;Aleksic;1999-09-12;FEMALE;TRAINER;false;null;null
 adam;adam123;Adam;Adamovic;04.04.1992.;MALE;ADMIN;false;null;null
 Milan;mile;Milan;Milanovic;1999-08-05;MALE;MANAGER;false;null;null

@@ -36,6 +36,8 @@ public class TrainingHistoryController {
 		String username = us.getUsername();
 		res.status(200);
 		if(us.getRole()==Role.MANAGER) {
+			if(us.getSportsFacility()==null)
+				return null;
 			return g.toJson(historyService.getManagersHistories(us.getSportsFacility().getName()));
 		}else	
 			return g.toJson(historyService.getUsersHistories(username));

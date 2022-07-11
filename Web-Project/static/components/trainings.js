@@ -69,7 +69,7 @@ Vue.component("trainings", {
         <td>{{u.training.sportsFacility.name}}</td>
         <td>{{u.dateTime.date.day}}.{{u.dateTime.date.month}}.{{u.dateTime.date.year}} - {{u.dateTime.time.hour}}:{{u.dateTime.time.minute}}</td>
         <td>{{u.training.type}}</td>
-        <td v-if="u.training.type === 'personal' && u.canceled != 'true'"><button class="addNew" style="width:80px; margin:0px;" v-on:click="Cancel(u)">Cancel</button></td>
+        <td v-if="u.training.type === 'personal' && u.canceled == false"><button class="addNew" style="width:80px; margin:0px;" v-on:click="Cancel(u)">Cancel</button></td>
 		<td v-else></td>
     </tr>
     </table>
@@ -114,9 +114,7 @@ Vue.component("trainings", {
             },
             );
             axios.get('rest/trainings/getUsersHistories')
-            .then(response => (this.usersHistories = response.data)).catch(function (error) {
-                alert('Error on server');
-            });	
+            .then(response => (this.usersHistories = response.data))
           },
     
 	methods: {

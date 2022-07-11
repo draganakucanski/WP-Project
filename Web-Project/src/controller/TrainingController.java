@@ -39,6 +39,18 @@ public class TrainingController {
 			
 		});
 	}
+	public static void getManagersTrainers() {
+		get("rest/trainings/getMTrainers", (req, res) -> {
+			res.type("application/json");
+			User us = userService.getUser(req.session().attribute("logedinUser"));
+			if(us.getSportsFacility() == null) {
+				return null;
+			}
+			String facilityName = us.getSportsFacility().getName();
+			return g.toJson(trainingService.getManagersTrainers(facilityName));
+			
+		});
+	}
 	public static void ContentNameExists() {
 		post("/rest/trainings/NameExists", (req, res) -> {
 			res.type("application/json");

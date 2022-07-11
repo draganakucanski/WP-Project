@@ -95,11 +95,12 @@ public class SparkAppMain {
 		UserController.AddManagerTrainer();
 		FacilitiesController.getManagersFacility();
 		FacilitiesController.getFacilityCustomers();
-		FacilitiesController.getFacilityTrainers();
+		//FacilitiesController.getFacilityTrainers();
 		TrainingController.getManagersTrainings();
 		TrainingController.AddTraining();
 		TrainingController.ContentNameExists();
 		TrainingController.editTraining();
+		TrainingController.getManagersTrainers();
 		CommentController.getAll();
 		CommentController.approveComment();
 		CommentController.getFacilityComments();

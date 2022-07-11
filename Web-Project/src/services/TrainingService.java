@@ -11,6 +11,7 @@ import beans.Training;
 import beans.TrainingType;
 import beans.Trainings;
 import beans.User;
+import beans.Users;
 import dto.FacilityAddingDTO;
 import dto.TrainingAddingDTO;
 
@@ -28,6 +29,17 @@ public class TrainingService {
 			if(t.getSportsFacility().getName().equals(name))
 				ret.add(t);
 		}
+		return ret;
+	}
+	public ArrayList<User> getManagersTrainers(String name){
+		ArrayList<User> ret = new ArrayList<User>();
+		Users us = new Users();
+		for(Training t: getManagersAll(name)) {
+			if(!ret.contains(us.getUser(t.getTrainer())))
+				ret.add(us.getUser(t.getTrainer()));
+		}
+		System.out.println("OVDDEE");
+		System.out.println(ret);
 		return ret;
 	}
 	public boolean NameExists(String name) {
