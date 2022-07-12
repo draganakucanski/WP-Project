@@ -46,6 +46,7 @@ public class SparkAppMain {
 		UserController.getUser();
 		UserController.addUser();
 		UserController.Registration();
+		UserController.DeleteUser();
 		UserController.login();
 		UserController.logout();
 		UserController.getLogedUser();
@@ -74,6 +75,7 @@ public class SparkAppMain {
 		FacilitiesController.nameExists();
 		FacilitiesController.AddFacilityWithManager();
 		FacilitiesController.getFacilityByName();
+		FacilitiesController.DeleteFacility();
 		TrainingController.getTrainings();
 		TrainingController.getFacilityTrainings();
 		TrainingHistoryController.getAllHistories();
@@ -90,6 +92,7 @@ public class SparkAppMain {
 		TrainingHistoryController.GetPersonal();
 		TrainingHistoryController.CancelTraining();
 		TrainingHistoryController.SignUp();
+		TrainingHistoryController.getManagersCustomers();
 		MembershipController.getMemberships();
 		MembershipController.CreateMembership();
 		UserController.AddManagerTrainer();
@@ -101,6 +104,7 @@ public class SparkAppMain {
 		TrainingController.ContentNameExists();
 		TrainingController.editTraining();
 		TrainingController.getManagersTrainers();
+		TrainingController.DeleteTraining();
 		CommentController.getAll();
 		CommentController.approveComment();
 		CommentController.getFacilityComments();

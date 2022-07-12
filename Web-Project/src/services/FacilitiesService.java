@@ -24,7 +24,7 @@ public class FacilitiesService {
 	private Facilities facilities = new Facilities();
 	
 	public Collection<SportsFacility> getAll(){
-		return facilities.values();
+		return facilities.getValues();
 	}
 	public ArrayList<SportsFacility> SearchFacility(FacilitySearchDTO search) {
 		
@@ -153,5 +153,10 @@ public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {
 	
 	return ret;
 }
+public void Delete(SportsFacility sf) {
+	sf.setDeleted(true);
+	this.facilities.edit(sf.getName(),sf);
+	this.facilities.editList(sf.getName(), sf);
+	}
 }
 

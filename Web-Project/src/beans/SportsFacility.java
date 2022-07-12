@@ -12,6 +12,7 @@ public class SportsFacility {
 	private String logo;
 	private double averageGrade;
 	private String workingHours;
+	private boolean deleted;
 	public String getName() {
 		return name;
 	}
@@ -122,6 +123,12 @@ public class SportsFacility {
 		this.location = location;
 		this.logo = logo;
 		this.workingHours = workingHours;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

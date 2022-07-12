@@ -80,6 +80,7 @@ Vue.component("userslist", {
 			<th>Date of birth</th>
 			<th>Role</th>
 			<th>Points Collected</th>
+			<th></th>
 		</tr>
 		
 		<tr v-for="u in this.usersList">
@@ -91,6 +92,7 @@ Vue.component("userslist", {
 			<td>{{u.dateOfBirth}}</td>
 			<td>{{u.role}}</td>
 			<td>{{u.pointsCollected}}</td>
+			<td><button class="addNew" style="width:80px; margin:0px;" v-on:click="Delete(u)">Delete</button></td>
 		
 		</tr>
 	</table>
@@ -233,6 +235,14 @@ Vue.component("userslist", {
 		redirectOnFrontPage: function(){
 		
 			router.push('/frontpage');	
+	},
+	Delete: function(u){
+		axios
+			.post('/rest/users/delete', u)
+			.then(response => {
+					alert('User is deleted');
+				
+			})
 	},
 	},
 	   

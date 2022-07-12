@@ -6,6 +6,7 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.SportsFacility;
+import beans.Training;
 import beans.User;
 import dto.FacilityAddingDTO;
 import dto.TrainingAddingDTO;
@@ -86,6 +87,14 @@ public class TrainingController {
 			String name = req.queryParams("name");
 			return g.toJson(trainingService.getManagersAll(name));
 			
+		});
+	}
+	public static void DeleteTraining() {
+		post("/rest/trainings/delete", (req, res) -> {
+			res.type("application/json");
+			Training t = g.fromJson(req.body(),Training.class);
+			trainingService.Delete(t);
+            return t.isDeleted();
 		});
 	}
 }

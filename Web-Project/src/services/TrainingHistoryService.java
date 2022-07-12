@@ -59,6 +59,15 @@ private TrainingHistories trainings = new TrainingHistories();
 		}
 		return users;
 	} */
+	public ArrayList<User> getManagersCustomers(String name){
+		ArrayList<User> users = new ArrayList<User>();
+		Users u = new Users();
+		for(TrainingHistory t : trainings.values()) {
+			if(t.getTraining().getSportsFacility().getName().equals(name) && !users.contains(u.getUser(t.getCustomer())))
+				users.add(u.getUser(t.getCustomer()));
+		}
+		return users;
+	}
 	public ArrayList<TrainingHistory> getManagersHistories(String name){
 		ArrayList<TrainingHistory> users = new ArrayList<TrainingHistory>();
 		for(TrainingHistory t : trainings.values()) {
@@ -259,8 +268,8 @@ public ArrayList<TrainingHistory> GetGyms(String username) {
 	  Memberships mems = new Memberships();
 	  Membership mem = null;
 	  for(Membership m: mems.values()) {
-		  if(m.getCustomer().equals(customer))
-		  mem = m;
+		  if(m.getCustomer().equals(customer) && m.isActive())
+			  mem = m;
 	  }
 	  LocalDateTime scheduledFor = LocalDateTime.parse(dateFor);
 	  if(mem==null || mem.isActive()==false || isLimitReached(mem, customer, scheduledFor)) {

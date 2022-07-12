@@ -16,6 +16,7 @@ import dao.UserTypeDAO;
 public class Users {
 
 	private HashMap<String, User> users = new HashMap<String, User>();
+	private ArrayList<User> userList = new ArrayList<User>();
 	
 	public Users() {
 		this(".");
@@ -72,6 +73,8 @@ public class Users {
 					}
 					users.put(username, new User(username, password, firstName, lastName, 
 												 dateOfBirth, gender, role, type, deleted,sf, points));
+					userList.add(new User(username, password, firstName, lastName, 
+												 dateOfBirth, gender, role, type, deleted,sf, points));
 				}
 				
 			}
@@ -86,13 +89,20 @@ public class Users {
 			}
 		}
 	}
+	public ArrayList<User> getValues() {
+		ArrayList<User> users= new ArrayList<User>();
+		for(User u:userList)
+			if(u.isDeleted()==false)
+				users.add(u);
+		return users;
+	} 
 
-	
-
+	/* staro za sv slucaj
 	/** Vraca kolekciju proizvoda. */
-	public Collection<User> getValues() {
+	/*public Collection<User> getValues() {
 		return users.values();
-	}
+	} */
+	
 
 	/** Vraca proizvod na osnovu njegovog id-a. */
 	public User getUser(String username) {
@@ -104,6 +114,7 @@ public class Users {
 			return;
 		} else {
 			this.users.put(user.getUsername(), user);
+			userList.add(user);
 			saveData();
 		}
 	}
@@ -169,7 +180,7 @@ public class Users {
 		
 	}
 	public User findUser(String username) {
-		for(User u:users.values()) {
+		for(User u: getValues()) {
 			if(u.getUsername().equals(username))
 				return u;
 		}
@@ -210,6 +221,7 @@ public class Users {
 		User u = getUser(username);
 		u.setMembership(m);
 		this.users.put(username, u);
+		editList(username, u);
 		saveData();
 	}
 	public UserType getUserType(Double points) {
@@ -236,5 +248,20 @@ public class Users {
 		u.setHistory(history);
 		this.users.put(username, u);
 		saveData();
+	}
+	public void editList(String username, User u) {
+		int index = -1;
+		for(User user : userList)
+			if(user.getUsername().equals(username)) {
+				index = userList.indexOf(user);
+			}
+		userList.set(index, u);
+		/*
+		for(User user : userList)
+			if(user.getUsername().equals(username)) {
+				userList.remove(user);
+				userList.add(u);
+			}
+			*/
 	}
 }

@@ -28,6 +28,14 @@ public class FacilitiesController {
 			
 		});
 	}
+	public static void DeleteFacility() {
+		post("/rest/facilities/delete", (req, res) -> {
+			res.type("application/json");
+			SportsFacility sf = g.fromJson(req.body(),SportsFacility.class);
+			facilitiesService.Delete(sf);
+            return sf.isDeleted();
+		});
+	}
 	
 	public static void FacilitySearch() {
 		get("rest/facilities/getFacilitiesSearch", (req, res) -> {

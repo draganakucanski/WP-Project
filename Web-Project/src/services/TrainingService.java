@@ -25,7 +25,7 @@ public class TrainingService {
 	}
 	public ArrayList<Training> getManagersAll(String name){
 		ArrayList<Training> ret = new ArrayList<Training>();
-		for(Training t : trainings.values()) {
+		for(Training t : trainings.getValues()) {
 			if(t.getSportsFacility().getName().equals(name))
 				ret.add(t);
 		}
@@ -64,4 +64,9 @@ public class TrainingService {
 		//t.setPicture(null);
 		this.trainings.edit(t, objectInfo);
 	}
+	public void Delete(Training t) {
+		t.setDeleted(true);
+		this.trainings.editNew(t.getName(),t);
+		this.trainings.editList(t.getName(), t);
+		}
 }

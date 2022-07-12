@@ -58,6 +58,7 @@ Vue.component("facilities", {
 		<th>Grade</th>
 		<th>Location</th>
 		<th>Status</th>
+		<th v-if="logedInUser != null && logedInUser.role=='admin'"></th>
 		
 	</tr>
 		
@@ -71,7 +72,7 @@ Vue.component("facilities", {
 		<td>{{f.location.address.street}}, {{f.location.address.number}},{{f.location.address.city}}, {{f.location.address.zipCode}} </td>
 		<td v-if="f.works">Open</td>
 		<td v-else>Closed</td>
-		
+		<td v-if="logedInUser != null && logedInUser.role=='admin'"><button class="addNew" style="width:80px; margin:0px;" v-on:click="Delete(f)">Delete</button></td>
 		</tr>
 </table>
 <div class="search">
@@ -207,6 +208,15 @@ Vue.component("facilities", {
 			} else {
 				return f.logo;	
 			}
+		},
+		Delete: function(f){
+			axios
+				.post('/rest/facilities/delete', f)
+				.then(response => {
+					if (response.data == true){
+						alert('Sports facility is deleted');
+					}
+				})
 		},
 			FilterWorks: function () {
 			if(this.filterWorks=='true'){

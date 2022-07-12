@@ -54,6 +54,7 @@ public class Trainings {
 		double duration = 0 ;
 		SportsFacility sf = null;
 		TrainingType type =TrainingType.GROUP;
+		boolean deleted = false;
 		//Location location = new Location();
 		//boolean works = true;// ovo je drugacije, bio je string
 		StringTokenizer st;
@@ -73,8 +74,10 @@ public class Trainings {
 					duration = Double.valueOf(st.nextToken().trim());
 					Facilities f = new Facilities();
 					sf  = f.getFacility(facilityName);
+					deleted =  Boolean.valueOf(st.nextToken().trim());
 				}
 				Training training = new Training(name, type, sf, duration, trainerUsername, description, picture);
+				training.setDeleted(deleted);
 				trainings.put(name, training);
 				trainingList.add(training);
 			}
@@ -91,8 +94,8 @@ public void saveData(){
 			writer = new PrintWriter("static/training.txt", "UTF-8");
 			
 			for (Training training : trainings.values()) {
-				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s", 
-						training.getName(), training.getSportsFacility().getName(), training.getTrainer(), training.getDescription(), training.getPicture(), training.getType(), training.getDuration()));
+				writer.println(String.format("%s;%s;%s;%s;%s;%s;%s;%s", 
+						training.getName(), training.getSportsFacility().getName(), training.getTrainer(), training.getDescription(), training.getPicture(), training.getType(), training.getDuration(), training.isDeleted()));
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -106,11 +109,18 @@ public void saveData(){
 	public Collection<Training> values() {
 		return trainings.values();
 	}
-
+	/*
 	public Collection<Training> getValues() {
 		return trainings.values();
 	}
-
+	*/
+	public ArrayList<Training> getValues() {
+		ArrayList<Training> trainingL= new ArrayList<Training>();
+		for(Training t:trainingList)
+			if(t.isDeleted()==false)
+				trainingL.add(t);
+		return trainingL;
+	}
 	public Training getTraining(String name) {
 		return trainings.get(name);
 	}
@@ -165,6 +175,18 @@ public void saveData(){
 		if(objectInfo.imageFile!=null) {
 			AddTrainingLogo(t, objectInfo.imageFile);
 		}
+		saveData();
+	}
+	public void editList(String name, Training t) {
+		int index = -1;
+		for(Training tr : trainingList)
+			if(tr.getName().equals(name)) {
+				index = trainingList.indexOf(tr);
+			}
+		trainingList.set(index, t);
+	}
+	public void editNew(String name, Training t) {
+		this.trainings.put(name, t);
 		saveData();
 	}
 }

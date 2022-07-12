@@ -17,31 +17,7 @@ Vue.component("memberships", {
 	},
 	template: ` 
 <div class="memberships">
-	<h2 class="list">List of memberships:</h2>   
-	<table class="customTable">
-	<tr bgcolor="lightgrey">
-		<th>Id</th>
-		<th>Date1</th>
-		<th>Date2</th>
-		<th>Type</th>
-		<th>price</th>
-		<th>customer</th>
-		<th>active</th>
-	</tr>
-		
-	<tr v-for="m in memberships">
-		<td>{{m.id}}</td>
-		<td>
-		{{m.payDate}}
-		</td>
-		<td>{{m.validTime}}</td>
-		<td>{{m.type}}</td>
-		<td>{{m.price}}</td>
-		<td>{{m.customer}}</td>
-		<td v-if="m.active">Active</td>
-		<td v-else>Unactive</td>
-	</tr>
-</table>
+	<h2 class="list">Choose new membership:</h2>   
 <div v-if="buttonClicked=='false'">
 <h2 class="chM"> Choose membership</h2>
 <form name="membership" id="membership" method="post">

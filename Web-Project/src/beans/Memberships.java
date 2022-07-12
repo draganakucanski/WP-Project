@@ -68,10 +68,10 @@ public class Memberships {
 					price = Double.valueOf(st.nextToken().trim());
 					customer = st.nextToken().trim();
 					LocalDateTime current = LocalDateTime.now();
-					if(validDateTime.isBefore(current)) {
-						active = false;
-					} else 
+					if(validDateTime.isAfter(current)) {
 						active = true;
+					} else 
+						active = false;
 					//active = Boolean.valueOf(st.nextToken().trim());
 					visits = Integer.valueOf(st.nextToken().trim());
 					gotPoints = Boolean.valueOf(st.nextToken().trim());

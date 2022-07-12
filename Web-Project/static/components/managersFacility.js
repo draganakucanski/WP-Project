@@ -53,6 +53,7 @@ Vue.component("managersFacility", {
 				  <th>Picture</th>
 				  <th>Type</th>
 				  <th>Manage</th>
+				  <th></th>
 			  </tr>
 			  <tr v-for="tr in trainings">
 				  <td>{{tr.name}}</td>
@@ -62,6 +63,7 @@ Vue.component("managersFacility", {
 				  <td><img :src="photoPathPic(tr)"></td>
 				  <td>{{tr.type}}</td>
 				  <td><button class="addNew" style="width:60px; margin:0px" v-on:click="Edit(tr)">Edit</button></td>
+				  <td><button class="addNew" style="width:60px; margin:0px" v-on:click="Delete(tr)">Delete</button></td>
 			  </tr>
 			  </table>
 			  <br>
@@ -154,10 +156,10 @@ mounted () {
 	.get('/rest/facilities/getFacilityTrainers')
 	.then(response => (this.facilityTrainers = response.data))
 	*/
+	
 	axios
-	.get('/rest/facilities/getFacilityCustomers')
+	.get('rest/trainings/getCustomers')
 	.then(response => (this.facilityCustomers = response.data))
-
 	axios
 	.get('rest/users/getTrainers/')
 	.then(response =>{
@@ -203,6 +205,14 @@ mounted () {
 			this.buttonClicked = 'true';
 			this.selectedTraining = tr;
 			this.backup = this.selectedTraining;
+		},
+		Delete: function(tr){
+			axios
+				.post('/rest/trainings/delete', tr)
+				.then(response => {
+						alert('Training is deleted');
+					
+				})
 		},
 		fileChange: function (e) {
             const file = e.target.files[0];

@@ -1,11 +1,13 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import beans.Gender;
 import beans.Role;
 import beans.SportsFacility;
+import beans.TrainingHistory;
 import beans.User;
 import beans.UserType;
 import beans.UserTypeName;
@@ -40,7 +42,12 @@ public class UserService {
 		}
 		return false;
 	}
-
+	public void Delete(User u) {
+		u.setDeleted(true);
+		this.users.edit(u.getUsername(),u);
+		this.users.editList(u.getUsername(), u);
+		}
+	
 	public void CustomerRegistration(UserRegistrationDTO customerInfo) {
 		UserTypeDAO ut = new UserTypeDAO();
 		UserType type = ut.getUserTypeByName(UserTypeName.BRONZE);
@@ -64,14 +71,20 @@ public class UserService {
 		us.setDateOfBirth(dateOfBirth);
 		us.setGender(gender);
 		this.users.edit(username, us);
+		this.users.editList(username, us);
 		return us;
 	}
 	public User editUsersFacility(String username,SportsFacility sportsFacility) {
-		System.out.println(username);
-		User us = users.getUser(username);
-		us.setSportsFacility(sportsFacility);
-		this.users.edit(username, us);
-		return us;
+		User u = null;
+		for(User us : this.users.getValues()) {
+			if(us.getUsername().equals(username)) 
+				u = us;
+		}
+		//User us = users.findUser(username);
+		u.setSportsFacility(sportsFacility);
+		this.users.edit(username, u);
+		this.users.editList(username, u);
+		return u;
 		
 	}
 	public ArrayList<User> getCustomers() {
@@ -100,7 +113,6 @@ public class UserService {
 		
 		ArrayList<User> ret = new ArrayList<User>();		
 		for(User us : this.users.getValues()) {
-			System.out.println( us.getRole());
 			if(us.getRole().equals(Role.MANAGER) && us.getSportsFacility()==null)
 				ret.add(us);
 				

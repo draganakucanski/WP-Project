@@ -43,6 +43,18 @@ public class TrainingHistoryController {
 			return g.toJson(historyService.getUsersHistories(username));
 	});
 	}
+	public static void getManagersCustomers() {
+		get("rest/trainings/getCustomers", (req, res) -> {
+		res.type("application/json");
+		User us = userService.getUser(req.session().attribute("logedinUser"));
+		//String username = us.getUsername();
+		res.status(200);
+		if(us.getSportsFacility()==null) {
+			return null;
+		}
+		return g.toJson(historyService.getManagersCustomers(us.getSportsFacility().getName()));
+	});
+	}
 	public static void TrainingSearch() {
 		get("rest/trainings/getTrainingSearch", (req, res) -> {
 			res.type("application/json");

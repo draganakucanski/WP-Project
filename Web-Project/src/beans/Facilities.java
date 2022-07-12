@@ -58,6 +58,7 @@ public class Facilities {
 		double lat;
 		double longi;
 		boolean works = false;
+		boolean deleted = false; 
 		int zip;
 		FacilityType type =FacilityType.GYM;
 		Location loc = new Location();
@@ -86,8 +87,10 @@ public class Facilities {
 					loc = new Location(lat,longi,new Address(street,number,city,zip));
 					logo = st.nextToken().trim();
 					workingHours = st.nextToken().trim();
+					deleted = Boolean.valueOf(st.nextToken().trim());
 				}
 				SportsFacility facility = new SportsFacility(name,type, works,loc,grade, logo, workingHours);
+				facility.setDeleted(deleted);
 				facilities.put(name, facility);
 				facilitiesList.add(facility);
 			}
@@ -105,11 +108,11 @@ public void saveData(){
 			
 			for (SportsFacility facility : facilities.values()) {
 				if(facility.getWorkingHours()==null) {
-					writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;null", 
-							facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo()));
+					writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;null;%s", 
+							facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo(), facility.isDeleted()));
 				}else
-				writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;%s", 
-						facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo(), facility.getWorkingHours()));
+				writer.println(String.format("%s;%s;%s;%s;%s-%s-%s,%s,%s,%s;%s;%s;%s", 
+						facility.getName(), facility.isWorks(), facility.getAverageGrade(), facility.getType(), facility.getLocation().getLatitude(), facility.getLocation().getLongitude(), facility.getLocation().getAddress().getStreet(), facility.getLocation().getAddress().getNumber(), facility.getLocation().getAddress().getCity(), facility.getLocation().getAddress().getZipCode(),facility.getLogo(), facility.getWorkingHours(), facility.isDeleted()));
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -120,14 +123,21 @@ public void saveData(){
 		
 	}
 	
-	public Collection<SportsFacility> values() {
+	/*public Collection<SportsFacility> values() {
 		return facilities.values();
+	} */
+	
+	public ArrayList<SportsFacility> getValues() {
+		ArrayList<SportsFacility> sfs= new ArrayList<SportsFacility>();
+		for(SportsFacility sf: facilitiesList)
+			if(sf.isDeleted()==false)
+				sfs.add(sf);
+		return sfs;
 	}
-
 	/** Vraca kolekciju fasilija. */
-	public Collection<SportsFacility> getValues() {
+	/*public Collection<SportsFacility> getValues() {
 		return facilities.values();
-	}
+	} */
 
 	/** Vraca proizvod na osnovu njegovog imena. */
 	public SportsFacility getFacility(String name) {
@@ -142,8 +152,8 @@ public void saveData(){
 		if (facilities.containsKey(facility.getName())) {
 			return;
 		} else {
-			System.out.println(facility.getName());
 			this.facilities.put(facility.getName(), facility);
+			this.facilitiesList.add(facility);
 			saveData();
 		}
 	}
@@ -180,6 +190,27 @@ public void saveData(){
 		
 
 	}
+	public void edit(String name, SportsFacility sf) {
+		this.facilities.put(name, sf);
+		saveData();
+	}
+	public void editList(String name, SportsFacility sf) {
+		int index = -1;
+		for(SportsFacility fac : facilitiesList)
+			if(fac.getName().equals(name)) {
+				index = facilitiesList.indexOf(fac);
+			}
+		facilitiesList.set(index, sf);
+		//facilitiesList.set(0, sf)
+		/*for(SportsFacility fac : facilitiesList)
+			if(fac.getName().equals(name)) {
+				facilitiesList.set(fac., sf)
+				facilitiesList.remove(fac);
+				facilitiesList.add(sf);
+			}
+			*/
+	}
+	
 	private void setGrades() {
 		Comments comments = new Comments();
 		for(SportsFacility f: facilities.values()) {

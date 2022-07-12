@@ -5,6 +5,7 @@ import static spark.Spark.post;
 
 import com.google.gson.Gson;
 
+import beans.TrainingHistory;
 import beans.User;
 import dto.AddManagerTrainerDTO;
 import dto.UserEditDTO;
@@ -200,6 +201,14 @@ public class UserController {
 			AddManagerTrainerDTO userInfo = g.fromJson(req.body(),AddManagerTrainerDTO.class);
 			userService.AddManagerTrainer(userInfo);
 		return "OK";
+		});
+	}
+	public static void DeleteUser() {
+		post("/rest/users/delete", (req, res) -> {
+			res.type("application/json");
+			User u = g.fromJson(req.body(),User.class);
+			userService.Delete(u);
+            return u.isDeleted();
 		});
 	}
 }

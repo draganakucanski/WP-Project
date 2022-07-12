@@ -9,6 +9,7 @@ public class Training {
 	private String trainer;
 	private String description;
 	private String picture;
+	private boolean deleted;
 	public String getName() {
 		return name;
 	}
@@ -64,6 +65,12 @@ public class Training {
 	}
 	public Training() {
 		super();
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	
