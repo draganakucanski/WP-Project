@@ -199,12 +199,12 @@ mounted () {
 		},
 		Cancel: function(){
 			this.buttonClicked = 'false';
-			this.selectedTraining = this.backup;
+			//this.selectedTraining = this.backup;
 		},
 		Edit: function(tr){
 			this.buttonClicked = 'true';
 			this.selectedTraining = tr;
-			this.backup = this.selectedTraining;
+			//this.backup = this.selectedTraining;
 		},
 		Delete: function(tr){
 			axios
