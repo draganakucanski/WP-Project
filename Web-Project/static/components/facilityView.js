@@ -6,8 +6,12 @@ Vue.component("facilityView", {
 			  trainings:null,
 			  comments:null,
 			  signUpClicked:'false',
+			  buttonClicked:'false',
+			  comment:'',
+			  grade:'',
 			  selectedTraining:null,
 			  scheduledFor:'',
+			  firstTraining:null,
 		    }
 	},
 	template: ` 
@@ -68,7 +72,19 @@ Vue.component("facilityView", {
 				  </table>
 				  <br>
 			  </div>
-		
+			
+			  <div v-if="logedInUser != null && logedInUser.role=='customer' && buttonClicked=='true' && firstTraining===true" style="background-color: #FFF7E1; border: 2px solid #283966;
+			  border-radius: 10px;">
+				  <button class="addNew" style="width:80px; float:right; margin:10px" v-on:click="NoCom">Skip</button>
+				  <table width="100%">
+					  <th>Comment</th>
+					  <td><input type="text" name = "name" v-model = "comment"></td> 
+					  <th>Grade(0-5)</th>
+					  <td><input type="number"  name="tentacles" min="0" max="5"  v-model = "grade"></td> 
+					<th><button class="addNew" style="width:90px; margin:0px" v-on:click="AddComm">Add comment</button></th>
+				  </table>
+				  <br>
+			  </div>
 	<div v-if="logedInUser != null">
 		<div class="leftcolumn" v-if="logedInUser.role=='admin' || logedInUser.role=='manager'">
 			<div id="comments" class="card">
@@ -163,6 +179,11 @@ Vue.component("facilityView", {
 					  name: name
 					}})
 				.then(response => (this.comments = response.data))
+				axios.get('rest/trainings/getIsFirst', {
+					params: {
+					  name: name
+					}})
+				.then(response => (this.firstTraining = response.data))
     },
     
 	methods: {
@@ -187,8 +208,23 @@ Vue.component("facilityView", {
 		Cancel: function(){
 			this.signUpClicked = 'false';
 		},
+		NoCom: function(){
+			this.buttonClicked = 'false';
+		},
+		AddComm: function()
+		{ 
+			axios
+				.post('/rest/comments/add', { "comment": this.comment, "grade" : this.grade,"facility" : this.selectedTraining.sportsFacility.name})
+				.then(response => {
+					alert("Added comment!");
+					this.buttonClicked = 'false';
+				})
+			
+			
+	},
 		SignUpForTraining: function()
 		{ 
+			this.buttonClicked = 'true';
 			axios
 				.post('/rest/histories/signUp', { "date": this.scheduledFor, "customer" : this.logedInUser.username,"trainingName" : this.selectedTraining.name})
 				.then(response => {

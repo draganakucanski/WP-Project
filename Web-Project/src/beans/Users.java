@@ -186,6 +186,15 @@ public class Users {
 		}
 		return null;
 	}
+	public void DeleteFacility(SportsFacility sf) {
+		for(User u: getValues()) {
+			if(u.getSportsFacility()!=null && u.getSportsFacility().getName().equals(sf.getName())) {
+				u.setSportsFacility(null);
+				editList(u.getUsername(), u);
+				edit(u.getUsername(), u);
+			}
+		}
+	}
 	public void updatePoints(String username, Membership m) {
 		User customer = findUser(username);
 		ArrayList<TrainingHistory> visitsInMembershipTime = new ArrayList<TrainingHistory>();

@@ -98,7 +98,7 @@ public class FacilitiesController {
 				res.status(200);
 				FacilityAddingDTO objectInfo = g.fromJson(req.body(),FacilityAddingDTO.class);
 				SportsFacility sf = facilitiesService.FacilityAdding(objectInfo);
-				userService.editUsersFacility(objectInfo.username, sf);
+				//newUs.editUsersFacility(objectInfo.username, sf);
 			return "OK";
 			});
 		}

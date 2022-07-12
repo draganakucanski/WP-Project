@@ -6,6 +6,9 @@ import static spark.Spark.post;
 import com.google.gson.Gson;
 
 import beans.Comment;
+import beans.User;
+import dto.AddCommentDTO;
+import dto.ScheduleTrainingDTO;
 import dto.TrainingAddingDTO;
 import services.CommentService;
 
@@ -36,6 +39,17 @@ public class CommentController {
 			String name = req.queryParams("name");
 			return g.toJson(commentService.getFacilityComments(name));
 			
+		});
+	}
+	public static void AddComment() {
+		post("/rest/comments/add", (req, res) -> {
+			res.type("application/json");
+			AddCommentDTO info = g.fromJson(req.body(),AddCommentDTO.class);
+			String username = req.session().attribute("logedinUser");
+			String content = info.comment;
+			String grade = info.grade;
+			String facilityName = info.facility;
+            return commentService.Add(username, content, grade, facilityName);
 		});
 	}
 }

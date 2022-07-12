@@ -193,4 +193,15 @@ public class TrainingHistoryController {
             return historyService.SignUp(scheduledFor, customer, trainingName);
 		});
 	}
+	public static void getIsFirst() {
+		get("rest/trainings/getIsFirst", (req, res) -> {
+			res.type("application/json");
+			String name = req.queryParams("name");
+			String username = req.session().attribute("logedinUser");
+			Boolean isF = historyService.IsFirst(name, username);
+			System.out.println(isF);
+			return isF;
+			
+		});
+	}
 }

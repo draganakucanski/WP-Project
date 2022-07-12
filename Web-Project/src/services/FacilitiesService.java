@@ -121,6 +121,8 @@ public SportsFacility FacilityAdding(FacilityAddingDTO objectInfo) {
 	SportsFacility sf = new SportsFacility(objectInfo.name,objectInfo.type,location, logo, objectInfo.workingHours);
 	this.facilities.addFacility(sf);
 	this.facilities.AddFacilityLogo(sf, objectInfo.imageFile);
+	UserService us = new UserService();
+	us.editUsersFacility(objectInfo.username, sf);
 	return sf;
 }
 public SportsFacility GetManagersFacility(User manager) {
@@ -154,6 +156,8 @@ public ArrayList<User> GetFacilityCustomers(SportsFacility sf) {
 	return ret;
 }
 public void Delete(SportsFacility sf) {
+	Users u = new Users();
+	u.DeleteFacility(sf);
 	sf.setDeleted(true);
 	this.facilities.edit(sf.getName(),sf);
 	this.facilities.editList(sf.getName(), sf);

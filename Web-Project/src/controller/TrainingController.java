@@ -97,4 +97,5 @@ public class TrainingController {
             return t.isDeleted();
 		});
 	}
+	
 }

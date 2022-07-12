@@ -310,4 +310,16 @@ public ArrayList<TrainingHistory> GetGyms(String username) {
 		   return true;
 	   return false;
 	}
+  public boolean IsFirst(String name, String username) {
+	  int count = 0;
+	  for(TrainingHistory t : trainings.values()) {
+			if(t.getCustomer().equals(username) && t.getTraining().getSportsFacility().getName().equals(name))
+				count++;
+		}
+	  System.out.println(count);
+	  if(count == 0)
+		  return true;
+	  else return false;
+  	}
+ 
 }

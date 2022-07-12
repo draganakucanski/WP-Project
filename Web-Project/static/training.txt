@@ -1,4 +1,5 @@
 Trening#1;DensDens;Tamara;Plesni trening;img/logo3.png;GROUP;2.0;false
 Trening#2;MissFit;Tamara;Personalni trening;img/logo3.png;PERSONAL;2.0;false
+Trening3;DensDens;Tamara;Proba treninga;img/Trening3.png;GYM;3.0;true
 TreningNovi;DensDens;Tamara;Novi trening;img/TreningNovi.png;PERSONAL;2.0;false
 TreningZaBrisanje;DensDens;Tamara;Novi trening;img/TreningNovi.png;PERSONAL;3.0;true

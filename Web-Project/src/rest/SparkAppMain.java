@@ -93,6 +93,7 @@ public class SparkAppMain {
 		TrainingHistoryController.CancelTraining();
 		TrainingHistoryController.SignUp();
 		TrainingHistoryController.getManagersCustomers();
+		TrainingHistoryController.getIsFirst();
 		MembershipController.getMemberships();
 		MembershipController.CreateMembership();
 		UserController.AddManagerTrainer();
@@ -108,6 +109,7 @@ public class SparkAppMain {
 		CommentController.getAll();
 		CommentController.approveComment();
 		CommentController.getFacilityComments();
+		CommentController.AddComment();
 		
 		
 		post("/rest/demo/login", (req, res) -> {

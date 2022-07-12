@@ -104,6 +104,7 @@ public void saveData(){
 	public void addComment(Comment c) {
 		int id = GenerateNewID();
 	  	c.setId(id);
+	  	c.setApproved(false);
 		this.comments.put(c.getId(), c);
 		saveData();
 	}

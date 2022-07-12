@@ -1,4 +1,4 @@
-DensDens;false;3.0;DANCESTUDIO;44.0-45.0-Jevrejska,5,Subotica,21000;img/logo3.png;12-20h;false
+DensDens;false;4.0;DANCESTUDIO;44.0-45.0-Jevrejska,5,Subotica,21000;img/logo3.png;12-20h;false
 MissFit;false;5.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/MissFit.png;8-20h;false
 d;false;0.0;SPORTSCENTER;4.0-4.0-s,2,d,2;img/d.png;8-20h;true
 GYYYYYYYM;false;0.0;SPORTSCENTER;3.0-2.0-a,2,aa,2;img/GYYYYYYYM.png;8-20h;false
@@ -7,8 +7,7 @@ Fitness Sport;false;4.0;SPORTSCENTER;44.0-45.0-Masarikova,12,Sabac,21000;img/log
 Proba;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/Proba.png;8-20h;false
 probabzv;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/probabzv.png;08-22h;true
 Sport GYMY;true;3.0;GYM;44.0-45.0-Dunavska,7,Novi Sad,21000;img/logo.png;8-20h;false
-Tito;false;0.0;GYM;1.0-1.0-titova,1,tetovo,1;img/Tito.png;8-20h;true
-Novvi;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/Novvi.png;08-22h;true
-Work;false;0.0;SPORTSCENTER;23.0-42.0-Ulc,1,Nis,491999;img/Work.png;8-20h;false
+Tito;false;0.0;GYM;1.0-1.0-titova,1,tetovo,1;img/Tito.png;8-20h;false
+Work;false;0.0;SPORTSCENTER;23.0-42.0-Ulc,1,Nis,491999;img/Work.png;8-20h;true
 Proba2;false;0.0;SPORTSCENTER;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/Proba2.png;8-20h;false
-Gymy;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/Gymy.png;8-20h;false
+Gymy;false;0.0;GYM;211.0-233.0-Djordja Jovanovica,33,Novi sad,21000;img/Gymy.png;8-20h;true

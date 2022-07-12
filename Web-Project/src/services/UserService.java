@@ -75,6 +75,7 @@ public class UserService {
 		return us;
 	}
 	public User editUsersFacility(String username,SportsFacility sportsFacility) {
+		System.out.println(getUsers());
 		User u = null;
 		for(User us : this.users.getValues()) {
 			if(us.getUsername().equals(username)) 
@@ -110,7 +111,7 @@ public class UserService {
 	return ret;
 }
 	public ArrayList<User> getFreeManagers() {
-		
+		System.out.println(this.users.getValues());
 		ArrayList<User> ret = new ArrayList<User>();		
 		for(User us : this.users.getValues()) {
 			if(us.getRole().equals(Role.MANAGER) && us.getSportsFacility()==null)

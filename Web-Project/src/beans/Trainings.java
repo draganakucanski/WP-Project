@@ -134,6 +134,7 @@ public void saveData(){
 		} else {
 			System.out.println(training.getName());
 			this.trainings.put(training.getName(), training);
+			trainingList.add(training);
 			saveData();
 		}
 	}
